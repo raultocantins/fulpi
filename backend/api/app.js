@@ -12,6 +12,6 @@ app.use(function (req,res,next){
 });
 
 
-app.listen(process.env.PORT,()=>{
+app.listen(3000,()=>{
     console.log('Backend started!!')
 })
