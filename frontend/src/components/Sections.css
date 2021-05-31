@@ -1,0 +1,93 @@
+.section1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.section1 > .describe {
+  width: 50%;
+}
+.section1 > .describe button {
+  width: 300px;
+  height: 50px;
+  border: none;
+  border-radius: 30px;
+  background-color: #fff;
+  color: #76c143;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.section2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.section2 img {
+  width: 400px;
+}
+
+.section3 {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section3 > .cards {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.section3 > .cards > .card {
+  height: 200px;
+  width: 250px;
+  margin: 10px;
+  border-radius: 15px;
+  background-color: #58923277;
+  position: relative;
+  box-shadow: 0 01px #589232, 01px 0 #589232, 01px 02px #589232,
+    02px 01px #589232, 02px 03px #589232, 03px 02px #589232, 03px 04px #589232,
+    04px 03px #589232, 04px 05px #589232, 05px 04px #589232, 05px 06px #589232,
+    06px 05px #589232;
+}
+.section3 > .cards > .card img {
+  height: 100%;
+  width: 100%;
+}
+.section3 > .cards > .card:hover {
+  background-color: #5892323b;
+}
+.section4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.section5 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.section5 > .card {
+  width: 50%;
+}
+.section5 > .card > .user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section5 > .card > .user img {
+  height: 50px;
+}
+
+.section5 > .card > .user p {
+    margin: 10px;
+  }
