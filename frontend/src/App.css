@@ -38,3 +38,86 @@
   margin-right: 50px;
 }
 
+.footer {
+  margin-top: 150px;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.footer > .imageFooter {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.footer > .imageFooter img {
+  height: 70%;
+  margin-right: 20px;
+}
+
+.footer > .describe p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer > .describe i {
+  margin-right: 10px;
+}
+
+.footer > .describe svg {
+  margin-right: 10px;
+}
+.appbar > .menuMobile {
+  display: none;
+}
+.appbar > .menuMobile > .box {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .menu {
+    display: none;
+  }
+  .appbar > .menuMobile {
+    display: flex;
+    transition: 2s ease;
+  }
+  .appbar > .menuMobile svg {
+    margin-right: 20px;
+  }
+  .appbar > .menuMobile > .box {
+    position: fixed;
+    z-index: 99;
+    right: 0;
+    top: 0;
+    width: 50vw;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 0px 0px 0px 30px;
+  }
+  .appbar > .menuMobile > .box a {
+    width: 100%;
+    text-align: center;
+    color: #76c143;
+    height: 30px;
+
+    margin: 10px;
+  }
+  .appbar > .menuMobile > .box svg {
+    margin-top: 10px;
+    height: 30px;
+    text-align: center;
+    color: #76c143;
+  }
+
+  .footer {
+    margin-top: 100px;
+    flex-direction: column;
+  }
+  .footer > .imageFooter img {
+    height: 40px;
+  }
+}
