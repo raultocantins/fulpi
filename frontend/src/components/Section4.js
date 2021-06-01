@@ -7,6 +7,7 @@ const section4 = () => {
       <div className="describe">
         <h1>Fulpi Audio Player </h1>
         <p>Ouça as newsletter com o fulpi-player e torne a sua experiência ainda mais incrível.</p>
+        <button>Registrar</button>
       </div>
     </div>
   );

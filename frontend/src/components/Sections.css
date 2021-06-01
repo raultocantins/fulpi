@@ -17,6 +17,15 @@
   color: #76c143;
   font-weight: bold;
   font-size: 15px;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.section1 > .describe button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+
+}
+.section1 > .describe button:active {
+  background-color: #fff;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .section2 {
@@ -69,25 +78,83 @@
   align-items: center;
   margin-top: 200px;
 }
-
-.section5 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.section5 > .card {
-  width: 50%;
-}
-.section5 > .card > .user {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.section5 > .card > .user img {
+.section4 > .describe button {
+  width: 300px;
   height: 50px;
+  border: none;
+  border-radius: 30px;
+  background-color: #fff;
+  color: #76c143;
+  font-weight: bold;
+  font-size: 15px;
+}
+.section4 > .describe button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.section4 > .describe button:active {
+  background-color: #fff;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.section5 > .card > .user p {
+
+.section5 {  
+  display: flex; 
+  justify-content: center;
+  flex-direction: column;  align-items: center;
+margin-top: 100px;
+}
+.section5 > .cards >.card {
+  width: 30%;
+  padding: 30px;
+  border-bottom: 1px solid #fff;
+
+}
+.section5 > .cards{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.section5 > .cards >.card > .user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.section5 > .cards >.card > .user img {
+  height: 50px;
+  width: 50px;
+  border-radius: 30px;
+}
+
+.section5 > .cards > .card > .user p {
     margin: 10px;
+  }
+  
+
+  .section6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+  }
+  .section6 > .cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .section6 > .cards > .card{
+    width: 300px;
+    height: 150px;
+  text-align: center;
+  border: 5px solid #fff;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 30px;
+  
   }
