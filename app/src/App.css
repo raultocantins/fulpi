@@ -1,97 +1,72 @@
 .App {
-  display: flex;  
-  justify-content: flex-end;
-}
-.container{
-  width: 80%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-
-.MuiDrawer-paperAnchorLeft {
-  background-color: #76c143 !important;
-  color: #fff !important;
-  width: 20%;
- 
-}
-.MuiDrawer-paperAnchorRight {
-  background-color: rgb(117, 193, 67,0.1) !important;
-  color: #000 !important;
-  width: 200px;
-}
-.MuiDrawer-paperAnchorLeft svg {
-  color: #fff !important;
-}
-.logo {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
-.logo img {
-  width: 50%;
-
-}
-
-.logoutDiv{ 
-  background-color: #76c143;  
-  position: absolute;
-  bottom: 0px;
+.container {
+  margin-left: 100px;
   width: 100%;
-}
-
-.logoutDiv button{ 
-  width: 100%; 
-  font-weight: bold;
-  color: #FFF;
-}
-.logoutDiv svg{
-  margin-left: 10px;
-}
-
-.perfil{
-  margin-top: 20px;
-}
-.perfil h3{
-  color: #76c143 ;
-}
-.perfil img{
-  width: 100px;
-  height: 100px;
-  border-radius: 30px;
-}
-.perfil > .levels{
-  margin-top: 50px;
-}
-.perfil > .levels > .boxGroups{
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
+  overflow-y: auto;
 }
-.perfil > .levels div{  
+.appbar {
+  height: 100px;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  display: flex !important;
+}
+.appbar > .menu a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 50px;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.appbar > .menu a:hover {
+  opacity: 0.7;
+}
+.appbar h1 {
+  color: #e50914;
+}
+.appbar > .search > .searchInput input {
+  color: #fff;
   margin: 0px 10px 0px 10px;
-  font-weight: bold;
-  
 }
 
-.perfil > .levels h3{  
-  margin: 0px
-  
+.appbar > .search > .searchInput svg {
+  color: #fff;
+  margin-right: 10px;
 }
-.MuiListItem-root{
-  margin: 10px 0px 10px 0px!important;
 
-}
-.MuiListItemIcon-root{
-display: flex;
-justify-content: flex-end;
-margin-right: 10px;  
-}
-.listMenu a{ 
+.appbar > .profile a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   text-decoration: none;
   color: #fff;
+  overflow: hidden;
+}
+.appbar > .profile img {
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+.appbar > .profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appbar > .profile button {
+  color: #fff !important;
+  margin-left: 50px;
+  height: 35px;
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import './ReleaseCard.css'
 import Paper from "@material-ui/core/Paper";
 import Perfil from '../../../assets/perfil2.jpg'
-export default () => {
+const releaseCard=() => {
     return (
         <Paper className="releaseCard" >
             <img src={Perfil} alt="perfil" />
@@ -15,3 +15,5 @@ export default () => {
         </Paper>
     )
 }
+
+export default releaseCard;
