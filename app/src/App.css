@@ -9,12 +9,7 @@
   align-items: center;
 
 }
-#teste{
-  width: 400px;
-  height: 150px;
-  background-color: #fff;
-  border-radius: 30px;
-}
+
 
 .MuiDrawer-paperAnchorLeft {
   background-color: #76c143 !important;

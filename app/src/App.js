@@ -12,8 +12,10 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import StarIcon from "@material-ui/icons/Star";
 import Paper from "@material-ui/core/Paper";
+import Logo from "./assets/Emoji.png";
 //import Components
-import Logo from "./assets/panda.svg";
+import Dashboard from './components/dashboard/Dashboard'
+
 function App() {
   return (
     <Router>
@@ -57,10 +59,10 @@ function App() {
             </Button>
           </div>
         </Drawer>
-        <div className="container">
+        <div className="container">          
           <Switch>
             <Route path="/" exact>
-              <h1>Dashboard</h1>
+              <Dashboard/>
             </Route>
             <Route path="/books">
               <h1>Books</h1>
