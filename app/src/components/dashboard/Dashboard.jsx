@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import ReleaseCard from "./components/ReleaseCard";
 import Destaque from "../../assets/perfil2.jpg";
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 export default class Dashboard extends React.Component {
+
+
+  nextStep(){
+    var genre=document.getElementsByClassName('genre')
+    genre[0].scroll(500,0)
+  }
   render() {
     return (
       <div className="dashboard">
@@ -28,7 +35,9 @@ export default class Dashboard extends React.Component {
         </div>
 
         <h3>Comédia</h3>
+
         <div className="genre">
+
           <Link to="/book/1">
             <ReleaseCard />
           </Link>
@@ -53,6 +62,10 @@ export default class Dashboard extends React.Component {
           <Link to="/book/1">
             <ReleaseCard />
           </Link>
+          <button onCLick={this.nextStep} className="nextStep">
+            <NavigateNextIcon />
+          </button>
+
         </div>
 
         <h3>Romance</h3>
@@ -78,6 +91,10 @@ export default class Dashboard extends React.Component {
           <Link to="/book/1">
             <ReleaseCard />
           </Link>
+          <button className="nextStep">
+            <NavigateNextIcon />
+          </button>
+
         </div>
 
         <h3>Ação</h3>
@@ -106,6 +123,9 @@ export default class Dashboard extends React.Component {
           <Link to="/book/1">
             <ReleaseCard />
           </Link>
+          <button className="nextStep">
+            <NavigateNextIcon />
+          </button>
         </div>
         <h3>Ficção</h3>
         <div className="genre">
@@ -131,6 +151,9 @@ export default class Dashboard extends React.Component {
           <Link to="/book/1">
             <ReleaseCard />
           </Link>
+          <button className="nextStep">
+            <NavigateNextIcon />
+          </button>
         </div>
       </div>
     );

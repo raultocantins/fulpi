@@ -17,7 +17,8 @@
   flex-wrap: wrap;
   flex-direction: column;
   width: 100%;
-  overflow-x: auto;
+  overflow-x: scroll;  
+  position: relative;
 }
 
 .spotlight {
@@ -64,4 +65,24 @@
 .spotlight > .describe button:active {
   color: #e50914;
   opacity: 0.7;
+}
+.genre >.nextStep{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100px;
+  height: 140px;
+  margin: 5px;
+position: sticky;
+  right: 0;
+  z-index: 99;
+  background-color: #14141491;
+  border: none;
+  color: #Fff;
+ 
+  
+}
+
+.genre >.nextStep svg{  
+  font-size: 40px;
 }
