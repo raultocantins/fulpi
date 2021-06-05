@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import { React } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Paper from "@material-ui/core/Paper";
@@ -10,12 +10,15 @@ import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 import SearchIcon from "@material-ui/icons/Search";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 //import Components
-import Dashboard from "./components/dashboard/Dashboard";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Book from './components/book/Book'
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Book from "./components/book/Book";
+import Dashboard from './components/dashboard/Dashboard'
+
 function App() {
+
+
   return (
     <Router>
       <div className="App">
@@ -40,14 +43,14 @@ function App() {
             />
           </div>
           <div className="profile">
-          <Link to="/profile">
-           <img src={Logo} alt="profile"/>
-           <h4>Alex raul</h4></Link>
-           <Button> 
-          <ExitToAppIcon/>
-          </Button>
+            <Link to="/profile">
+              <img src={Logo} alt="profile" />
+              <h4>Alex raul</h4>
+            </Link>
+            <Button>
+              <ExitToAppIcon />
+            </Button>
           </div>
-          
         </div>
         <div className="container">
           <Switch>
@@ -70,7 +73,7 @@ function App() {
               <h1>Profile</h1>
             </Route>
             <Route path="/book/:id">
-              <Book/>
+              <Book />
             </Route>
           </Switch>
         </div>

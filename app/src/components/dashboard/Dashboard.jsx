@@ -1,17 +1,81 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Dashboard.css";
-import ReleaseCard from "./components/ReleaseCard";
 import Destaque from "../../assets/perfil2.jpg";
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import MovieRow from "../movieRow/MovieRow";
 export default class Dashboard extends React.Component {
-
-
-  nextStep(){
-    var genre=document.getElementsByClassName('genre')
-    genre[0].scroll(500,0)
-  }
   render() {
+    var items = [
+      {
+        id: 0,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 1,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 2,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 0,
+        image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
+      },
+      {
+        id: 1,
+        image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
+      },
+      {
+        id: 2,
+        image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
+      },
+      {
+        id: 0,
+        image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
+      },
+      {
+        id: 1,
+        image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
+      },
+      {
+        id: 2,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 0,
+        image:
+          "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
+      },
+      {
+        id: 1,
+        image:
+          "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
+      },
+      {
+        id: 2,
+        image:
+          "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
+      },
+      {
+        id: 0,
+        image:
+          "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
+      },
+      {
+        id: 1,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 2,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+    ];
     return (
       <div className="dashboard">
         <div className="spotlight">
@@ -33,127 +97,11 @@ export default class Dashboard extends React.Component {
             <button>Read book</button>
           </div>
         </div>
-
-        <h3>Comédia</h3>
-
-        <div className="genre">
-
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <button onCLick={this.nextStep} className="nextStep">
-            <NavigateNextIcon />
-          </button>
-
-        </div>
-
-        <h3>Romance</h3>
-        <div className="genre">
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <button className="nextStep">
-            <NavigateNextIcon />
-          </button>
-
-        </div>
-
-        <h3>Ação</h3>
-        <div className="genre">
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <button className="nextStep">
-            <NavigateNextIcon />
-          </button>
-        </div>
-        <h3>Ficção</h3>
-        <div className="genre">
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <Link to="/book/1">
-            <ReleaseCard />
-          </Link>
-          <button className="nextStep">
-            <NavigateNextIcon />
-          </button>
+        <div className="rowsGenre">
+          <MovieRow title="Comédia" items={items} />
+          <MovieRow title="Romance" items={items} />
+          <MovieRow title="Ficção" items={items} />
+          <MovieRow title="Ação" items={items} />
         </div>
       </div>
     );

@@ -8,18 +8,6 @@
 .dashboard h3 {
   margin-left: 20px;
 }
-.genre {
-  margin-left: 20px;
-  height: 200px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 100%;
-  overflow-x: scroll;  
-  position: relative;
-}
 
 .spotlight {
   margin-bottom: 50px;
@@ -66,23 +54,8 @@
   color: #e50914;
   opacity: 0.7;
 }
-.genre >.nextStep{
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  width: 100px;
-  height: 140px;
-  margin: 5px;
-position: sticky;
-  right: 0;
-  z-index: 99;
-  background-color: #14141491;
-  border: none;
-  color: #Fff;
- 
-  
-}
-
-.genre >.nextStep svg{  
-  font-size: 40px;
+.rowsGenre{
+  position: relative;
+  height: 100%;
+  width: 97%;
 }
