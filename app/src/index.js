@@ -5,15 +5,19 @@ import App from "./App";
 import Login from "./components/login/Login";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ErrorPage from './pageError'
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route path="/" exact>
+        <Route path="/app">
           <App />
         </Route>
         <Route path="/signin">
           <Login />
+        </Route>
+        <Route path="*">
+          <ErrorPage/>
         </Route>
       </Switch>
     </Router>

@@ -1,0 +1,17 @@
+.top10 {
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+}
+
+.top10 > .groupCards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}

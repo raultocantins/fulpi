@@ -44,7 +44,7 @@
   margin-right: 10px;
 }
 
-.appbar > .profile a {
+.appbar > .imgProfile a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,20 +53,64 @@
   color: #fff;
   overflow: hidden;
 }
-.appbar > .profile img {
+.appbar > .imgProfile img {
   height: 35px;
   width: 35px;
   margin-right: 10px;
   border-radius: 10px;
 }
-.appbar > .profile {
+.appbar > .imgProfile {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.appbar > .profile button {
+.appbar > .imgProfile button {
   color: #fff !important;
   margin-left: 50px;
   height: 35px;
+}
+.appbar > .menuMobile {
+  display: none;
+}
+.appbar > .iconMobile {
+  display: none;
+}
+@media (max-width: 1150px) {
+  .container {
+    margin-left: 0px;
+    height: 100%;
+  }
+  .appbar > .iconMobile {
+    display: flex;
+  }
+  .appbar {
+    position: relative;
+  }
+  .appbar > .menu {
+    display: none;
+  }
+  .appbar > .imgProfile {
+    display: none;
+  }
+  .appbar > .search {
+    display: none;
+  }
+  .appbar > .menuMobile {
+    display: flex;
+    flex-direction: column;
+    background-color: #141414b7;
+    position: absolute;
+    z-index: 99;
+    top: 80px;
+    width: 100%;
+    height: 210px;
+    text-align: center;
+  }
+  .appbar > .menuMobile a {
+    padding: 5px;
+    margin: 5px;
+    color: #fff;
+    text-decoration: none;
+  }
 }

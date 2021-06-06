@@ -81,12 +81,13 @@
   display: flex;
   justify-content: flex-start;
   width: 300px;
+
 }
 .login > .boxLogin > .groupButtons button {
   width: auto;
   height: 10px;
   font-size: 10px;
-  margin-top: 20px;
+  margin: 20px 10px 10px 10px;
 }
 #loading {
   color: #fff !important;
