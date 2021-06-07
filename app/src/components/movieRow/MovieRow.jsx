@@ -42,7 +42,7 @@ const MovieRow = ({ title, items }) => {
         >
           {items.length > 0 &&
             items.map((item, key) => (
-              <Link key={key} to={`/book/${item.id}`}>
+              <Link key={key} to={`/app/book/${item.id}`}>
                 <div  className="movieRow--item">
                   <div className="card">
                     <img src={item.image} alt="perfil" />
