@@ -1,17 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("./middlewares/token");
-const upload = require('./multer')
-router.use(express.json())
+const { save_user, signin, validateToken } = require("./middlewares/auth");
+const { setGenre, getGenres } = require("./middlewares/genres");
+//const passportValid = require("./middlewares/passport");
+//const upload = require("./multer");
 //import middlewares
-const { setGenre, getGenres } = require('./middlewares/genres')
+router.use(express.json());
 
 //get genres
-router.get("/genres", getGenres);
+router.get("/genres", validateToken, getGenres);
+router.post("/genres",validateToken, setGenre);
 
-//set new genre
-router.post("/genres", setGenre)
+//register user
+router.post("/auth/register/user", save_user);
 
+//login user
+router.post("/auth/signin", signin);
+
+//VALIDATE TOKEN
+router.post("/validateToken", validateToken);
 
 /*router.post("/upload", upload.single("file"), (req, res) => {
   res.send("Upload com sucesso!!!");
