@@ -25,8 +25,11 @@ function App() {
     ToggleMenu(!toggleMenu);
   }
  function logout(){
+   window.localStorage.removeItem('token')
    document.location.href='/signin'
  }
+
+
   return (
     <Router>
       <Worker

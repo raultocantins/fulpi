@@ -4,6 +4,7 @@ import { Checkbox } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
+import AuthLogin from "../../config/login";
 export default class Login extends React.Component {
   state = {
     loading: false,
@@ -40,10 +41,21 @@ export default class Login extends React.Component {
       alert("email inválido!");
     } else {
       this.setState({ loading: true });
-      setTimeout(() => {
-        this.setState({ loading: false });
-        alert("passou!!!");
-      }, 3000);
+      var user = {
+        email: this.state.email,
+        password: this.state.password,
+      };
+      AuthLogin(user)
+        .then((res) => {
+          var dataUser = JSON.stringify(res.data);
+          window.localStorage.setItem("token", dataUser);
+          window.location.href = "/app";
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("error");
+          this.setState({ loading: false });
+        });
     }
   }
   render() {

@@ -1,6 +1,7 @@
 const express = require("express");
+
 const router = express.Router();
-const { save_user, signin, validateToken } = require("./middlewares/auth");
+const { save_user, signin, validateToken,signinTest } = require("./middlewares/auth");
 const { setGenre, getGenres } = require("./middlewares/genres");
 //const passportValid = require("./middlewares/passport");
 //const upload = require("./multer");
@@ -16,6 +17,9 @@ router.post("/auth/register/user", save_user);
 
 //login user
 router.post("/auth/signin", signin);
+
+//login user test
+router.post("/auth/signinteste", signinTest);
 
 //VALIDATE TOKEN
 router.post("/validateToken", validateToken);

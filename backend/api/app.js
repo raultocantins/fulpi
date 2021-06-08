@@ -5,6 +5,6 @@ const Routes=require('./routes')
 const app=express()
 app.use(cors())
 app.use(Routes)
-app.listen(3000,()=>{
+app.listen(4000,()=>{
     console.log('Backend started!!')
 })

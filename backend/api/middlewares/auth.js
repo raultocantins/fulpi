@@ -1,7 +1,7 @@
 const authSecret =
   "f4f62bc83fa5c7b98ee1d1f849a0904edbd3c7b1db8aa9fcbfa4f16158321cf2fc61423acd9fcf320f15453a671acbffda117615db9f1d5b48a0bae3fc155bbf";
 const jwt = require("jsonwebtoken");
-
+const jwtSimple = require("jwt-simple");
 const bcrypt = require("bcrypt-nodejs");
 const db = require("../../database/db");
 function existsOrError(value, msg) {
@@ -42,14 +42,14 @@ const signin = async (req, res) => {
   };
   res.json({
     ...payload,
-    token: jwt.encode(payload, authSecret),
+    token: jwtSimple.encode(payload, authSecret),
   });
 };
 
 const validateToken = async (req, res, next) => {
-  // const userData = req.body || null;
+  //const userData = req.body || null;
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  const token =authHeader?authHeader.split(" ")[1]:null;
   if (token == null) {
     return res.sendStatus(401);
   }
@@ -58,7 +58,6 @@ const validateToken = async (req, res, next) => {
       return res.sendStatus(403);
     }
     req.user = user;
-
     next();
   });
 };
@@ -137,5 +136,23 @@ const getUser = async (req, res) => {
       res.status(500).send(err);
     });
 };*/
+const signinTest = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send("Informe o usuário e senha!");
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    id: 15,
+    name: "Alex raul santo araujo",
+    email: "alexbraul.ar@gmail.com",
+    iat: now,
+    exp: now + 60 * 60 * 24,
+  };
+  res.json({
+    ...payload,
+    token: jwtSimple.encode(payload, authSecret),
+  });
+};
 
 module.exports = { signin, validateToken, save_user, signinTest };
