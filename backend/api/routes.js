@@ -3,14 +3,21 @@ const express = require("express");
 const router = express.Router();
 const { save_user, signin, validateToken,signinTest } = require("./middlewares/auth");
 const { setGenre, getGenres } = require("./middlewares/genres");
-//const passportValid = require("./middlewares/passport");
+const {getHistorys,setHistory}=require('./middlewares/historys')
+const authenticate = require("./middlewares/passport");
 //const upload = require("./multer");
 //import middlewares
 router.use(express.json());
 
 //get genres
-router.get("/genres", validateToken, getGenres);
-router.post("/genres",validateToken, setGenre);
+router.get("/genres", authenticate(), getGenres);
+router.post("/genres",authenticate(), setGenre);
+
+//get historys
+router.get("/historys",authenticate(),getHistorys);
+
+//set history
+router.post("/history",authenticate(),setHistory)
 
 //register user
 router.post("/auth/register/user", save_user);

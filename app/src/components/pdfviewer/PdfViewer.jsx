@@ -8,11 +8,11 @@ import './PdfViewer.css'
 import Pdf from '../../assets/pdf.pdf'
 
 const PdfViewer = () => {
-  //  let { id } = useParams();
+    //  let { id } = useParams();
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
     return (
         <div className="pdfviewer" >
-            <Viewer fileUrl={Pdf}
+            <Viewer fileUrl="https://pdfsfulpi.s3-sa-east-1.amazonaws.com/pdf.b698684b.pdf"
                 plugins={[
                     defaultLayoutPluginInstance,
                 ]}

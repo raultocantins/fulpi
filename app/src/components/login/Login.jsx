@@ -5,6 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
 import AuthLogin from "../../config/login";
+import AuthRegister from '../../config/register'
+import {isAuthenticate} from '../../config/auth'
 export default class Login extends React.Component {
   state = {
     loading: false,
@@ -18,6 +20,13 @@ export default class Login extends React.Component {
     super(props);
     this.toggleStep = this.toggleStep.bind(this);
     this.submit = this.submit.bind(this);
+    this.register=this.register.bind(this)
+  }
+  componentDidMount(){
+   if(isAuthenticate()){
+    window.location.href="/app" 
+   }
+    
   }
   toggleStep() {
     this.setState({ register: !this.state.register });
@@ -58,6 +67,29 @@ export default class Login extends React.Component {
         });
     }
   }
+  register(){
+    if(this.state.password===this.state.confirmPassword){
+      this.setState({ loading: true });
+      var user={
+        name:this.state.name,
+        password:this.state.password,
+        email:this.state.email
+      }
+      AuthRegister(user)
+      .then(res=>{
+        this.setState({ loading: false });
+        this.toggleStep()
+      })
+      .catch(err=>{
+        this.setState({ loading: false });
+        alert('error')
+        console.log(err)
+      })
+    }else{
+      alert('Senhas não são iguais!!')
+    }
+  
+  }
   render() {
     return (
       <div className="login">
@@ -94,7 +126,7 @@ export default class Login extends React.Component {
                 onChange={this.handleChange("confirmPassword")}
                 value={this.state.confirmPassword}
               />
-              <button onClick={this.submit}>
+              <button onClick={this.register}>
                 {this.state.loading ? (
                   <CircularProgress id="loading" />
                 ) : (
