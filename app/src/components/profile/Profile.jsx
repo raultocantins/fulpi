@@ -7,20 +7,38 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import PhoneIcon from "@material-ui/icons/Phone";
 
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 const Profile = () => {
   var profile = {
     name: "Alex raul santo",
     email: "alexbraul.ar@gmail.com",
     phoneNumber: "63992086480",
   };
+ 
   return (
     <div className="profile">
       <h1>Informações Pessoais</h1>
       <div className="perfil">
-        <img
-          src="https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg"
-          alt="profile"
-        />
+   <div className="upload">
+     <div className="hoverblack">
+
+     </div>
+   <input accept="image/*" id="icon-button-file" type="file" />
+      <label htmlFor="icon-button-file">
+        <IconButton color="primary" aria-label="upload picture" component="span">
+          <PhotoCamera />
+        </IconButton>
+      </label>
+      <img
+            src="https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg"
+            alt="profile"
+           
+          />
+   </div>
+      
+         
+   
         <div className="describe">
           <Input
             className="input"

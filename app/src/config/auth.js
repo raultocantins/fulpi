@@ -1,6 +1,6 @@
 //import Axios from "axios";
 export const isAuthenticate = () => {
-  var userToken = JSON.parse(window.localStorage.getItem("token"));
+//  var userToken = JSON.parse(window.localStorage.getItem("token"));
  // Axios.defaults.headers.common["Authorization"] = `Bearer ${userToken.token}`;
 
  /* Axios.post("http://localhost:4000/validateToken")

@@ -5,7 +5,8 @@ const { save_user, signin, validateToken,signinTest } = require("./middlewares/a
 const { setGenre, getGenres } = require("./middlewares/genres");
 const {getHistorys,setHistory}=require('./middlewares/historys')
 const authenticate = require("./middlewares/passport");
-//const upload = require("./multer");
+const multerConfig = require("./multer");
+const multer=require('multer')
 //import middlewares
 router.use(express.json());
 router.use(cors())
@@ -31,8 +32,11 @@ router.post("/auth/signinteste", signinTest);
 //VALIDATE TOKEN
 router.post("/validateToken", validateToken);
 
-/*router.post("/upload", upload.single("file"), (req, res) => {
-  res.send("Upload com sucesso!!!");
-});*/
+
+//Upload user image
+router.post("/user/image", multer(multerConfig).single("file"), (req, res) => {
+  const { originalname: name, size, key, location: url = "" } = req.file;
+  res.send("Upload com sucesso!!!"+name);
+});
 
 module.exports = router;

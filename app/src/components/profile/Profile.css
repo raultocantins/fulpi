@@ -6,8 +6,7 @@
   overflow-y: auto;
   width: 100%;
   height: 100%;
-color: #fff;
- 
+  color: #fff;
 }
 .profile > .perfil {
   width: 900px;
@@ -19,20 +18,15 @@ color: #fff;
   border-radius: 10px;
   color: #fff!;
 }
-.profile  h1{
-    margin-bottom: 50px;
-  }
-.profile > .perfil img {
-  height: 100%;
-  width: 30%;
-  border-radius: 10px 0px 0px 10px;
+.profile h1 {
+  margin-bottom: 50px;
 }
 
 .profile > .perfil > .describe {
   padding: 20px;
   width: 70%;
   height: 100%;
- 
+
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -51,36 +45,73 @@ color: #fff;
   font-weight: bold;
 }
 
-.ranking{
-    background-color: rgb(243, 16, 16);
-    margin-top: 50px;
-    width: 900px;
-    border-radius: 10px;
-    overflow-y: auto;
-    color: #fff;
+.ranking {
+  background-color: rgb(243, 16, 16);
+  margin-top: 50px;
+  width: 900px;
+  border-radius: 10px;
+  overflow-y: auto;
+  color: #fff;
 }
-.ranking .score{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
+.ranking .score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.ranking .score p{
-   margin-right: 15px;
-   
+.ranking .score p {
+  margin-right: 15px;
 }
+.upload {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.upload img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 5;
+  border-radius: inherit;
+}
+
+.upload input {
+  display: none;
+}
+.upload svg {
+  color: #fff;
+  position: absolute;
+  z-index: 8;
+}
+.upload > .hoverblack {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 7;
+  background-color: transparent;
+}
+.upload > .hoverblack:hover {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 7;
+  background-color: #14141441;
+  transition: all ease 0.3s;
+}
+
 @media (max-width: 600px) {
-    .profile {
-       justify-content: flex-start;
-       
-       
-      }
+  .profile {
+    justify-content: flex-start;
+  }
   .profile > .perfil {
     width: 90%;
     height: auto;
     flex-direction: column;
     padding: 15px;
-   
   }
   .profile > .perfil img {
     height: 40%;
@@ -91,6 +122,5 @@ color: #fff;
     width: 100%;
     height: 60%;
     padding: 0px;
-    
   }
 }
