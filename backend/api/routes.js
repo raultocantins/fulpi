@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors=require('cors')
 const router = express.Router();
 const { save_user, signin, validateToken,signinTest } = require("./middlewares/auth");
 const { setGenre, getGenres } = require("./middlewares/genres");
@@ -8,7 +8,7 @@ const authenticate = require("./middlewares/passport");
 //const upload = require("./multer");
 //import middlewares
 router.use(express.json());
-
+router.use(cors())
 //get genres
 router.get("/genres", authenticate(), getGenres);
 router.post("/genres",authenticate(), setGenre);

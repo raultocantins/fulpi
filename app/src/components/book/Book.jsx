@@ -14,7 +14,7 @@ const Book = function () {
         <img src="http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg" alt="capa" />
         <div className="describe">
           <h1>O guerreiro sagrado</h1>
-          <Link to="/app/pdfviewer/:linktopdf">
+          <Link to="/app/pdfviewer/pdf.b698684b.pdf">
             <button>Ler book</button></Link>
         </div>
       </div>

@@ -12,9 +12,10 @@ export const isAuthenticate = () => {
       console.log(err);
       return false;
     });*/
-    if(userToken!=null && userToken.token){
+  /*  if(userToken!=null && userToken.token){
       return true
     }else{
       return false
-    }
+    }*/
+    return true
 };
