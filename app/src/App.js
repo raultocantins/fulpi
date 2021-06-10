@@ -1,5 +1,5 @@
 import "./App.css";
-import { React, useState } from "react";
+import { React, useState,useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import Logo from "./assets/perfil2.jpg";
 import Input from "@material-ui/core/Input";
@@ -20,7 +20,7 @@ import PdfViewer from "./components/pdfviewer/PdfViewer";
 import { Worker } from '@react-pdf-viewer/core';
 function App() {
   const [toggleMenu, ToggleMenu] = useState(false);
-
+  const [user,setUser]=useState({name:""})
   function toggleMenuMobile() {
     ToggleMenu(!toggleMenu);
   }
@@ -28,6 +28,12 @@ function App() {
    window.localStorage.removeItem('token')
    document.location.href='/signin'
  }
+ useEffect(()=>{
+  var user=JSON.parse(window.localStorage.getItem('token'))
+  setUser({
+    name:user.name,   
+  })
+ },[])
 
 
   return (
@@ -88,7 +94,7 @@ function App() {
             <div className="imgProfile">
               <Link to="/app/profile">
                 <img src={Logo} alt="profile" />
-                <h4>Alex raul</h4>
+                <h4>{user.name}</h4>
               </Link>
               <Button onClick={logout}>
                 <ExitToAppIcon />

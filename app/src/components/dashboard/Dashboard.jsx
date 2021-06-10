@@ -1,6 +1,5 @@
 import React from "react";
 import "./Dashboard.css";
-import Destaque from "../../assets/perfil2.jpg";
 import MovieRow from "../movieRow/MovieRow";
 export default class Dashboard extends React.Component {
   render() {
@@ -78,25 +77,19 @@ export default class Dashboard extends React.Component {
     ];
     return (
       <div className="dashboard">
-        <div className="spotlight">
-          <img src={Destaque} alt="spotlight" />
-          <div className="describe">
-            <h1>Maria e seus violinos</h1>
-            <p>
-              Agora é a época em que estão amadurecendo as nozes; vamos os dois
-              à montanha e, pelo menos uma vez na vida, fartemo-nos, antes que o
-              esquilo as carregue todas. - Sim, - respondeu Franguinha, - vamos;
-              vamos regalar-nos fartamente. E lá se foram os dois para a
-              montanha. Como era um dia magnífico, deixaram-se ficar até tarde.
-              Ora, eu não sei se realmente estavam empanturrados, ou se apenas
-              fingiam estar; só sei que não queriam voltar a pé para casa e
-              Franguinho teve que construir um carrinho com cascas de nozes.
-              Quando ficou pronto, Franguinha acomodou-se nele e disse: - Agora,
-              Franguinho, podes puxar.
-            </p>
-            <button>Read book</button>
-          </div>
+      <div className="cartaz">
+      <div className="spotlight">
+          <img src="https://cdn.falauniversidades.com.br/wp-content/uploads/2019/04/better-call-saul-cartaz1.jpg" alt="spotlight" />         
+           
+           <div className="btn">
+            <div className="title">
+            <h1>Better Call Saull</h1>
+            <p>Por: Alex raul santo</p>
+            </div>
+           <button>Read book</button>         
+           </div>
         </div>
+      </div>
         <div className="rowsGenre">
           <MovieRow title="Comédia" items={items} />
           <MovieRow title="Romance" items={items} />

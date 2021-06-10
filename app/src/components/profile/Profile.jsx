@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useEffect,useState} from "react";
 import "./Profile.css";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -15,7 +15,14 @@ const Profile = () => {
     email: "alexbraul.ar@gmail.com",
     phoneNumber: "63992086480",
   };
- 
+ const [user,setUser]=useState({name:"",email:""})
+  useEffect(()=>{
+var user=JSON.parse(window.localStorage.getItem('token'))
+setUser({
+  name:user.name,
+  email:user.email
+})
+  },[])
   return (
     <div className="profile">
       <h1>Informações Pessoais</h1>
@@ -44,7 +51,7 @@ const Profile = () => {
             className="input"
             fullWidth
             id="input-with-icon-adornment"
-            value={profile.name}
+            value={user.name}
             disabled
             startAdornment={
               <InputAdornment position="start">
@@ -56,7 +63,7 @@ const Profile = () => {
             className="input"
             fullWidth
             id="input-with-icon-adornment"
-            value={profile.email}
+            value={user.email}
             disabled
             startAdornment={
               <InputAdornment position="start">
