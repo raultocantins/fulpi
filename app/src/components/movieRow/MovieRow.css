@@ -38,6 +38,7 @@
   width: 100%;
   transform: scale(0.9);
   transition: all ease 0.2s;
+ 
 }
 
 .movieRow--item img:hover {
@@ -79,3 +80,4 @@
     opacity: 1;
   }
 }
+

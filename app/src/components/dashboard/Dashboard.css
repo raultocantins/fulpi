@@ -8,7 +8,7 @@
 .dashboard h3 {
   margin-left: 20px;
 }
-.cartaz{
+.cartaz {
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -18,11 +18,10 @@
   margin-bottom: 50px;
   width: 70%;
   height: 430px;
- position: relative;
+  position: relative;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-
 }
 .spotlight img {
   height: 100%;
@@ -32,21 +31,22 @@
   border-radius: 10px;
 }
 
-.spotlight >.btn {
+.spotlight > .btn {
   position: absolute;
-  z-index: 6; 
+  z-index: 6;
   bottom: 0px;
   height: 100px;
-  width: 100%;  
+  width: 100%;
   background-color: #14141472;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: rgb(229, 9, 20,0.4) 5px 5px, rgb(229, 9, 20,0.3) 10px 10px, rgb(229, 9, 20,0.2) 15px 15px, rgb(229, 9, 20,0.1) 20px 20px, rgb(229, 9, 20,0.05) 25px 25px;
-  
+  box-shadow: rgb(229, 9, 20, 0.4) 5px 5px, rgb(229, 9, 20, 0.3) 10px 10px,
+    rgb(229, 9, 20, 0.2) 15px 15px, rgb(229, 9, 20, 0.1) 20px 20px,
+    rgb(229, 9, 20, 0.05) 25px 25px;
 }
 
-.spotlight >.btn button {  
+.spotlight > .btn button {
   border: none;
   background-color: #e50914;
   color: #fff;
@@ -57,30 +57,27 @@
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.spotlight>.btn>.title {  
+.spotlight > .btn > .title {
   height: 100%;
- 
 }
-.spotlight>.btn>.title p{  
-margin: 0;
- 
+.spotlight > .btn > .title p {
+  margin: 0;
 }
-.spotlight>.btn>.title h1{  
+.spotlight > .btn > .title h1 {
   margin: 5px 0px 10px 0px;
-   
-  }
-.spotlight  button:hover {
+}
+.spotlight button:hover {
   background-color: #fff;
   color: #e50914;
 }
-.spotlight  button:active {
+.spotlight button:active {
   color: #e50914;
   opacity: 0.7;
 }
 .rowsGenre {
   position: relative;
   height: 100%;
-  width: 100vw;  
+  width: 100vw;
 }
 @media (max-width: 600px) {
   .spotlight {
@@ -95,6 +92,7 @@ margin: 0;
     width: 100%;
     height: 150px;
     border-radius: 0px;
+   
   }
   .spotlight > .describe {
     width: 100%;
@@ -109,3 +107,4 @@ margin: 0;
     display: none;
   }
 }
+

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Dashboard.css";
 import MovieRow from "../movieRow/MovieRow";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 export default class Dashboard extends React.Component {
   render() {
     var items = [
@@ -77,19 +78,22 @@ export default class Dashboard extends React.Component {
     ];
     return (
       <div className="dashboard">
-      <div className="cartaz">
-      <div className="spotlight">
-          <img src="https://cdn.falauniversidades.com.br/wp-content/uploads/2019/04/better-call-saul-cartaz1.jpg" alt="spotlight" />         
-           
-           <div className="btn">
-            <div className="title">
-            <h1>Better Call Saull</h1>
-            <p>Por: Alex raul santo</p>
+        <div className="cartaz">
+          <div className="spotlight">
+            <LazyLoadImage
+              alt="spotlight"
+              src="https://cdn.falauniversidades.com.br/wp-content/uploads/2019/04/better-call-saul-cartaz1.jpg" // use normal <img> attributes as props
+            />
+
+            <div className="btn">
+              <div className="title">
+                <h1>Better Call Saull</h1>
+                <p>Por: Alex raul santo</p>
+              </div>
+              <button>Read book</button>
             </div>
-           <button>Read book</button>         
-           </div>
+          </div>
         </div>
-      </div>
         <div className="rowsGenre">
           <MovieRow title="Comédia" items={items} />
           <MovieRow title="Romance" items={items} />

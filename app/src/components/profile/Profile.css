@@ -77,11 +77,13 @@
   position: absolute;
   z-index: 5;
   border-radius: inherit;
+ background-size: cover;
 }
 
 .upload input {
   display: none;
 }
+
 .upload svg {
   color: #fff;
   position: absolute;

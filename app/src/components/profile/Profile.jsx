@@ -1,4 +1,4 @@
-import {React,useEffect,useState} from "react";
+import { React, useEffect, useState } from "react";
 import "./Profile.css";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -6,46 +6,78 @@ import Button from "@material-ui/core/Button";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import PhoneIcon from "@material-ui/icons/Phone";
-
-import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import Axios from "axios";
+import IconButton from "@material-ui/core/IconButton";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import ReactLoading from "react-loading";
 const Profile = () => {
-  var profile = {
-    name: "Alex raul santo",
-    email: "alexbraul.ar@gmail.com",
-    phoneNumber: "63992086480",
-  };
- const [user,setUser]=useState({name:"",email:""})
-  useEffect(()=>{
-var user=JSON.parse(window.localStorage.getItem('token'))
-setUser({
-  name:user.name,
-  email:user.email
-})
-  },[])
+  const [user, setUser] = useState({
+    name: "Undefined",
+    email: "Undefined",
+    phoneNumber: "",
+  });
+  const [userimg, setImg] = useState(
+    "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg"
+  );
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let user = JSON.parse(window.localStorage.getItem("token"));
+    if (user) {
+      setUser({
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+      });
+      setImg(user.image);
+    }
+  }, []);
+
+  function onChange(img) {
+    setLoading(true);
+    const data = new FormData();
+    data.append("file", img.target.files[0]);
+    Axios.post("https://uploadtesteraws.herokuapp.com/posts", data)
+      .then((res) => {
+        setImg(res.data.url);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        alert("Error ao enviar Imagem");
+      });
+  }
+
   return (
     <div className="profile">
       <h1>Informações Pessoais</h1>
       <div className="perfil">
-   <div className="upload">
-     <div className="hoverblack">
-
-     </div>
-   <input accept="image/*" id="icon-button-file" type="file" />
-      <label htmlFor="icon-button-file">
-        <IconButton color="primary" aria-label="upload picture" component="span">
-          <PhotoCamera />
-        </IconButton>
-      </label>
-      <img
-            src="https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg"
-            alt="profile"
-           
+        <div className="upload">
+          <div className="hoverblack"></div>
+          <input
+            type="file"
+            onChange={onChange}
+            className="input"
+            id="icon-button-file"
           />
-   </div>
-      
-         
-   
+          <label htmlFor="icon-button-file">
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              disabled={loading ? true : false}
+            >
+              {loading ? (
+                <ReactLoading color="red" type="spinningBubbles" />
+              ) : (
+                <PhotoCamera />
+              )}
+            </IconButton>
+          </label>
+          <img src={userimg} alt="profile" />
+        </div>
+
         <div className="describe">
           <Input
             className="input"
@@ -76,7 +108,7 @@ setUser({
             disabled
             fullWidth
             id="input-with-icon-adornment"
-            value={profile.phoneNumber}
+            value={user.phoneNumber}
             startAdornment={
               <InputAdornment position="start">
                 <PhoneIcon />

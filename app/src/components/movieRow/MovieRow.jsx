@@ -3,6 +3,8 @@ import "./MovieRow.css";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 const MovieRow = ({ title, items }) => {
   const [scrollX, setScrollX] = useState(0);
 
@@ -43,9 +45,14 @@ const MovieRow = ({ title, items }) => {
           {items.length > 0 &&
             items.map((item, key) => (
               <Link key={key} to={`/app/book/${item.id}`}>
-                <div  className="movieRow--item">
+                <div className="movieRow--item">
                   <div className="card">
-                    <img src={item.image} alt="perfil" />
+                    <LazyLoadImage
+                      height="100%"
+                      width="100%"
+                      alt="book"
+                      src={item.image} // use normal <img> attributes as props
+                    />
                   </div>
                 </div>
               </Link>

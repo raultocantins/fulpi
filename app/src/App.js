@@ -30,9 +30,17 @@ function App() {
  }
  useEffect(()=>{
   var user=JSON.parse(window.localStorage.getItem('token'))
+  if(user){
+
+
   setUser({
     name:user.name,   
   })
+}else{
+  setUser({
+    name:"Undefined",   
+  })
+}
  },[])
 
 
