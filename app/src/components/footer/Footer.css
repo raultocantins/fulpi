@@ -1,0 +1,33 @@
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;  
+    height: 200px;  
+    position: absolute;
+    bottom: 0;
+}
+.footer>.links{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  height: 100%;
+}
+.footer>.links div{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+   flex-direction: column;
+   text-align: center;  
+  }
+  .footer>.links div a{
+   margin: 10px;
+  }
+
+.footer>.market{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

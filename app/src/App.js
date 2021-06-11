@@ -1,6 +1,6 @@
 import "./App.css";
-import { React, useState,useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Logo from "./assets/perfil2.jpg";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -20,28 +20,28 @@ import PdfViewer from "./components/pdfviewer/PdfViewer";
 import { Worker } from '@react-pdf-viewer/core';
 function App() {
   const [toggleMenu, ToggleMenu] = useState(false);
-  const [user,setUser]=useState({name:""})
+  const [user, setUser] = useState({ name: "" })
   function toggleMenuMobile() {
     ToggleMenu(!toggleMenu);
   }
- function logout(){
-   window.localStorage.removeItem('token')
-   document.location.href='/signin'
- }
- useEffect(()=>{
-  var user=JSON.parse(window.localStorage.getItem('token'))
-  if(user){
+  function logout() {
+    window.localStorage.removeItem('token')
+    document.location.href = '/signin'
+  }
+  useEffect(() => {
+    var user = JSON.parse(window.localStorage.getItem('token'))
+    if (user) {
 
 
-  setUser({
-    name:user.name,   
-  })
-}else{
-  setUser({
-    name:"Undefined",   
-  })
-}
- },[])
+      setUser({
+        name: user.name,
+      })
+    } else {
+      setUser({
+        name: "Undefined",
+      })
+    }
+  }, [])
 
 
   return (
@@ -132,7 +132,9 @@ function App() {
               <Route path="/app/pdfviewer/:id">
                 <PdfViewer />
               </Route>
+
             </Switch>
+
           </div>
         </div>
       </Worker>

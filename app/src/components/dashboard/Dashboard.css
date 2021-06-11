@@ -22,6 +22,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  
 }
 .spotlight img {
   height: 100%;
@@ -32,6 +34,7 @@
 }
 
 .spotlight > .btn {
+  
   position: absolute;
   z-index: 6;
   bottom: 0px;
@@ -80,31 +83,17 @@
   width: 100vw;
 }
 @media (max-width: 600px) {
-  .spotlight {
-    flex-direction: column;
-    width: 100%;
-    overflow: hidden;
-    margin-left: 0px;
-    border-radius: 0px;
-    height: auto;
-  }
-  .spotlight img {
-    width: 100%;
-    height: 150px;
-    border-radius: 0px;
+
+  .spotlight {    
+    width: 100vw;
    
   }
-  .spotlight > .describe {
-    width: 100%;
-    display: flex;
-    margin: 0px 10px 30px 10px;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 13px;
+  .spotlight>.btn {    
+    
+   padding-bottom: 18px;
   }
-  .spotlight > .describe p {
-    display: none;
+  .spotlight img {    
+    border-radius: 0px;
   }
 }
 

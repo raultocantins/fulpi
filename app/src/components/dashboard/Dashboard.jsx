@@ -100,6 +100,7 @@ export default class Dashboard extends React.Component {
           <MovieRow title="Ficção" items={items} />
           <MovieRow title="Ação" items={items} />
         </div>
+
       </div>
     );
   }

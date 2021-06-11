@@ -19,7 +19,7 @@ const PdfViewer = () => {
   return (
     <div className="pdfviewer">
       { loading?Loading():""}
-      <Viewer
+      <Viewer 
         onDocumentLoad={handleLoading}
         fileUrl={`https://pdfsfulpi.s3-sa-east-1.amazonaws.com/${id}`}
         plugins={[defaultLayoutPluginInstance]}

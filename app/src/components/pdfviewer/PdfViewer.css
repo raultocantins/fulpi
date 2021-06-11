@@ -26,6 +26,9 @@
 .rpv-default-layout-body{
     border-radius: 10px;
 }
+.rpv-core-doc-loading{
+    display: none!important;
+}
 @media (max-width:600px){
     .pdfviewer{
         width: 100%;
