@@ -7,6 +7,7 @@ const getHistorys = async (req, res) => {
 }
 
 const setHistory = async (req, res) => {
+
     var history = req.body.history
     const newHistory = {
         name: history.name,
@@ -26,4 +27,4 @@ const setHistory = async (req, res) => {
 
 }
 
-module.exports = { getHistorys ,setHistory};
+module.exports = { getHistorys, setHistory };
