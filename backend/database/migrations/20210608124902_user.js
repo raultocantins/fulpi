@@ -5,6 +5,7 @@ exports.up = function (knex) {
     table.string("email").notNull();
     table.string("password").notNull();
     table.string("image");
+    table.boolean("writer")
     table.jsonb("favoritos");
     table.integer("phonenumber");
   });

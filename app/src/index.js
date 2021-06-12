@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import Login from "./components/login/Login";
+import WriterRegister from "./components/writerRegister/Writer";
 import reportWebVitals from "./reportWebVitals";
+import Writer from "./components/writer/Writer";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,7 +13,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import ErrorPage from "./pageError";
-import {isAuthenticate} from './config/auth'
+import { isAuthenticate ,isWriter} from "./config/auth";
 
 const PrivateRouter = ({ component: Component, ...rest }) => (
   <Route
@@ -27,6 +29,20 @@ const PrivateRouter = ({ component: Component, ...rest }) => (
     }
   />
 );
+const PrivateRouterWriter = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isWriter() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{ pathname: "/writer/register", state: { from: props.location } }}
+        />
+      )
+    }
+  />
+);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -36,6 +52,11 @@ ReactDOM.render(
         <Route path="/signin">
           <Login />
         </Route>
+        <Route path="/writer/register">
+          <WriterRegister />
+        </Route>
+        <PrivateRouterWriter path="/writer" component={Writer} />{" "}
+        
         <Route path="*">
           <ErrorPage />
         </Route>

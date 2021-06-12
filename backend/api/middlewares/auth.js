@@ -46,10 +46,34 @@ const signin = async (req, res) => {
   });
 };
 
+const signinWriter = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send("Informe o usuário e senha!");
+  }
+  const user = await db("user").where({ email: req.body.email }).first();
+
+  if (!user) return res.status(400).send("Usuário não encontrado!");
+  const isMath = bcrypt.compareSync(req.body.password, user.password);
+  if (!isMath) return res.status(401).send("E-mail/senha inválidos!");
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    iat: now,
+    exp: now + 60 * 60 * 24,
+  };
+  const user = await db("user").update({ writer: true });
+  res.json({
+    ...payload,
+    token: jwtSimple.encode(payload, authSecret),
+  });
+};
+
 const validateToken = async (req, res, next) => {
   //const userData = req.body || null;
   const authHeader = req.headers["authorization"];
-  const token =authHeader?authHeader.split(" ")[1]:null;
+  const token = authHeader ? authHeader.split(" ")[1] : null;
   if (token == null) {
     return res.sendStatus(401);
   }
@@ -155,4 +179,4 @@ const signinTest = async (req, res) => {
   });
 };
 
-module.exports = { signin, validateToken, save_user, signinTest };
+module.exports = { signin, validateToken, save_user, signinTest, signinWriter };

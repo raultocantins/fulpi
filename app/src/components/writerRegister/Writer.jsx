@@ -1,16 +1,17 @@
 import React from "react";
-import "./Login.css";
+import "./Writer.css";
 import { Checkbox } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
 import AuthLogin from "../../config/login";
-import AuthRegister from '../../config/register'
-import {isAuthenticate} from '../../config/auth'
-export default class Login extends React.Component {
+import AuthRegister from "../../config/register";
+
+import CreateIcon from "@material-ui/icons/Create";
+export default class Writer extends React.Component {
   state = {
     loading: false,
-    register: false,
+    register: true,
     name: "",
     email: "",
     password: "",
@@ -20,14 +21,9 @@ export default class Login extends React.Component {
     super(props);
     this.toggleStep = this.toggleStep.bind(this);
     this.submit = this.submit.bind(this);
-    this.register=this.register.bind(this)
+    this.register = this.register.bind(this);
   }
-  componentDidMount(){
-   if(isAuthenticate()){
-    window.location.href="/app" 
-   }
-    
-  }
+
   toggleStep() {
     this.setState({ register: !this.state.register });
     this.setState({
@@ -67,34 +63,36 @@ export default class Login extends React.Component {
         });
     }
   }
-  register(){
-    if(this.state.password===this.state.confirmPassword){
+  register() {
+    if (this.state.password === this.state.confirmPassword) {
       this.setState({ loading: true });
-      var user={
-        name:this.state.name,
-        password:this.state.password,
-        email:this.state.email
-      }
+      var user = {
+        name: this.state.name,
+        password: this.state.password,
+        email: this.state.email,
+      };
       AuthRegister(user)
-      .then(res=>{
-        this.setState({ loading: false });
-        this.toggleStep()
-      })
-      .catch(err=>{
-        this.setState({ loading: false });
-        alert('error')
-        console.log(err)
-      })
-    }else{
-      alert('Senhas não são iguais!!')
+        .then((res) => {
+          this.setState({ loading: false });
+          this.toggleStep();
+        })
+        .catch((err) => {
+          this.setState({ loading: false });
+          alert("error");
+          console.log(err);
+        });
+    } else {
+      alert("Senhas não são iguais!!");
     }
-  
   }
   render() {
     return (
-      <div className="login">
+      <div className="registerWriter">
         <div className="logo">
-          <h1>FulpiBooks</h1>
+          <h1>
+            FulpiBooks
+            <CreateIcon style={{ fontSize: "70px" }} />
+          </h1>
         </div>
         <div className="boxLogin">
           {this.state.register ? (
@@ -138,7 +136,7 @@ export default class Login extends React.Component {
                   Sign up with google <FunctionsIcon />
                 </IconButton>{" "}
                 <IconButton onClick={this.toggleStep}>
-                  Já possui uma conta?
+                  Já possui uma conta fulpibooks?
                 </IconButton>{" "}
               </div>
             </React.Fragment>
@@ -180,7 +178,7 @@ export default class Login extends React.Component {
             </React.Fragment>
           )}
 
-          <a href="/writer/register">Want to be a writer?</a>
+          <a href="/">Need help?</a>
         </div>
       </div>
     );

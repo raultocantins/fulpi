@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors')
 const router = express.Router();
-const { save_user, signin, validateToken, signinTest } = require("./middlewares/auth");
+const { save_user, signin, validateToken, signinTest ,signinWriter} = require("./middlewares/auth");
 const { setGenre, getGenres } = require("./middlewares/genres");
 const { getHistorys, setHistory } = require('./middlewares/historys')
 const { setImageUser } = require('./middlewares/user')
@@ -27,6 +27,11 @@ router.post("/auth/register/user", save_user);
 
 //login user
 router.post("/auth/signin", signin);
+
+
+//login writer
+router.post("/auth/signin/writer", signinWriter);
+
 
 //login user test
 router.post("/auth/signinteste", signinTest);
