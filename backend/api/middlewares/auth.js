@@ -56,14 +56,15 @@ const signinWriter = async (req, res) => {
   const isMath = bcrypt.compareSync(req.body.password, user.password);
   if (!isMath) return res.status(401).send("E-mail/senha inválidos!");
   const now = Math.floor(Date.now() / 1000);
+   await db("user").where({ email: req.body.email }).first().update({ writer: true });
   const payload = {
     id: user.id,
     name: user.name,
     email: user.email,
+    writer:user.writer,
     iat: now,
     exp: now + 60 * 60 * 24,
   };
-  const user = await db("user").update({ writer: true });
   res.json({
     ...payload,
     token: jwtSimple.encode(payload, authSecret),

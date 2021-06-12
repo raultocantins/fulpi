@@ -4,7 +4,7 @@ import { Checkbox } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
-import AuthLogin from "../../config/login";
+import AuthLoginWriter from "../../config/loginWriter.js";
 import AuthRegister from "../../config/register";
 
 import CreateIcon from "@material-ui/icons/Create";
@@ -50,7 +50,7 @@ export default class Writer extends React.Component {
         email: this.state.email,
         password: this.state.password,
       };
-      AuthLogin(user)
+      AuthLoginWriter(user)
         .then((res) => {
           var dataUser = JSON.stringify(res.data);
           window.localStorage.setItem("token", dataUser);
