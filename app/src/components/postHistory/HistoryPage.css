@@ -1,3 +1,75 @@
 .historyPage{
     color: #fff;
+    height: 100vh;
+}
+.historyPage>.container {
+  width: 100%;
+  height: 80%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+.historyPage> .appbar {
+  height: 50px;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  display: flex !important;
+}
+.historyPage> .appbar > .menu a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 50px;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.historyPage> .appbar > .menu a:hover {
+  opacity: 0.7;
+}
+.historyPage> .appbar h1 {
+  color: #e50914;
+}
+.historyPage> .appbar > .search > .searchInput input {
+  color: #fff;
+  margin: 0px 10px 0px 10px;
+}
+
+.historyPage> .appbar > .search > .searchInput svg {
+  color: #fff;
+  margin-right: 10px;
+}
+.historyPage> .appbar > .imgProfile a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+  color: #fff;
+  overflow: hidden;
+}
+.historyPage> .appbar > .imgProfile img {
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+.historyPage> .appbar > .imgProfile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.historyPage> .appbar  button {
+  color: #fff !important;
+  margin-left: 50px;
+  height: 35px; 
+  
+}
+.historyPage> .appbar > .menuMobile {
+  display: none;
+}
+.historyPage> .appbar > .iconMobile {
+  display: none;
 }
