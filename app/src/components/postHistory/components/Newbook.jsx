@@ -6,6 +6,7 @@ import ReactLoading from "react-loading";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
+import DatePicker from "react-date-picker";
 import "./Newbook.css";
 
 const Newbook = () => {
@@ -13,6 +14,7 @@ const Newbook = () => {
   const [loading, setLoading] = useState(false);
   const [userimg, setUserImage] = useState("");
   const [link, setLink] = useState("");
+  const [date, setDate] = useState();
   function nextStep() {
     if (step < 4) {
       setStep(step + 1);
@@ -41,7 +43,7 @@ const Newbook = () => {
   function onChangePdf(file) {
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post("http://localhost:4000/history/uploads", data)
+    Axios.post("https://uploadtesteraws.herokuapp.com/posts", data)
       .then((res) => {
         setLink(res.data.url);
         console.log(res.data.url);
@@ -139,7 +141,30 @@ const Newbook = () => {
         )}
         {step === 2 ? (
           <div className="step2">
-            <h1>step 2</h1>
+             <div className="describe">
+                <p>
+                  <strong>Defina o resumo do seu livro, </strong>
+                  demonstre em poucas palavras o quanto incrível é o seu livro.
+                </p>{" "}
+              </div>
+            <div className="form-group">
+              <div className="prefacio">
+                <label htmlFor="formGroupExampleInput">Prefácio</label>
+                <textarea id="formGroupExampleInput" />
+              </div>
+              <div className="lancamento">
+                <label htmlFor="formGroupExampleInput">Lançamento</label>
+                <DatePicker
+                  calendarIcon="teste"
+                  clearIcon="x"
+                  onChange={(newDate) => {
+                    setDate(newDate);
+                  }}
+                  value={date}
+                  id="formGroupExampleInput"
+                />
+              </div>
+            </div>
           </div>
         ) : (
           ""
