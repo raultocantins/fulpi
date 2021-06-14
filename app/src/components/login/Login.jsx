@@ -6,7 +6,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
 import AuthLogin from "../../config/login";
 import AuthRegister from '../../config/register'
-import {isAuthenticate} from '../../config/auth'
+import { isAuthenticate } from '../../config/auth'
 export default class Login extends React.Component {
   state = {
     loading: false,
@@ -15,18 +15,23 @@ export default class Login extends React.Component {
     email: "",
     password: "",
     confirmPassword: "",
+    render: false
   };
   constructor(props) {
     super(props);
     this.toggleStep = this.toggleStep.bind(this);
     this.submit = this.submit.bind(this);
-    this.register=this.register.bind(this)
+    this.register = this.register.bind(this)
   }
-  componentDidMount(){
-   if(isAuthenticate()){
-    window.location.href="/app" 
-   }
-    
+
+  componentDidMount() {
+    if (isAuthenticate()) {
+      window.location.href = "/app"
+    } else {
+      this.setState({ render: true })
+    }
+
+
   }
   toggleStep() {
     this.setState({ register: !this.state.register });
@@ -67,122 +72,128 @@ export default class Login extends React.Component {
         });
     }
   }
-  register(){
-    if(this.state.password===this.state.confirmPassword){
+  register() {
+    if (this.state.password === this.state.confirmPassword) {
       this.setState({ loading: true });
-      var user={
-        name:this.state.name,
-        password:this.state.password,
-        email:this.state.email
+      var user = {
+        name: this.state.name,
+        password: this.state.password,
+        email: this.state.email,
+        writer: false
       }
       AuthRegister(user)
-      .then(res=>{
-        this.setState({ loading: false });
-        this.toggleStep()
-      })
-      .catch(err=>{
-        this.setState({ loading: false });
-        alert('error')
-        console.log(err)
-      })
-    }else{
+        .then(res => {
+          this.setState({ loading: false });
+          this.toggleStep()
+        })
+        .catch(err => {
+          this.setState({ loading: false });
+          alert('error')
+          console.log(err)
+        })
+    } else {
       alert('Senhas não são iguais!!')
     }
-  
+
   }
   render() {
-    return (
-      <div className="login">
-        <div className="logo">
-          <h1>FulpiBooks</h1>
-        </div>
-        <div className="boxLogin">
-          {this.state.register ? (
-            <React.Fragment>
-              <h1>Sign Up</h1>{" "}
-              <input
-                name="name"
-                placeholder="Nome completo"
-                onChange={this.handleChange("name")}
-                value={this.state.name}
-              />
-              <input
-                name="email"
-                placeholder="Email"
-                onChange={this.handleChange("email")}
-                value={this.state.email}
-              />
-              <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange("password")}
-                value={this.state.password}
-              />
-              <input
-                name="confirmPassword"
-                type="password"
-                placeholder="Confirm Password"
-                onChange={this.handleChange("confirmPassword")}
-                value={this.state.confirmPassword}
-              />
-              <button onClick={this.register}>
-                {this.state.loading ? (
-                  <CircularProgress id="loading" />
-                ) : (
-                  "Sign up"
-                )}
-              </button>
-              <div className="groupButtons">
-                <IconButton>
-                  Sign up with google <FunctionsIcon />
-                </IconButton>{" "}
-                <IconButton onClick={this.toggleStep}>
-                  Já possui uma conta?
-                </IconButton>{" "}
-              </div>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <h1>Sign In</h1>
-              <input
-                name="email"
-                placeholder="Email"
-                onChange={this.handleChange("email")}
-                value={this.state.email}
-              />
-              <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange("password")}
-                value={this.state.password}
-              />
-              <button onClick={this.submit}>
-                {this.state.loading ? (
-                  <CircularProgress id="loading" />
-                ) : (
-                  "Sign In"
-                )}
-              </button>
-              <div className="help">
-                <Checkbox />
-                Remember me
-              </div>
-              <div className="groupButtons">
-                <IconButton>
-                  Sign in with google <FunctionsIcon />
-                </IconButton>{" "}
-                <IconButton onClick={this.toggleStep}>
-                  Não possui uma conta?
-                </IconButton>{" "}
-              </div>
-            </React.Fragment>
-          )}
+    if (this.state.render) {
+      return (
+        <div className="login">
+          <div className="logo">
+            <h1>FulpiBooks</h1>
+          </div>
+          <div className="boxLogin">
+            {this.state.register ? (
+              <React.Fragment>
+                <h1>Sign Up</h1>{" "}
+                <input
+                  name="name"
+                  placeholder="Nome completo"
+                  onChange={this.handleChange("name")}
+                  value={this.state.name}
+                />
+                <input
+                  name="email"
+                  placeholder="Email"
+                  onChange={this.handleChange("email")}
+                  value={this.state.email}
+                />
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  onChange={this.handleChange("password")}
+                  value={this.state.password}
+                />
+                <input
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Confirm Password"
+                  onChange={this.handleChange("confirmPassword")}
+                  value={this.state.confirmPassword}
+                />
+                <button onClick={this.register}>
+                  {this.state.loading ? (
+                    <CircularProgress id="loading" />
+                  ) : (
+                    "Sign up"
+                  )}
+                </button>
+                <div className="groupButtons">
+                  <IconButton>
+                    Sign up with google <FunctionsIcon />
+                  </IconButton>{" "}
+                  <IconButton onClick={this.toggleStep}>
+                    Já possui uma conta?
+              </IconButton>{" "}
+                </div>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <h1>Sign In</h1>
+                <input
+                  name="email"
+                  placeholder="Email"
+                  onChange={this.handleChange("email")}
+                  value={this.state.email}
+                />
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  onChange={this.handleChange("password")}
+                  value={this.state.password}
+                />
+                <button onClick={this.submit}>
+                  {this.state.loading ? (
+                    <CircularProgress id="loading" />
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
+                <div className="help">
+                  <Checkbox />
+              Remember me
+            </div>
+                <div className="groupButtons">
+                  <IconButton>
+                    Sign in with google <FunctionsIcon />
+                  </IconButton>{" "}
+                  <IconButton onClick={this.toggleStep}>
+                    Não possui uma conta?
+              </IconButton>{" "}
+                </div>
+              </React.Fragment>
+            )}
 
-          <a href="/writer/register">Want to be a writer?</a>
+            <a href="/writer/register">Want to be a writer?</a>
+          </div>
         </div>
-      </div>
-    );
+      )
+    } else {
+return(<React.Fragment></React.Fragment>);
+    }
+
   }
 }

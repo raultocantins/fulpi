@@ -37,6 +37,7 @@ const signin = async (req, res) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    writer: user.writer,
     iat: now,
     exp: now + 60 * 60 * 24,
   };
@@ -56,19 +57,40 @@ const signinWriter = async (req, res) => {
   const isMath = bcrypt.compareSync(req.body.password, user.password);
   if (!isMath) return res.status(401).send("E-mail/senha inválidos!");
   const now = Math.floor(Date.now() / 1000);
-   await db("user").where({ email: req.body.email }).first().update({ writer: true });
-  const payload = {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    writer:user.writer,
-    iat: now,
-    exp: now + 60 * 60 * 24,
-  };
-  res.json({
-    ...payload,
-    token: jwtSimple.encode(payload, authSecret),
-  });
+  if (!user.writer) {
+    const updated = await db("user").where({ email: req.body.email }).first().update({ writer: true })
+    if (updated) {
+      const userUpdated = await db("user").where({ email: req.body.email }).first();
+      const payload = {
+        id: userUpdated.id,
+        name: userUpdated.name,
+        email: userUpdated.email,
+        writer: userUpdated.writer,
+        iat: now,
+        exp: now + 60 * 60 * 24,
+      };
+      res.json({
+        ...payload,
+        token: jwtSimple.encode(payload, authSecret),
+      });
+    }
+
+  } else {
+    const payload = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      writer: user.writer,
+      iat: now,
+      exp: now + 60 * 60 * 24,
+    };
+    res.json({
+      ...payload,
+      token: jwtSimple.encode(payload, authSecret),
+    });
+  }
+
+
 };
 
 const validateToken = async (req, res, next) => {

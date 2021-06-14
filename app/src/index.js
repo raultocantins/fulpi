@@ -5,7 +5,7 @@ import App from "./App";
 import Login from "./components/login/Login";
 import WriterRegister from "./components/writerRegister/Writer";
 import reportWebVitals from "./reportWebVitals";
-import Writer from "./components/writer/Writer";
+import Writer from "./components/postHistory/HistoryPage";
 import {
   BrowserRouter as Router,
   Switch,

@@ -42,6 +42,18 @@ module.exports = {
         fileSize: MAX_SIZE_TWO_MEGABYTES,
     },
     fileFilter: (req, file, cb) => {
-        cb(null, true);
+      const allowedMimes = [
+          "image/jpeg",
+          "image/pjpeg",
+          "image/png",
+          "image/gif",
+          "application/pdf",
+        ];
+    
+        if (allowedMimes.includes(file.mimetype)) {
+          cb(null, true);
+        } else {
+          cb(true,"Invalid file type.");
+        }
     },
 };

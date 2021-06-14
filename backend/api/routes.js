@@ -46,8 +46,9 @@ router.post("/user/image", multer(multerImageProfile).single("file"), setImageUs
 
 //Upload file history test
 router.post("/history/uploads", multer(multerFileHistory).single("file"), (req,res)=>{
-  res.status(204).json({ url: req.file.url });
+  res.json(req.file.location)
 });
+
 
 
 
