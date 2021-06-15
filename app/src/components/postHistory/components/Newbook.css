@@ -8,9 +8,10 @@
 .box {
   width: 650px;
   height: 500px;
-  background-color: red;
+  background-color: transparent;
   border-radius: 10px;
   position: relative;
+  border: 2px solid #fff;
 }
 
 .step0,
@@ -97,14 +98,15 @@
   left: 0;
   bottom: 0;
   height: 40px;
-  width: 90px;
+  width:70px;
   z-index: 8;
   border: none;
-  border-radius: 0px 10px 0px 0px;
+  border-radius: 0px 10px 0px 10px;
   color: #fff;
   background-color: #14141470;
 }
 .box > .backButton:hover {
+  background-color: #fff;
   color: red;
   transition: all ease 0.3s;
 }
@@ -118,6 +120,95 @@
   margin-left: 10px;
   width: 80%;
 }
+.box > .step3{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+.box > .step3 > .describe{
+width: 70%;
+position: absolute;
+left: 10px;
+top: 0;
+}
+.box > .step3 input{
+  width: 70%;
+  text-align: center;
+  height: 70px;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+}
+.box > .step3 input::placeholder{
+
+  color: #fff;
+  font-weight: 100;
+  font-size: 20px;
+}
+
+.box> .step4{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+.box> .step5 {
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+ 
+}
+.box> .step5 button{
+  margin-top: 30px;
+  outline: none;
+  border: none;
+  height: auto;
+  background-color: #fff;
+padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+   
+  }
+  .box> .step5 button:hover{    
+    background-color: rgba(255, 255, 255, 0.919);   
+     transition: all ease 0.3s;
+    }
+    .box> .step5 button:active{    
+      background-color: #fff;   
+       
+      }
+.box> .step5 img{
+ width: 200px;
+ height: 180px;
+}
+.box> .step5>.describe{
+  left: 10px;
+  top: 10px;
+  position: absolute;
+  width: 70%;
+}
+.box> .step4>.describe{
+height: 70%;
+padding: 10px;
+}
+.box> .step4 img{
+  width: 100%;
+  height: 200px;
+  border-radius: 10px 10px 0px 0px;  
+  
+  }
+
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -128,24 +219,40 @@
   margin-top: 30px;
 }
 .form-group > .prefacio,
-.form-group > .lancamento {
+.form-group > .lancamento,
+.form-group > .genero {
   width: 100%;
   display: flex;
   flex-direction: column;
-
-  height: 200px;
+  height: auto;
   font-weight: bold;
   margin-bottom: 30px;
 }
 .form-group > .prefacio textarea {
   margin-top: 10px;
-  height: 100%;
-  width: 100%;
+  height: 100px;
   border-radius: 10px;
   outline: none;
-  padding: 10px;
+ 
   font-size: 1.1rem;
 }
+.form-group > .genero select {
+  margin-top: 10px; 
+  font-size: 1.1rem;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid #fff;
+  font-weight: bold;
+}
+.form-group > .genero select option{
+  color: #141414;
+  padding: 10px;
+  
+}
+
 .react-date-picker__wrapper {
   color: #fff !important;
   border: 2px solid #fff;

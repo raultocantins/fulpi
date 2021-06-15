@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import Axios from "axios";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
@@ -7,6 +7,9 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
 import DatePicker from "react-date-picker";
+import EventIcon from '@material-ui/icons/Event';
+import ClearIcon from '@material-ui/icons/Clear';
+import Analise from '../../../assets/analise.png'
 import "./Newbook.css";
 
 const Newbook = () => {
@@ -15,9 +18,22 @@ const Newbook = () => {
   const [userimg, setUserImage] = useState("");
   const [link, setLink] = useState("");
   const [date, setDate] = useState();
+  const [prefacio, setPrefacio] = useState("")
+  const [genre, setGenre] = useState("")
+  const [title, setTitle] = useState("")
   function nextStep() {
-    if (step < 4) {
-      setStep(step + 1);
+    if (step < 5) {
+      switch (step) {
+        case 0: if (userimg) { setStep(step + 1) } else { alert('Envie uma imagem para continuar') }
+          break;
+        case 1: if (link) { setStep(step + 1) } else { alert('Envie o seu pdf para continuar') }
+          break;
+        case 2: if (prefacio && date && genre) { setStep(step + 1) } else { alert('Preencha os campos para continuar') }
+          break;
+        case 3: if (title) { setStep(step + 1) } else { alert('Preencha o títula para finalizar') }
+          break;
+        default: submitHistory()
+      }
     }
   }
   function backStep() {
@@ -29,7 +45,7 @@ const Newbook = () => {
   function onChangeImage(file) {
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post("https://uploadtesteraws.herokuapp.com/posts", data)
+    Axios.post("http://localhost:4000/history/uploads", data)
       .then((res) => {
         console.log(res.data.url);
         setUserImage(res.data.url);
@@ -43,7 +59,7 @@ const Newbook = () => {
   function onChangePdf(file) {
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post("https://uploadtesteraws.herokuapp.com/posts", data)
+    Axios.post("http://localhost:4000/history/uploads", data)
       .then((res) => {
         setLink(res.data.url);
         console.log(res.data.url);
@@ -53,6 +69,28 @@ const Newbook = () => {
 
         alert("Error ao enviar Imagem");
       });
+  }
+  function submitHistory() {
+    var userToken = JSON.parse(window.localStorage.getItem("token"));
+    var history = {
+      name: title,
+      image: userimg,
+      prefacio: prefacio,
+      escritor: userToken.name,
+      lancamento: date,
+      genero: genre,
+      link: link,
+      distribuidora: "fulpibooks"
+    }
+    Axios.defaults.headers.common["Authorization"] = `Bearer ${userToken.token}`
+    Axios.post("http://localhost:4000/history", {history})
+      .then(res => {
+        setStep(step + 1)
+      })
+      .catch(err => {
+        console.log(err)
+        alert("error")
+      })
   }
 
   return (
@@ -141,28 +179,38 @@ const Newbook = () => {
         )}
         {step === 2 ? (
           <div className="step2">
-             <div className="describe">
-                <p>
-                  <strong>Defina o resumo do seu livro, </strong>
+            <div className="describe">
+              <p>
+                <strong>Defina o resumo do seu livro, </strong>
                   demonstre em poucas palavras o quanto incrível é o seu livro.
                 </p>{" "}
-              </div>
+            </div>
             <div className="form-group">
               <div className="prefacio">
                 <label htmlFor="formGroupExampleInput">Prefácio</label>
-                <textarea id="formGroupExampleInput" />
+                <textarea onChange={(text) => { setPrefacio(text.target.value) }} id="formGroupExampleInput" value={prefacio} />
               </div>
               <div className="lancamento">
                 <label htmlFor="formGroupExampleInput">Lançamento</label>
                 <DatePicker
-                  calendarIcon="teste"
-                  clearIcon="x"
+                  calendarIcon={<EventIcon />}
+                  clearIcon={<ClearIcon />}
                   onChange={(newDate) => {
                     setDate(newDate);
                   }}
                   value={date}
                   id="formGroupExampleInput"
                 />
+              </div>
+              <div className="genero">
+                <label htmlFor="formGroupExampleInput">Gênero</label>
+                <select value={genre} onChange={(value) => { setGenre(value.target.value) }}>
+                  <option value="Romance">Romance</option>
+                  <option value="Ação">Ação</option>
+                  <option value="Aventura">Aventura</option>
+                  <option value="Ficção">Ficcão</option>
+                  <option value="Técnico">Técnico</option>
+                </select>
               </div>
             </div>
           </div>
@@ -171,24 +219,53 @@ const Newbook = () => {
         )}
         {step === 3 ? (
           <div className="step3">
-            <h1>step 3</h1>
+            <div className="describe">
+              <p>
+                <strong>Defina o título do seu livro, </strong>
+                  o título de um livro representa muito sobre seu conteúdo.
+                </p>{" "}
+            </div>
+            <input placeholder="Insira o título..." onChange={(value) => { setTitle(value.target.value) }} value={title} />
           </div>
         ) : (
           ""
         )}
         {step === 4 ? (
           <div className="step4">
-            <button>Step 04</button>
+            <img src={userimg} alt="preview" />
+            <div className="describe">
+              <h1>{title}</h1>
+              <p><strong>Préfacio:  </strong>{prefacio}</p>
+              <p>Data de Lançamento: {new Date(date).toLocaleString()}</p>
+              <p>Gênero: {genre}</p>
+            </div>
           </div>
         ) : (
           ""
         )}
-        <button onClick={nextStep} className="nextButton">
+        {step === 5 ? (
+          <div className="step5">
+            <div className="describe">
+              <p>
+                <strong>Envio concluido com sucesso, </strong>
+                o livro será analisado e em breve você receberá retorno via email.
+              </p>{" "}
+            </div>
+            <img src={Analise} alt="analise" />
+            <button onClick={() => window.location.href = "/writer/books/"}>Acompanhar Análise</button>
+          </div>
+        ) : (
+          ""
+        )}
+        {step < 5 ? <button onClick={nextStep} className="nextButton">
           <ArrowForwardIosIcon />
-        </button>
-        <button onClick={backStep} className="backButton">
-          <ArrowBackIosIcon />
-        </button>
+        </button> : ""}
+
+        {step > 0 ?
+
+          <button onClick={backStep} className="backButton">
+            <ArrowBackIosIcon />
+          </button> : ""}
       </div>
     </div>
   );
