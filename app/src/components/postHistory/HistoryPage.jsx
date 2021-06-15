@@ -7,7 +7,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Logo from "../../assets/perfil2.jpg";
-
+import CreateIcon from "@material-ui/icons/Create";
+import MovieRow from "../movieRow/MovieRow";
 import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -19,6 +20,27 @@ import Newbook from "./components/Newbook";
 export default class HistoryPage extends React.Component {
   state = {
     toggleMenu: false,
+    items: [
+      {
+        id: 0,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 1,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 2,
+        image:
+          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
+      },
+      {
+        id: 0,
+        image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
+      }],
+
   };
   constructor(props) {
     super(props);
@@ -34,7 +56,7 @@ export default class HistoryPage extends React.Component {
     return (
       <div className="historyPage">
         <div className="appbar">
-          <h1>FulpiBooks</h1>
+          <h1>FulpiBooks <CreateIcon/></h1>
           {this.state.toggleMenu ? (
             <CloseIcon className="iconMobile" onClick={this.toggleMenuMobile} />
           ) : (
@@ -78,7 +100,7 @@ export default class HistoryPage extends React.Component {
               <h1>Inicio</h1>
             </Route>
             <Route path="/writer/books">
-              <h1>books</h1>
+            <MovieRow title="Comédia" items={this.state.items} />
             </Route>
             <Route path="/writer/profit">
               <h1>ganhos</h1>

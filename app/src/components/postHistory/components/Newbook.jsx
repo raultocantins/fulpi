@@ -7,9 +7,8 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
 import DatePicker from "react-date-picker";
-import EventIcon from '@material-ui/icons/Event';
-import ClearIcon from '@material-ui/icons/Clear';
-import Analise from '../../../assets/analise.png'
+import EventIcon from "@material-ui/icons/Event";
+import ClearIcon from "@material-ui/icons/Clear";
 import "./Newbook.css";
 
 const Newbook = () => {
@@ -18,21 +17,42 @@ const Newbook = () => {
   const [userimg, setUserImage] = useState("");
   const [link, setLink] = useState("");
   const [date, setDate] = useState();
-  const [prefacio, setPrefacio] = useState("")
-  const [genre, setGenre] = useState("")
-  const [title, setTitle] = useState("")
+  const [prefacio, setPrefacio] = useState("");
+  const [genre, setGenre] = useState("");
+  const [title, setTitle] = useState("");
   function nextStep() {
     if (step < 5) {
       switch (step) {
-        case 0: if (userimg) { setStep(step + 1) } else { alert('Envie uma imagem para continuar') }
+        case 0:
+          if (userimg) {
+            setStep(step + 1);
+          } else {
+            alert("Envie uma imagem para continuar");
+          }
           break;
-        case 1: if (link) { setStep(step + 1) } else { alert('Envie o seu pdf para continuar') }
+        case 1:
+          if (link) {
+            setStep(step + 1);
+          } else {
+            alert("Envie o seu pdf para continuar");
+          }
           break;
-        case 2: if (prefacio && date && genre) { setStep(step + 1) } else { alert('Preencha os campos para continuar') }
+        case 2:
+          if (prefacio && date && genre) {
+            setStep(step + 1);
+          } else {
+            alert("Preencha os campos para continuar");
+          }
           break;
-        case 3: if (title) { setStep(step + 1) } else { alert('Preencha o títula para finalizar') }
+        case 3:
+          if (title) {
+            setStep(step + 1);
+          } else {
+            alert("Preencha o títula para finalizar");
+          }
           break;
-        default: submitHistory()
+        default:
+          submitHistory();
       }
     }
   }
@@ -43,34 +63,40 @@ const Newbook = () => {
   }
 
   function onChangeImage(file) {
+    setLoading(true);
     var data = new FormData();
     data.append("file", file.target.files[0]);
     Axios.post("http://localhost:4000/history/uploads", data)
       .then((res) => {
         console.log(res.data.url);
         setUserImage(res.data.url);
+        setLoading(false);
         //  alert("deu certo");
       })
       .catch((err) => {
         console.log(err);
         alert("Error ao enviar Imagem");
+        setLoading(false);
       });
   }
   function onChangePdf(file) {
+    setLoading(true);
     var data = new FormData();
     data.append("file", file.target.files[0]);
     Axios.post("http://localhost:4000/history/uploads", data)
       .then((res) => {
         setLink(res.data.url);
+        setLoading(false);
         console.log(res.data.url);
       })
       .catch((err) => {
         console.log(err);
-
         alert("Error ao enviar Imagem");
+        setLoading(false);
       });
   }
   function submitHistory() {
+    setLoading(true);
     var userToken = JSON.parse(window.localStorage.getItem("token"));
     var history = {
       name: title,
@@ -80,22 +106,53 @@ const Newbook = () => {
       lancamento: date,
       genero: genre,
       link: link,
-      distribuidora: "fulpibooks"
-    }
-    Axios.defaults.headers.common["Authorization"] = `Bearer ${userToken.token}`
-    Axios.post("http://localhost:4000/history", {history})
-      .then(res => {
-        setStep(step + 1)
+      distribuidora: "fulpibooks",
+    };
+    Axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${userToken.token}`;
+    Axios.post("http://localhost:4000/history", { history })
+      .then((res) => {
+        setLoading(false);
+        setStep(step + 1);
       })
-      .catch(err => {
-        console.log(err)
-        alert("error")
-      })
+      .catch((err) => {
+        console.log(err);
+        alert("error");
+        setLoading(false);
+      });
   }
 
   return (
     <div className="newbook">
+      <div className="timeline">
+        <div
+          className="line"
+          style={step === 0 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 1 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 2 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 3 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 4 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 5 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+      </div>
       <div className="box">
+        {loading ? <ReactLoading className="loading" type="bubbles" /> : ""}
         {step === 0 ? (
           <div className="step0">
             <div className="describe">
@@ -119,7 +176,7 @@ const Newbook = () => {
                 disabled={loading ? true : false}
               >
                 {loading ? (
-                  <ReactLoading color="red" type="spinningBubbles" />
+                  <ReactLoading color="#e50914" type="spinningBubbles" />
                 ) : (
                   <PhotoCamera />
                 )}
@@ -167,7 +224,7 @@ const Newbook = () => {
                 disabled={loading ? true : false}
               >
                 {loading ? (
-                  <ReactLoading color="red" type="spinningBubbles" />
+                  <ReactLoading color="#e50914" type="spinningBubbles" />
                 ) : (
                   <PictureAsPdfIcon />
                 )}
@@ -182,13 +239,19 @@ const Newbook = () => {
             <div className="describe">
               <p>
                 <strong>Defina o resumo do seu livro, </strong>
-                  demonstre em poucas palavras o quanto incrível é o seu livro.
-                </p>{" "}
+                demonstre em poucas palavras o quanto incrível é o seu livro.
+              </p>{" "}
             </div>
             <div className="form-group">
               <div className="prefacio">
                 <label htmlFor="formGroupExampleInput">Prefácio</label>
-                <textarea onChange={(text) => { setPrefacio(text.target.value) }} id="formGroupExampleInput" value={prefacio} />
+                <textarea
+                  onChange={(text) => {
+                    setPrefacio(text.target.value);
+                  }}
+                  id="formGroupExampleInput"
+                  value={prefacio}
+                />
               </div>
               <div className="lancamento">
                 <label htmlFor="formGroupExampleInput">Lançamento</label>
@@ -204,7 +267,13 @@ const Newbook = () => {
               </div>
               <div className="genero">
                 <label htmlFor="formGroupExampleInput">Gênero</label>
-                <select value={genre} onChange={(value) => { setGenre(value.target.value) }}>
+                <select
+                  value={genre}
+                  onChange={(value) => {
+                    setGenre(value.target.value);
+                  }}
+                >
+                  <option value="">--Escolha o gênero--</option>
                   <option value="Romance">Romance</option>
                   <option value="Ação">Ação</option>
                   <option value="Aventura">Aventura</option>
@@ -221,11 +290,17 @@ const Newbook = () => {
           <div className="step3">
             <div className="describe">
               <p>
-                <strong>Defina o título do seu livro, </strong>
-                  o título de um livro representa muito sobre seu conteúdo.
-                </p>{" "}
+                <strong>Defina o título do seu livro, </strong>o título de um
+                livro representa muito sobre seu conteúdo.
+              </p>{" "}
             </div>
-            <input placeholder="Insira o título..." onChange={(value) => { setTitle(value.target.value) }} value={title} />
+            <input
+              placeholder="Insira o título..."
+              onChange={(value) => {
+                setTitle(value.target.value);
+              }}
+              value={title}
+            />
           </div>
         ) : (
           ""
@@ -235,7 +310,10 @@ const Newbook = () => {
             <img src={userimg} alt="preview" />
             <div className="describe">
               <h1>{title}</h1>
-              <p><strong>Préfacio:  </strong>{prefacio}</p>
+              <p>
+                <strong>Préfacio: </strong>
+                {prefacio}
+              </p>
               <p>Data de Lançamento: {new Date(date).toLocaleString()}</p>
               <p>Gênero: {genre}</p>
             </div>
@@ -247,25 +325,33 @@ const Newbook = () => {
           <div className="step5">
             <div className="describe">
               <p>
-                <strong>Envio concluido com sucesso, </strong>
-                o livro será analisado e em breve você receberá retorno via email.
+                <strong>Envio concluido com sucesso, </strong>o livro será
+                analisado e em breve você receberá retorno via email.
               </p>{" "}
             </div>
-            <img src={Analise} alt="analise" />
-            <button onClick={() => window.location.href = "/writer/books/"}>Acompanhar Análise</button>
+            <ReactLoading type="bubbles" />
+            <button onClick={() => (window.location.href = "/writer/books/")}>
+              Acompanhar Análise
+            </button>
           </div>
         ) : (
           ""
         )}
-        {step < 5 ? <button onClick={nextStep} className="nextButton">
-          <ArrowForwardIosIcon />
-        </button> : ""}
+        {step < 5 ? (
+          <button onClick={nextStep} className="nextButton">
+            <ArrowForwardIosIcon />
+          </button>
+        ) : (
+          ""
+        )}
 
-        {step > 0 ?
-
+        {step > 0 ? (
           <button onClick={backStep} className="backButton">
             <ArrowBackIosIcon />
-          </button> : ""}
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

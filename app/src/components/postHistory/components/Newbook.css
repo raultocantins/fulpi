@@ -4,14 +4,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+.newbook > .timeline {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 650px;
+  margin-bottom: 30px;
+}
+.newbook > .timeline > .line {
+  width: 10%;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.315);
+  padding: 5px;
+  border-radius: 10px;
+  transition: all ease 0.5s;
 }
 .box {
   width: 650px;
   height: 500px;
-  background-color: transparent;
+  background-color: red;
   border-radius: 10px;
   position: relative;
-  border: 2px solid #fff;
 }
 
 .step0,
@@ -98,7 +113,7 @@
   left: 0;
   bottom: 0;
   height: 40px;
-  width:70px;
+  width: 70px;
   z-index: 8;
   border: none;
   border-radius: 0px 10px 0px 10px;
@@ -120,20 +135,20 @@
   margin-left: 10px;
   width: 80%;
 }
-.box > .step3{
+.box > .step3 {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 100%;
 }
-.box > .step3 > .describe{
-width: 70%;
-position: absolute;
-left: 10px;
-top: 0;
+.box > .step3 > .describe {
+  width: 70%;
+  position: absolute;
+  left: 10px;
+  top: 0;
 }
-.box > .step3 input{
+.box > .step3 input {
   width: 70%;
   text-align: center;
   height: 70px;
@@ -145,69 +160,56 @@ top: 0;
   background-color: transparent;
   color: #fff;
 }
-.box > .step3 input::placeholder{
-
+.box > .step3 input::placeholder {
   color: #fff;
   font-weight: 100;
   font-size: 20px;
 }
 
-.box> .step4{
+.box > .step4 {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 100%;
 }
-.box> .step5 {
-width: 100%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
- 
+.box > .step5 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.box> .step5 button{
+.box > .step5 button {
   margin-top: 30px;
   outline: none;
   border: none;
   height: auto;
-  background-color: #fff;
-padding: 5px;
+  background-color: transparent;
+  padding: 5px;
   font-weight: bold;
-  border-radius: 5px;
-   
-  }
-  .box> .step5 button:hover{    
-    background-color: rgba(255, 255, 255, 0.919);   
-     transition: all ease 0.3s;
-    }
-    .box> .step5 button:active{    
-      background-color: #fff;   
-       
-      }
-.box> .step5 img{
- width: 200px;
- height: 180px;
+  color: #fff;
 }
-.box> .step5>.describe{
+.box > .step5 button:hover {
+  opacity: 0.6;
+}
+
+.box > .step5 > .describe {
   left: 10px;
   top: 10px;
   position: absolute;
   width: 70%;
 }
-.box> .step4>.describe{
-height: 70%;
-padding: 10px;
+.box > .step4 > .describe {
+  height: 70%;
+  padding: 10px;
 }
-.box> .step4 img{
+.box > .step4 img {
   width: 100%;
   height: 200px;
-  border-radius: 10px 10px 0px 0px;  
-  
-  }
-
+  border-radius: 10px 10px 0px 0px;
+}
 
 .form-group {
   display: flex;
@@ -233,11 +235,11 @@ padding: 10px;
   height: 100px;
   border-radius: 10px;
   outline: none;
- 
+  resize: inherit;
   font-size: 1.1rem;
 }
 .form-group > .genero select {
-  margin-top: 10px; 
+  margin-top: 10px;
   font-size: 1.1rem;
   outline: none;
   padding: 10px;
@@ -247,10 +249,9 @@ padding: 10px;
   border: 2px solid #fff;
   font-weight: bold;
 }
-.form-group > .genero select option{
+.form-group > .genero select option {
   color: #141414;
   padding: 10px;
-  
 }
 
 .react-date-picker__wrapper {
