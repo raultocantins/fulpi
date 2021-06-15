@@ -10,7 +10,6 @@ import DatePicker from "react-date-picker";
 import EventIcon from "@material-ui/icons/Event";
 import ClearIcon from "@material-ui/icons/Clear";
 import "./Newbook.css";
-
 const Newbook = () => {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -74,8 +73,8 @@ const Newbook = () => {
         //  alert("deu certo");
       })
       .catch((err) => {
-        console.log(err);
-        alert("Error ao enviar Imagem");
+        console.log(err);        
+     // alert("Error ao enviar Imagem");
         setLoading(false);
       });
   }
@@ -125,6 +124,7 @@ const Newbook = () => {
 
   return (
     <div className="newbook">
+
       <div className="timeline">
         <div
           className="line"

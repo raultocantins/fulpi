@@ -5,72 +5,72 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 export default class Dashboard extends React.Component {
   render() {
     var items = [
-      {
+      { status:true,
         id: 0,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
-      {
+      { status:true,
         id: 1,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
-      {
+      { status:true,
         id: 2,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
-      {
+      { status:true,
         id: 0,
         image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
       },
-      {
+      { status:true,
         id: 1,
         image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
       },
-      {
+      { status:true,
         id: 2,
         image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
       },
-      {
+      { status:true,
         id: 0,
         image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
       },
-      {
+      { status:true,
         id: 1,
         image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
       },
-      {
+      { status:true,
         id: 2,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
-      {
+      { status:true,
         id: 0,
         image:
           "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
       },
-      {
+      { status:true,
         id: 1,
         image:
           "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
       },
-      {
+      { status:true,
         id: 2,
         image:
           "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
       },
-      {
+      { status:true,
         id: 0,
         image:
           "http://tvcinemaemusica.files.wordpress.com/2011/07/snowwhite_lillycollins.jpg",
       },
-      {
+      { status:true,
         id: 1,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
-      {
+      { status:true,
         id: 2,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",

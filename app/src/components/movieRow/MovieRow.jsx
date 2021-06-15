@@ -4,7 +4,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import ReactLoading from "react-loading";
 const MovieRow = ({ title, items }) => {
   const [scrollX, setScrollX] = useState(0);
 
@@ -44,18 +44,27 @@ const MovieRow = ({ title, items }) => {
         >
           {items.length > 0 &&
             items.map((item, key) => (
-              <Link key={key} to={`/app/book/${item.id}`}>
+             item.status? <Link key={key} to={`/app/book/${item.id}`}>
+             <div className="movieRow--item">
+               <div className="card">
+                 <LazyLoadImage
+                   height="100%"
+                   width="100%"
+                   alt="book"
+                   src={item.image} // use normal <img> attributes as props
+                 />
+               </div>
+             </div>
+           </Link>: 
                 <div className="movieRow--item">
-                  <div className="card">
-                    <LazyLoadImage
-                      height="100%"
-                      width="100%"
-                      alt="book"
-                      src={item.image} // use normal <img> attributes as props
-                    />
+                  <div className="card ">
+                  <div className="falseCard">
+                    {item.name}
+                    <ReactLoading  type="bubbles"/>
+                  </div>
                   </div>
                 </div>
-              </Link>
+              
             ))}
         </div>
       </div>

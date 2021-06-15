@@ -4,7 +4,7 @@ import './Loading.css'
 
 const Loading=()=>{
     return(
-        <ReactLoading type="spinningBubbles" color="red" className="loading"/>
+        <ReactLoading type="bubbles"  className="loading"/>
     )
 }
 export default Loading;

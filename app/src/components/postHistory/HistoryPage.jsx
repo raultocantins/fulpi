@@ -1,12 +1,7 @@
 import React from "react";
-import Axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Input from "@material-ui/core/Input";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
+import {  Switch, Route, Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import Logo from "../../assets/perfil2.jpg";
 import CreateIcon from "@material-ui/icons/Create";
 import MovieRow from "../movieRow/MovieRow";
 import AppsIcon from "@material-ui/icons/Apps";
@@ -22,29 +17,35 @@ export default class HistoryPage extends React.Component {
     toggleMenu: false,
     items: [
       {
+        status: true,
+        name: "Breaking bad",
         id: 0,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
       {
+        status: false,
+        name: "Morgan prime",
         id: 1,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
       {
+        name: "Breaking bad",
+        status: false,
         id: 2,
         image:
           "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
       },
       {
+        status: true,
+        name: "Breaking bad",
         id: 0,
         image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
-      }],
-
+      },
+    ],
   };
-  constructor(props) {
-    super(props);
-  }
+ 
   toggleMenuMobile() {
     //   ToggleMenu(!toggleMenu);
   }
@@ -56,7 +57,9 @@ export default class HistoryPage extends React.Component {
     return (
       <div className="historyPage">
         <div className="appbar">
-          <h1>FulpiBooks <CreateIcon/></h1>
+          <h1>
+            FulpiBooks <CreateIcon />
+          </h1>
           {this.state.toggleMenu ? (
             <CloseIcon className="iconMobile" onClick={this.toggleMenuMobile} />
           ) : (
@@ -100,7 +103,7 @@ export default class HistoryPage extends React.Component {
               <h1>Inicio</h1>
             </Route>
             <Route path="/writer/books">
-            <MovieRow title="Comédia" items={this.state.items} />
+              <MovieRow title="Comédia" items={this.state.items} />
             </Route>
             <Route path="/writer/profit">
               <h1>ganhos</h1>
