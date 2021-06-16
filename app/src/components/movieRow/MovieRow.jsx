@@ -46,7 +46,7 @@ const MovieRow = ({ title, items }) => {
         >
           {items.length > 0 &&
             items.map((item, key) => (
-             item.status? <Link key={key} to={`/app/book/${item.id}`}>
+             !item.status? <Link key={key} to={`/app/book/${item.id}`}>
              <div className="movieRow--item">
                <div className="card">
                  <LazyLoadImage

@@ -1,5 +1,5 @@
 import Axios from "axios";
 const authLoginWriter = (user) => {
-  return Axios.post("http://localhost:4000/auth/signin/writer", user)   
+  return Axios.post("http://fulpibackend.ngrok.io/auth/signin/writer", user)   
 };
 export default  authLoginWriter;

@@ -3,7 +3,7 @@ const cors = require('cors')
 const router = express.Router();
 const { save_user, signin, validateToken, signinTest ,signinWriter} = require("./middlewares/auth");
 const { setGenre, getGenres } = require("./middlewares/genres");
-const { getHistorys, setHistory } = require('./middlewares/historys')
+const { getHistorys, setHistory,getHistoryById } = require('./middlewares/historys')
 const { setImageUser } = require('./middlewares/user')
 const authenticate = require("./middlewares/passport");
 const multerImageProfile = require("./multer");
@@ -18,6 +18,9 @@ router.post("/genres", authenticate(), setGenre);
 
 //get historys
 router.get("/historys",  getHistorys);
+
+//get history BY ID
+router.get("/history/:id",  getHistoryById);
 
 //set history
 router.post("/history", authenticate(), setHistory)

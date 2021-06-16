@@ -2,13 +2,22 @@ const db = require('../../database/db')
 const orderBygenre=require('../../workers/orderBygenre')
 
 const getHistorys = async (req, res) => {
-    const data = await db('historyDevelopment02').select('id', 'name', 'image', 'prefacio', 'score', 'escritor', 'lancamento', 'genero', 'link', 'distribuidora', 'userId').then(historys => {
+    const data = await db('historyDevelopment02').select('id', 'name', 'image', 'escritor','genero').then(historys => {
         return historys
     })
 
    var historys= orderBygenre(data)
     res.json(historys)
-    //res.json(teste.map(e=>e.action));
+    
+
+}
+const getHistoryById = async (req, res) => {
+    const id=req.params.id
+    const history = await db('historyDevelopment02').select('id', 'name', 'image', 'escritor','prefacio','score','lancamento','genero','link','distribuidora','status').where({id:id}).first().then(history => {
+        return history
+    }).catch(err=>res.status(500).send(err))
+    res.json(history)
+  
 }
 
 const setHistory = async (req, res) => {
@@ -23,7 +32,8 @@ const setHistory = async (req, res) => {
         genero: history.genero,
         link: history.link,
         distribuidora: history.distribuidora,
-        userId: req.user.id
+        userId: req.user.id,
+        status:false
     }
     await db('historyDevelopment02').insert(newHistory).then(_ => res.status(204).send('Inserção concluida!'))
         .catch(err => { console.log(err); res.status(500).send(err) })
@@ -32,4 +42,4 @@ const setHistory = async (req, res) => {
 
 }
 
-module.exports = { getHistorys, setHistory };
+module.exports = { getHistorys, setHistory,getHistoryById };

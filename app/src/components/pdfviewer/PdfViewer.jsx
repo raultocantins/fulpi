@@ -6,25 +6,24 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import { useParams } from "react-router-dom";
 import "./PdfViewer.css";
 //import Pdf from "../../assets/pdf.pdf";
-import Loading from '../../shared/loading/Loading'
+import Loading from "../../shared/loading/Loading";
 
 const PdfViewer = () => {
   let { id } = useParams();
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   function handleLoading() {
-    setLoading(false)
+    setLoading(false);
   }
   return (
     <div className="pdfviewer">
-      { loading?Loading():""}
-      <Viewer 
+      {loading ? Loading() : ""}
+      <Viewer
         onDocumentLoad={handleLoading}
-        fileUrl={`https://pdfsfulpi.s3-sa-east-1.amazonaws.com/${id}`}
+        fileUrl={`${id}`}
         plugins={[defaultLayoutPluginInstance]}
       />
-
     </div>
   );
 };

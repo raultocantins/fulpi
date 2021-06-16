@@ -65,7 +65,7 @@ const Newbook = () => {
     setLoading(true);
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post("http://localhost:4000/history/uploads", data)
+    Axios.post("http://fulpibackend.ngrok.io/history/uploads", data)
       .then((res) => {
         console.log(res.data.url);
         setUserImage(res.data.url);
@@ -82,7 +82,7 @@ const Newbook = () => {
     setLoading(true);
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post("http://localhost:4000/history/uploads", data)
+    Axios.post("http://fulpibackend.ngrok.io/history/uploads", data)
       .then((res) => {
         setLink(res.data.url);
         setLoading(false);
@@ -105,12 +105,12 @@ const Newbook = () => {
       lancamento: date,
       genero: genre,
       link: link,
-      distribuidora: "fulpibooks",
+      distribuidora: "fulpibooks"     
     };
     Axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${userToken.token}`;
-    Axios.post("http://localhost:4000/history", { history })
+    Axios.post("http://fulpibackend.ngrok.io/history", { history })
       .then((res) => {
         setLoading(false);
         setStep(step + 1);

@@ -37,7 +37,7 @@ const Profile = () => {
     setLoading(true);
     const data = new FormData();
     data.append("file", img.target.files[0]);
-    Axios.post("https://uploadtesteraws.herokuapp.com/posts", data)
+    Axios.post("http://fulpibackend.ngrok.io/user/image", data)
       .then((res) => {
         setImg(res.data.url);
         setLoading(false);

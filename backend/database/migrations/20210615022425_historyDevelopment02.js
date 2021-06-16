@@ -11,6 +11,7 @@ exports.up = function (knex) {
         table.string('genero').notNull()
         table.string('link').notNull()
         table.string('distribuidora').notNull()
+        table.boolean('status').notNull()
         table.integer('userId').references('id')
              .inTable('user').notNull()
 
