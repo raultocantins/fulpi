@@ -73,8 +73,8 @@ const Newbook = () => {
         //  alert("deu certo");
       })
       .catch((err) => {
-        console.log(err);        
-     // alert("Error ao enviar Imagem");
+        console.log(err);
+        // alert("Error ao enviar Imagem");
         setLoading(false);
       });
   }
@@ -121,6 +121,9 @@ const Newbook = () => {
         setLoading(false);
       });
   }
+  var genres = ["action", "romance", "fiction", "biography",
+    "horror", "poetry", "anthem", "sonnet", "satire",
+    "technician", "fable", "literature", "drama"]
 
   return (
     <div className="newbook">
@@ -274,11 +277,9 @@ const Newbook = () => {
                   }}
                 >
                   <option value="">--Escolha o gênero--</option>
-                  <option value="Romance">Romance</option>
-                  <option value="Ação">Ação</option>
-                  <option value="Aventura">Aventura</option>
-                  <option value="Ficção">Ficcão</option>
-                  <option value="Técnico">Técnico</option>
+                  {genres.map((e, i) => {
+                   return <option value={e}>{e}</option>
+                  })}
                 </select>
               </div>
             </div>
@@ -345,7 +346,7 @@ const Newbook = () => {
           ""
         )}
 
-        {step > 0 ? (
+        {step > 0 && step < 5 ? (
           <button onClick={backStep} className="backButton">
             <ArrowBackIosIcon />
           </button>

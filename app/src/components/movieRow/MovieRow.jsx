@@ -25,7 +25,9 @@ const MovieRow = ({ title, items }) => {
   };
 
   return (
-    <div className="movieRow">
+    
+    <div className="movieRow" >
+     
       <h2>{title}</h2>
       <div className="movieRow-left" onClick={handleLeftArrow}>
         <NavigateBeforeIcon style={{ fontSize: 50 }} />
@@ -53,10 +55,12 @@ const MovieRow = ({ title, items }) => {
                    alt="book"
                    src={item.image} // use normal <img> attributes as props
                  />
+                
                </div>
+              
              </div>
            </Link>: 
-                <div className="movieRow--item">
+                <div key={key}  className="movieRow--item">
                   <div className="card ">
                   <div className="falseCard">
                     {item.name}
