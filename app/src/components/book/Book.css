@@ -10,7 +10,7 @@
 .book>.capa{
    position: relative;
    height: 400px;
-   background-color: green;
+   background-color: transparent;
   border-radius: inherit;
   
 }
@@ -20,6 +20,7 @@
     position: absolute;
     z-index: 5;
     border-radius: inherit;
+   
 
 }
 .book>.capa>.describe{

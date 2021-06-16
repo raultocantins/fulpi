@@ -5,6 +5,7 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ReactLoading from "react-loading";
+import "react-lazy-load-image-component/src/effects/blur.css";
 const MovieRow = ({ title, items }) => {
   const [scrollX, setScrollX] = useState(0);
 
@@ -25,9 +26,7 @@ const MovieRow = ({ title, items }) => {
   };
 
   return (
-    
-    <div className="movieRow" >
-     
+    <div className="movieRow">
       <h2>{title}</h2>
       <div className="movieRow-left" onClick={handleLeftArrow}>
         <NavigateBeforeIcon style={{ fontSize: 50 }} />
@@ -45,31 +44,32 @@ const MovieRow = ({ title, items }) => {
           }}
         >
           {items.length > 0 &&
-            items.map((item, key) => (
-             !item.status? <Link key={key} to={`/app/book/${item.id}`}>
-             <div className="movieRow--item">
-               <div className="card">
-                 <LazyLoadImage
-                   height="100%"
-                   width="100%"
-                   alt="book"
-                   src={item.image} // use normal <img> attributes as props
-                 />
-                
-               </div>
-              
-             </div>
-           </Link>: 
-                <div key={key}  className="movieRow--item">
-                  <div className="card ">
-                  <div className="falseCard">
-                    {item.name}
-                    <ReactLoading  type="bubbles"/>
+            items.map((item, key) =>
+              !item.status ? (
+                <Link key={key} to={`/app/book/${item.id}`}>
+                  <div className="movieRow--item">
+                    <div className="card">
+                      <LazyLoadImage
+                        effect="blur"
+                        height="100%"
+                        width="100%"
+                        alt="book"
+                        src={item.image} // use normal <img> attributes as props
+                      />
+                    </div>
                   </div>
+                </Link>
+              ) : (
+                <div key={key} className="movieRow--item">
+                  <div className="card ">
+                    <div className="falseCard">
+                      {item.name}
+                      <ReactLoading type="bubbles" />
+                    </div>
                   </div>
                 </div>
-              
-            ))}
+              )
+            )}
         </div>
       </div>
     </div>

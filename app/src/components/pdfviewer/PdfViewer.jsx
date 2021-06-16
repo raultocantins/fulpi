@@ -21,7 +21,7 @@ const PdfViewer = () => {
       {loading ? Loading() : ""}
       <Viewer
         onDocumentLoad={handleLoading}
-        fileUrl={`${id}`}
+        fileUrl={`https://fulpihistory.s3.sa-east-1.amazonaws.com/${id}`}
         plugins={[defaultLayoutPluginInstance]}
       />
     </div>
