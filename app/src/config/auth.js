@@ -11,7 +11,7 @@ const isAuthenticate = () => {
 };
 const isWriter = () => {
     var userToken = JSON.parse(window.localStorage.getItem("token"));
-if (userToken.writer) {
+if (userToken?.writer) {
     return true;
   } else {
     return false;

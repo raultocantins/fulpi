@@ -23,12 +23,7 @@ export default class Writer extends React.Component {
     this.submit = this.submit.bind(this);
     this.register = this.register.bind(this);
   }
-  componentDidMount() {
-    if (isAuthenticate()) {
-      window.location.href = "/app"
-    }
 
-  }
   toggleStep() {
     this.setState({ register: !this.state.register });
     this.setState({

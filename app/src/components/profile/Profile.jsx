@@ -10,41 +10,23 @@ import Axios from "axios";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ReactLoading from "react-loading";
-import {development} from '../../config/url'
+import { development } from "../../config/url";
+import { useDispatch, useSelector } from "react-redux";
+function setImage(image) {
+  return { type: "SET_IMAGE", image: image };
+}
 const Profile = () => {
-  const [user, setUser] = useState({
-    name: "Undefined",
-    email: "Undefined",
-    phoneNumber: "",
-  });
-  const [userimg, setImg] = useState("");
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    let user = JSON.parse(window.localStorage.getItem("token"));
-    if (user) {
-      setUser({
-        id:user.id,
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        token:user.token,
-        image:user.image
-      });
-      setImg(user.image);
-    }
-  }, []);
-
+  const user = useSelector((state) => state.authentication.user);
   function onChange(img) {
-    Axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${user.token}`;
+    Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     setLoading(true);
     const data = new FormData();
     data.append("file", img.target.files[0]);
-    Axios.post(`${development}/user/image`, data)
+    Axios.post(`https://uploadtesteraws.herokuapp.com/posts`, data)
       .then((res) => {
-        setImg(res.data.location);
+        dispatch(setImage(res.data.url));
         setLoading(false);
       })
       .catch((err) => {
@@ -80,7 +62,7 @@ const Profile = () => {
               )}
             </IconButton>
           </label>
-          <img src={userimg} alt="profile" />
+          <img src={user.image} alt="profile" />
         </div>
 
         <div className="describe">
@@ -113,7 +95,7 @@ const Profile = () => {
             disabled
             fullWidth
             id="input-with-icon-adornment"
-            value={user.phoneNumber}
+            value={user.phoneNumber ? user.phoneNumber : "(00)0000-0000"}
             startAdornment={
               <InputAdornment position="start">
                 <PhoneIcon />

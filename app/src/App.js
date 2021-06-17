@@ -1,7 +1,7 @@
 import "./App.css";
 import { React, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import Axios from "axios";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -18,10 +18,20 @@ import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
 import PdfViewer from "./components/pdfviewer/PdfViewer";
 import { Worker } from "@react-pdf-viewer/core";
+import { useDispatch, useSelector } from "react-redux";
+function historys(historys) {
+  return { type: "HISTORYS", historys };
+}
+function userSet(user) { 
+  return { type: "SIGNIN_USER", user };
+}
+
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.authentication.user);
   const [toggleMenu, ToggleMenu] = useState(false);
   const [app, setApp] = useState(false);
-  const [userImg,setUserImage]=useState("")
+  const [userImg, setUserImage] = useState("");
   function toggleMenuMobile() {
     ToggleMenu(!toggleMenu);
   }
@@ -30,17 +40,24 @@ function App() {
     document.location.href = "/signin";
   }
   useEffect(() => {
-    var user = JSON.parse(window.localStorage.getItem("token"));
+    let user = JSON.parse(window.localStorage.getItem("token"));
+    Axios.get("http://fulpibackend.ngrok.io/historys")
+      .then((res) => {
+        dispatch(historys(res.data));
+        dispatch(userSet(user));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     if (!user?.writer) {
       setApp(true);
     }
-    setUserImage(user.image)
   }, []);
 
   function selectApp() {
     setApp(true);
   }
-
   function toWriter() {
     window.location.href = "/writer";
   }
@@ -101,10 +118,9 @@ function App() {
               )}
               <div className="menu">
                 <Link to="/app/">Ínicio</Link>
-               {/* <Link to="/app/books">Books séries</Link>
+                {/* <Link to="/app/books">Books séries</Link>
                 <Link to="/app/top10">Top10</Link>
               <Link to="/app/favoritos">Favoritos</Link>*/}
-              
               </div>
               <div className="search">
                 <Input
@@ -120,7 +136,7 @@ function App() {
               </div>
               <div className="imgProfile">
                 <Link to="/app/profile">
-                  <img src={userImg} alt="profile" />
+                  <img src={user.image} alt="profile" />
                 </Link>
 
                 <Button onClick={logout}>

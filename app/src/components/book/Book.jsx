@@ -7,29 +7,47 @@ import "./Book.css";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import {development} from '../../config/url'
+import { development } from "../../config/url";
+import { useSelector } from "react-redux";
 const Book = function () {
-  let { id } = useParams();
+  var { id } = useParams();
+  const historys = useSelector((state) => state.historys.historys);
 
   const [history, setHistory] = useState([]);
   const [url, setUrl] = useState("");
-  useEffect(() => {
-    Axios.get(`${development}/history/${id}`)
-      .then((res) => {
-        setHistory(res.data);
-        setUrl(
-          history.link
-            ? history.link.replace(
-                "https://fulpihistory.s3.sa-east-1.amazonaws.com/",
-                ""
-              )
-            : ""
-        );
-      })
-      .catch((err) => {
-        console.log(err);
+  const genres = [
+    "action",
+    "anthem",
+    "biography",
+    "drama",
+    "fable",
+    "fiction",
+    "horror",
+    "literature",
+    "poetry",
+    "romance",
+    "satire",
+    "sonnet",
+    "technician",
+  ];
+  function getHistoryById(id) {
+    var arrays = [];
+    for (var i = 0; i <= genres.length; i++) {
+      arrays.push(historys[genres[i]]);
+    }
+    arrays.forEach((e) => {
+     if(e){
+      e.map((e) => {
+        if (e.id===parseInt(id)) {   
+          setHistory(e)
+        }
       });
-  });
+     }
+    });
+  }
+  useEffect(() => {
+    getHistoryById(id);      
+  }, []);
   return (
     <div className="book">
       <div className="capa">
