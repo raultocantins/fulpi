@@ -4,13 +4,14 @@ import MovieRow from "../movieRow/MovieRow";
 import Axios from "axios";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { development } from '../../config/url'
 export default class Dashboard extends React.Component {
   state = {
     historys: [],
   };
 
   componentDidMount() {
-    Axios.get("http://fulpibackend.ngrok.io/historys")
+    Axios.get(`${development}/historys`)
       .then((res) => {
         this.setState({ historys: res.data });
       })
@@ -42,47 +43,47 @@ export default class Dashboard extends React.Component {
           </div>
         </div>
         <div className="rowsGenre">
-          {this.state.historys.action ? (
+          {this.state.historys.action?.length > 0 ? (
             <MovieRow title="Action" items={this.state.historys.action} />
           ) : (
             ""
           )}
-          {this.state.historys.romance ? (
+          {this.state.historys.romance?.length > 0 ? (
             <MovieRow title="romance" items={this.state.historys.romance} />
           ) : (
             ""
           )}
-          {this.state.historys.fiction ? (
+          {this.state.historys.fiction?.length > 0 ? (
             <MovieRow title="fiction" items={this.state.historys.fiction} />
           ) : (
             ""
           )}
-          {this.state.historys.biography ? (
+          {this.state.historys.biography?.length > 0 ? (
             <MovieRow title="biography" items={this.state.historys.biography} />
           ) : (
             ""
           )}
-          {this.state.historys.poetry ? (
+          {this.state.historys.poetry?.length > 0 ? (
             <MovieRow title="poetry" items={this.state.historys.poetry} />
           ) : (
             ""
           )}
-          {this.state.historys.anthem ? (
+          {this.state.historys.anthem?.length > 0 ? (
             <MovieRow title="anthem" items={this.state.historys.anthem} />
           ) : (
             ""
           )}
-          {this.state.historys.sonnet ? (
+          {this.state.historys.sonnet?.length > 0 ? (
             <MovieRow title="sonnet" items={this.state.historys.sonnet} />
           ) : (
             ""
           )}
-          {this.state.historys.satire ? (
+          {this.state.historys.satire?.length > 0 ? (
             <MovieRow title="satire" items={this.state.historys.satire} />
           ) : (
             ""
           )}
-          {this.state.historys.technician ? (
+          {this.state.historys.technician?.length > 0 ? (
             <MovieRow
               title="technician"
               items={this.state.historys.technician}
@@ -90,12 +91,12 @@ export default class Dashboard extends React.Component {
           ) : (
             ""
           )}
-          {this.state.historys.fable ? (
+          {this.state.historys.fable?.length > 0 ? (
             <MovieRow title="fable" items={this.state.historys.fable} />
           ) : (
             ""
           )}
-          {this.state.historys.literature ? (
+          {this.state.historys.literature?.length > 0 ? (
             <MovieRow
               title="literature"
               items={this.state.historys.literature}
@@ -103,7 +104,7 @@ export default class Dashboard extends React.Component {
           ) : (
             ""
           )}
-          {this.state.historys.drama ? (
+          {this.state.historys.drama?.length > 0 ? (
             <MovieRow title="drama" items={this.state.historys.drama} />
           ) : (
             ""

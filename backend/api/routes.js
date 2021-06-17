@@ -44,7 +44,7 @@ router.post("/validateToken", validateToken);
 
 
 //Upload user image
-router.post("/user/image", multer(multerImageProfile).single("file"), setImageUser);
+router.post("/user/image",[authenticate(), multer(multerImageProfile).single("file")], setImageUser);
 
 
 //Upload file history test

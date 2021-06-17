@@ -9,6 +9,7 @@ import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
 import DatePicker from "react-date-picker";
 import EventIcon from "@material-ui/icons/Event";
 import ClearIcon from "@material-ui/icons/Clear";
+import {development} from '../../../config/url'
 import "./Newbook.css";
 const Newbook = () => {
   const [step, setStep] = useState(0);
@@ -65,7 +66,7 @@ const Newbook = () => {
     setLoading(true);
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post("http://fulpibackend.ngrok.io/history/uploads", data)
+    Axios.post(`${development}/history/uploads`, data)
       .then((res) => {
         console.log(res.data.url);
         setUserImage(res.data.url);
@@ -82,7 +83,7 @@ const Newbook = () => {
     setLoading(true);
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post("http://fulpibackend.ngrok.io/history/uploads", data)
+    Axios.post(`${development}/history/uploads`, data)
       .then((res) => {
         setLink(res.data.url);
         setLoading(false);
@@ -110,7 +111,7 @@ const Newbook = () => {
     Axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${userToken.token}`;
-    Axios.post("http://fulpibackend.ngrok.io/history", { history })
+    Axios.post(`${development}/history`, { history })
       .then((res) => {
         setLoading(false);
         setStep(step + 1);

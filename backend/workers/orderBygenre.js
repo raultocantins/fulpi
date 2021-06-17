@@ -51,7 +51,7 @@ function orderBygenre(data) {
     var fable = []
     var literature = []
     var drama = []
-var h=[]
+    var h = []
     var newObj = mock.map(e => {
         for (var i = 0; i <= types.length; i++) {
             if (e[types[i]]) {

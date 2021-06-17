@@ -7,13 +7,14 @@ import "./Book.css";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import {development} from '../../config/url'
 const Book = function () {
   let { id } = useParams();
 
   const [history, setHistory] = useState([]);
   const [url, setUrl] = useState("");
   useEffect(() => {
-    Axios.get(`http://fulpibackend.ngrok.io/history/${id}`)
+    Axios.get(`${development}/history/${id}`)
       .then((res) => {
         setHistory(res.data);
         setUrl(

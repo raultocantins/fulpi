@@ -1,5 +1,6 @@
 import Axios from "axios";
+import {development} from './url'
 const authRegister = (user) => {
-  return Axios.post("http://fulpibackend.ngrok.io/auth/register/user", user)   
+  return Axios.post(`${development}/auth/register/user`, user)   
 };
 export default  authRegister;

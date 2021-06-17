@@ -10,36 +10,41 @@ import Axios from "axios";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ReactLoading from "react-loading";
+import {development} from '../../config/url'
 const Profile = () => {
   const [user, setUser] = useState({
     name: "Undefined",
     email: "Undefined",
     phoneNumber: "",
   });
-  const [userimg, setImg] = useState(
-    "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg"
-  );
+  const [userimg, setImg] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let user = JSON.parse(window.localStorage.getItem("token"));
     if (user) {
       setUser({
+        id:user.id,
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        token:user.token,
+        image:user.image
       });
       setImg(user.image);
     }
   }, []);
 
   function onChange(img) {
+    Axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${user.token}`;
     setLoading(true);
     const data = new FormData();
     data.append("file", img.target.files[0]);
-    Axios.post("http://fulpibackend.ngrok.io/user/image", data)
+    Axios.post(`${development}/user/image`, data)
       .then((res) => {
-        setImg(res.data.url);
+        setImg(res.data.location);
         setLoading(false);
       })
       .catch((err) => {

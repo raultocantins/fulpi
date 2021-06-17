@@ -38,6 +38,7 @@ const signin = async (req, res) => {
     name: user.name,
     email: user.email,
     writer: user.writer,
+    image:user.image,
     iat: now,
     exp: now + 60 * 60 * 24,
   };
@@ -66,6 +67,7 @@ const signinWriter = async (req, res) => {
         name: userUpdated.name,
         email: userUpdated.email,
         writer: userUpdated.writer,
+        image:userUpdated.image,
         iat: now,
         exp: now + 60 * 60 * 24,
       };
@@ -81,6 +83,7 @@ const signinWriter = async (req, res) => {
       name: user.name,
       email: user.email,
       writer: user.writer,
+      image:user.image,
       iat: now,
       exp: now + 60 * 60 * 24,
     };

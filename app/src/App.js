@@ -1,7 +1,7 @@
 import "./App.css";
 import { React, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Logo from "./assets/perfil2.jpg";
+
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -21,6 +21,7 @@ import { Worker } from "@react-pdf-viewer/core";
 function App() {
   const [toggleMenu, ToggleMenu] = useState(false);
   const [app, setApp] = useState(false);
+  const [userImg,setUserImage]=useState("")
   function toggleMenuMobile() {
     ToggleMenu(!toggleMenu);
   }
@@ -33,6 +34,7 @@ function App() {
     if (!user?.writer) {
       setApp(true);
     }
+    setUserImage(user.image)
   }, []);
 
   function selectApp() {
@@ -99,9 +101,10 @@ function App() {
               )}
               <div className="menu">
                 <Link to="/app/">Ínicio</Link>
-                <Link to="/app/books">Books séries</Link>
+               {/* <Link to="/app/books">Books séries</Link>
                 <Link to="/app/top10">Top10</Link>
-                <Link to="/app/favoritos">Favoritos</Link>
+              <Link to="/app/favoritos">Favoritos</Link>*/}
+              
               </div>
               <div className="search">
                 <Input
@@ -117,7 +120,7 @@ function App() {
               </div>
               <div className="imgProfile">
                 <Link to="/app/profile">
-                  <img src={Logo} alt="profile" />
+                  <img src={userImg} alt="profile" />
                 </Link>
 
                 <Button onClick={logout}>

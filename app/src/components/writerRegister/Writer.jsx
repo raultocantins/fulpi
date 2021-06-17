@@ -6,7 +6,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
 import AuthLoginWriter from "../../config/loginWriter.js";
 import AuthRegister from "../../config/register";
-import {isAuthenticate} from '../../config/auth'
+import { isAuthenticate } from '../../config/auth'
 import CreateIcon from "@material-ui/icons/Create";
 export default class Writer extends React.Component {
   state = {
@@ -23,12 +23,12 @@ export default class Writer extends React.Component {
     this.submit = this.submit.bind(this);
     this.register = this.register.bind(this);
   }
-  componentDidMount(){
-    if(isAuthenticate()){
-     window.location.href="/app" 
+  componentDidMount() {
+    if (isAuthenticate()) {
+      window.location.href = "/app"
     }
-     
-   }
+
+  }
   toggleStep() {
     this.setState({ register: !this.state.register });
     this.setState({
@@ -54,7 +54,7 @@ export default class Writer extends React.Component {
       var user = {
         email: this.state.email,
         password: this.state.password,
-        writer:true
+        writer: true
       };
       AuthLoginWriter(user)
         .then((res) => {
@@ -76,7 +76,7 @@ export default class Writer extends React.Component {
         name: this.state.name,
         password: this.state.password,
         email: this.state.email,
-        writer:true
+        writer: true
       };
       AuthRegister(user)
         .then((res) => {
