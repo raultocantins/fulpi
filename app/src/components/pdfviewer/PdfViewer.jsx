@@ -20,6 +20,7 @@ const PdfViewer = () => {
     <div className="pdfviewer">
       {loading ? Loading() : ""}
       <Viewer
+      onZoom={()=>alert()}
         onDocumentLoad={handleLoading}
         fileUrl={`https://fulpihistory.s3.sa-east-1.amazonaws.com/${id}`}
         plugins={[defaultLayoutPluginInstance]}

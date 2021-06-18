@@ -2,7 +2,7 @@ const db = require('../../database/db')
 const orderBygenre=require('../../workers/orderBygenre')
 
 const getHistorys = async (req, res) => {
-    const data = await db('historyDevelopment02').select('id', 'name', 'image', 'escritor','genero','status').then(historys => {
+    const data = await db('historyDevelopment02').select('id', 'name', 'image', 'escritor','prefacio','score','lancamento','genero','link','distribuidora','status').then(historys => {
         return historys
     })
 

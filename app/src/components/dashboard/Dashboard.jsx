@@ -3,28 +3,31 @@ import "./Dashboard.css";
 import MovieRow from "../movieRow/MovieRow";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Dashboard = () => {
   const historys = useSelector((state) => state.historys.historys);
-  //const user = useSelector((state) => state.authentication.user);
   return (
     <div className="dashboard">
       <div className="cartaz">
         <div className="spotlight">
+
           <LazyLoadImage
             alt="spotlight"
             effect="blur"
             height="100%"
             width="100%"
-            src="https://cdn.falauniversidades.com.br/wp-content/uploads/2019/04/better-call-saul-cartaz1.jpg" // use normal <img> attributes as props
+            src={historys.spotlight.map(e => e.image)} // use normal <img> attributes as props
           />
+
 
           <div className="btn">
             <div className="title">
               <h1>Better Call Saull</h1>
               <p>Por: Alex raul santo</p>
             </div>
-            <button>Read book</button>
+            <Link to={`/app/book/${historys.spotlight.map(e => e.id)}`}>  <button >Read book</button></Link>
+
           </div>
         </div>
       </div>

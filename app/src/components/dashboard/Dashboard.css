@@ -85,8 +85,8 @@
 @media (max-width: 600px) {
 
   .spotlight {    
-    width: 100vw;
-   
+    width: 90vw;
+    height: 230px;
   }
   .spotlight>.btn {    
     

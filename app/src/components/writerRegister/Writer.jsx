@@ -6,7 +6,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
 import AuthLoginWriter from "../../config/loginWriter.js";
 import AuthRegister from "../../config/register";
-import { isAuthenticate } from '../../config/auth'
 import CreateIcon from "@material-ui/icons/Create";
 export default class Writer extends React.Component {
   state = {

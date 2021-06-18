@@ -5,10 +5,9 @@ import { Checkbox } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FunctionsIcon from "@material-ui/icons/Functions";
-import AuthLogin from "../../config/login";
 import AuthRegister from "../../config/register";
 import { isAuthenticate } from "../../config/auth";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { development } from "../../config/url";
 
 function signIn(user) {
@@ -42,33 +41,20 @@ const Login = () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password === "") {
       alert("email inválido!");
     } else {
-      setLoading(false);
-      var user = {
-        email: email,
-        password: password,
-      };
+
       Axios.post(`${development}/auth/signin`, { email, password })
         .then((res) => {
+
           var dataUser = JSON.stringify(res.data);
           window.localStorage.setItem("token", dataUser);
           dispatch(signIn(res.data));
+          setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
-          alert("error");
+          alert(err);
           console.log(err);
         });
-      /*
-      .then((res) => {
-        var dataUser = JSON.stringify(res.data);
-        window.localStorage.setItem("token", dataUser);
-        window.location.href = "/app";
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("error");
-        this.setState({ loading: false });
-      });*/
     }
   }
   function registerUser() {
@@ -102,7 +88,7 @@ const Login = () => {
       </div>
       <div className="boxLogin">
         {register ? (
-          <React.Fragment>
+          <>
             <h1>Sign Up</h1>{" "}
             <input
               name="name"
@@ -141,9 +127,9 @@ const Login = () => {
                 Já possui uma conta?
               </IconButton>{" "}
             </div>
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <h1>Sign In</h1>
             <input
               name="email"
@@ -158,7 +144,7 @@ const Login = () => {
               onChange={(value) => setPassword(value.target.value)}
               value={password}
             />
-            <button onClick={this.submit}>
+            <button onClick={submit}>
               {loading ? <CircularProgress id="loading" /> : "Sign In"}
             </button>
             <div className="help">
@@ -173,7 +159,7 @@ const Login = () => {
                 Não possui uma conta?
               </IconButton>{" "}
             </div>
-          </React.Fragment>
+          </>
         )}
 
         <a href="/writer/register">Want to be a writer?</a>

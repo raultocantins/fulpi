@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React,  useState } from "react";
 import "./Profile.css";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -24,7 +24,7 @@ const Profile = () => {
     setLoading(true);
     const data = new FormData();
     data.append("file", img.target.files[0]);
-    Axios.post(`https://uploadtesteraws.herokuapp.com/posts`, data)
+    Axios.post(`${development}/user/image`, data)
       .then((res) => {
         dispatch(setImage(res.data.url));
         setLoading(false);

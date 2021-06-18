@@ -38,6 +38,8 @@ function orderBygenre(data) {
             default:
         }
     })
+
+
     var action = []
     var romance = []
     var fiction = []
@@ -51,6 +53,7 @@ function orderBygenre(data) {
     var fable = []
     var literature = []
     var drama = []
+
     var h = []
     var newObj = mock.map(e => {
         for (var i = 0; i <= types.length; i++) {
@@ -100,7 +103,29 @@ function orderBygenre(data) {
         if (e.drama) {
             drama.push(e.drama)
         }
+
     })
+    var historysAll = [
+        action,
+        romance,
+        fiction,
+        biography,
+        horror,
+        poetry,
+        anthem,
+        sonnet,
+        satire,
+        technician,
+        fable,
+        literature,
+        drama,
+    ]
+    var spot = []
+    var spotlight = historysAll.map(e => {
+        e.map(e => e.score >= 0 ? spot.push(e) : null)
+    })
+
+
     var historys = {
         action: action,
         romance: romance,
@@ -114,7 +139,8 @@ function orderBygenre(data) {
         technician: technician,
         fable: fable,
         literature: literature,
-        drama: drama
+        drama: drama,
+        spotlight: spot.slice(0, 1)
     }
 
     return historys;

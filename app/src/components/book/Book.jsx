@@ -1,20 +1,16 @@
 import { React, useEffect, useState } from "react";
-import Axios from "axios";
-
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link, useParams } from "react-router-dom";
 import "./Book.css";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { development } from "../../config/url";
 import { useSelector } from "react-redux";
 const Book = function () {
   var { id } = useParams();
   const historys = useSelector((state) => state.historys.historys);
 
   const [history, setHistory] = useState([]);
-  const [url, setUrl] = useState("");
   const genres = [
     "action",
     "anthem",
@@ -36,18 +32,25 @@ const Book = function () {
       arrays.push(historys[genres[i]]);
     }
     arrays.forEach((e) => {
-     if(e){
-      e.map((e) => {
-        if (e.id===parseInt(id)) {   
-          setHistory(e)
-        }
-      });
-     }
+      if (e) {
+        e.map((e) => {
+          if (e.id === parseInt(id)) {
+            setHistory(e)
+          }
+          return e
+        });
+      }
     });
   }
   useEffect(() => {
-    getHistoryById(id);      
-  }, []);
+    getHistoryById(id);
+  });
+  function getUrl() {
+    if (history.link) {
+      return history?.link.replace("https://fulpihistory.s3.sa-east-1.amazonaws.com/", "")
+    }
+
+  }
   return (
     <div className="book">
       <div className="capa">
@@ -60,7 +63,7 @@ const Book = function () {
         />
         <div className="describe">
           <h1>{history.name}</h1>
-          <Link to={`/app/pdfviewer/${url}`}>
+          <Link to={`/app/pdfviewer/${getUrl()}`}>
             <button>Ler book</button>
           </Link>
         </div>

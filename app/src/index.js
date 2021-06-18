@@ -8,14 +8,13 @@ import reportWebVitals from "./reportWebVitals";
 import Writer from "./components/postHistory/HistoryPage";
 import { Provider } from "react-redux";
 import store from "./store/store";
-//import NewLogin from "./components/newLogin/Newlogin";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-import ErrorPage from "./pageError";
+
 import { isAuthenticate, isWriter } from "./config/auth";
 
 const PrivateRouter = ({ component: Component, ...rest }) => (
@@ -44,12 +43,27 @@ const PrivateRouterWriter = ({ component: Component, ...rest }) => (
     }
   />
 );
+const RouterError = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isAuthenticate() ? (
+        <Redirect to={{ pathname: "/app" }} />
+      ) : (
+        <Redirect to={{ pathname: "/signin" }} />
+      )
+    }
+  />
+);
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
         <Provider store={store}>
+          <RouterError path="/" exact />
+
+
           <PrivateRouter path="/app" component={App} />{" "}
           <Route path="/signin">
             <Login />
@@ -60,9 +74,7 @@ ReactDOM.render(
           </Route>
         </Provider>
 
-        <Route path="*">
-          <ErrorPage />
-        </Route>
+
       </Switch>
     </Router>
   </React.StrictMode>,

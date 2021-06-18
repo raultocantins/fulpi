@@ -19,6 +19,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import PdfViewer from "./components/pdfviewer/PdfViewer";
 import { Worker } from "@react-pdf-viewer/core";
 import { useDispatch, useSelector } from "react-redux";
+import {development} from './config/url'
 function historys(historys) {
   return { type: "HISTORYS", historys };
 }
@@ -31,7 +32,7 @@ function App() {
   const user = useSelector((state) => state.authentication.user);
   const [toggleMenu, ToggleMenu] = useState(false);
   const [app, setApp] = useState(false);
-  const [userImg, setUserImage] = useState("");
+  
   function toggleMenuMobile() {
     ToggleMenu(!toggleMenu);
   }
@@ -41,7 +42,8 @@ function App() {
   }
   useEffect(() => {
     let user = JSON.parse(window.localStorage.getItem("token"));
-    Axios.get("http://fulpibackend.ngrok.io/historys")
+    Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+    Axios.get(`${development}/historys`)
       .then((res) => {
         dispatch(historys(res.data));
         dispatch(userSet(user));
@@ -53,7 +55,7 @@ function App() {
     if (!user?.writer) {
       setApp(true);
     }
-  }, []);
+  },[dispatch]);
 
   function selectApp() {
     setApp(true);
@@ -70,7 +72,7 @@ function App() {
             <button onClick={selectApp}>
               <div className="hoverBlack"></div>
               <img
-                src="https://image.freepik.com/fotos-gratis/perfil-de-um-homem-bonito_102671-6967.jpg"
+                src={user.image}
                 alt="user"
               />
             </button>
@@ -112,6 +114,9 @@ function App() {
                   <Link to="/app/profile" onClick={toggleMenuMobile}>
                     Perfil
                   </Link>
+                  <Button onClick={logout}>
+                  <ExitToAppIcon />
+                </Button>
                 </div>
               ) : (
                 ""

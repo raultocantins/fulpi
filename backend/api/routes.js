@@ -17,7 +17,7 @@ router.get("/genres", authenticate(), getGenres);
 router.post("/genres", authenticate(), setGenre);
 
 //get historys
-router.get("/historys",  getHistorys);
+router.get("/historys", authenticate(), getHistorys);
 
 //get history BY ID
 router.get("/history/:id",  getHistoryById);
