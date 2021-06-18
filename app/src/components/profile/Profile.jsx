@@ -20,12 +20,13 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.authentication.user);
   function onChange(img) {
+    let user = JSON.parse(window.localStorage.getItem("token"));
     Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     setLoading(true);
     const data = new FormData();
     data.append("file", img.target.files[0]);
     Axios.post(`${development}/user/image`, data)
-      .then((res) => {
+      .then((res) => {    
         dispatch(setImage(res.data.url));
         setLoading(false);
       })
@@ -56,7 +57,7 @@ const Profile = () => {
               disabled={loading ? true : false}
             >
               {loading ? (
-                <ReactLoading color="red" type="spinningBubbles" />
+                <ReactLoading  type="spinningBubbles" />
               ) : (
                 <PhotoCamera />
               )}

@@ -54,7 +54,7 @@ export default class Writer extends React.Component {
         .then((res) => {
           var dataUser = JSON.stringify(res.data);
           window.localStorage.setItem("token", dataUser);
-          window.location.href = "/app";
+          window.location.href = "/writer";
         })
         .catch((err) => {
           console.log(err);

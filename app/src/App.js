@@ -18,12 +18,17 @@ import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
 import PdfViewer from "./components/pdfviewer/PdfViewer";
 import { Worker } from "@react-pdf-viewer/core";
+import ReactLoading from "react-loading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { useDispatch, useSelector } from "react-redux";
-import {development} from './config/url'
+import { development } from "./config/url";
+import Semfoto from "./assets/semfoto.jpg";
+import Writer from "./assets/writer.jpg";
 function historys(historys) {
   return { type: "HISTORYS", historys };
 }
-function userSet(user) { 
+function userSet(user) {
   return { type: "SIGNIN_USER", user };
 }
 
@@ -32,7 +37,8 @@ function App() {
   const user = useSelector((state) => state.authentication.user);
   const [toggleMenu, ToggleMenu] = useState(false);
   const [app, setApp] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+  const [select, setSelect] = useState(false);
   function toggleMenuMobile() {
     ToggleMenu(!toggleMenu);
   }
@@ -41,23 +47,31 @@ function App() {
     document.location.href = "/signin";
   }
   useEffect(() => {
-    let user = JSON.parse(window.localStorage.getItem("token"));
-    Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+    setLoading(true);
+    let userToken = JSON.parse(window.localStorage.getItem("token"));
+    Axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${userToken.token}`;
     Axios.get(`${development}/historys`)
       .then((res) => {
         dispatch(historys(res.data));
-        dispatch(userSet(user));
+        dispatch(userSet(userToken));
+        setLoading(false);
+        if (!userToken.writer) {
+          setApp(true);
+        } else {
+          setSelect(true);
+        }
       })
       .catch((err) => {
         console.log(err);
+        alert("error ao carregar historias");
+        setLoading(false);
       });
-
-    if (!user?.writer) {
-      setApp(true);
-    }
-  },[dispatch]);
+  }, [dispatch]);
 
   function selectApp() {
+    setSelect(false);
     setApp(true);
   }
   function toWriter() {
@@ -67,19 +81,38 @@ function App() {
   return (
     <Router>
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-        {app === false ? (
+        {loading ? (
+          <ReactLoading
+            type="spinningBubbles"
+            color="#e50914"
+            className="loading"
+            height={400}
+            width={400}
+          />
+        ) : (
+          ""
+        )}
+        {user.writer && !loading && select ? (
           <div className="selectUser">
             <button onClick={selectApp}>
               <div className="hoverBlack"></div>
-              <img
-                src={user.image}
+              <LazyLoadImage
+                style={{ borderRadius: "10px" }}
+                effect="blur"
+                height="100%"
+                width="100%"
+                src={user.image ? user.image : Semfoto}
                 alt="user"
               />
             </button>
             <button onClick={toWriter}>
               <div className="hoverBlack"></div>
-              <img
-                src="https://wallpaperforu.com/wp-content/uploads/2020/07/vintage-wallpaper-20071314082149.jpg"
+              <LazyLoadImage
+                style={{ borderRadius: "10px" }}
+                effect="blur"
+                height="100%"
+                width="100%"
+                src={Writer}
                 alt="user"
               />
             </button>
@@ -87,7 +120,7 @@ function App() {
         ) : (
           ""
         )}
-        {app ? (
+        {!loading && app && !select ? (
           <div className="App">
             <div className="appbar">
               <h1>FulpiBooks</h1>
@@ -115,8 +148,8 @@ function App() {
                     Perfil
                   </Link>
                   <Button onClick={logout}>
-                  <ExitToAppIcon />
-                </Button>
+                    <ExitToAppIcon />
+                  </Button>
                 </div>
               ) : (
                 ""
@@ -124,8 +157,8 @@ function App() {
               <div className="menu">
                 <Link to="/app/">Ínicio</Link>
                 {/* <Link to="/app/books">Books séries</Link>
-                <Link to="/app/top10">Top10</Link>
-              <Link to="/app/favoritos">Favoritos</Link>*/}
+                  <Link to="/app/top10">Top10</Link>
+                <Link to="/app/favoritos">Favoritos</Link>*/}
               </div>
               <div className="search">
                 <Input
@@ -142,6 +175,7 @@ function App() {
               <div className="imgProfile">
                 <Link to="/app/profile">
                   <img src={user.image} alt="profile" />
+            <p>{user.name.slice(0,12)}</p>
                 </Link>
 
                 <Button onClick={logout}>

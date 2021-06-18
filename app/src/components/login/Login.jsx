@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import Axios from 'axios'
+import Axios from "axios";
 import "./Login.css";
 import { Checkbox } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -33,18 +33,17 @@ const Login = () => {
     setName("");
     setEmail("");
     setPassword("");
-    setPassword("");
+    setConfirm("");
   }
   function submit() {
     setLoading(true);
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password === "") {
       alert("email inválido!");
+      setLoading(false);
     } else {
-
       Axios.post(`${development}/auth/signin`, { email, password })
         .then((res) => {
-
           var dataUser = JSON.stringify(res.data);
           window.localStorage.setItem("token", dataUser);
           dispatch(signIn(res.data));
@@ -58,7 +57,15 @@ const Login = () => {
     }
   }
   function registerUser() {
-    if (password === confirmPassword) {
+    if (name.length < 6) {
+      alert("name não inserido");
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email === "") {
+      alert("email não inserido/inválido");
+    } else if (password.length < 8) {
+      alert("password não inserido");
+    } else if (confirmPassword.length < 8) {
+      alert("confirm password não inserido");
+    } else if (password === confirmPassword) {
       setLoading(true);
       var user = {
         name: name,
@@ -75,8 +82,10 @@ const Login = () => {
           setLoading(false);
           alert("error");
           console.log(err);
+          setLoading(false);
         });
     } else {
+      setLoading(false);
       alert("Senhas não são iguais!!");
     }
   }
@@ -123,9 +132,7 @@ const Login = () => {
               <IconButton>
                 Sign up with google <FunctionsIcon />
               </IconButton>{" "}
-              <IconButton onClick={toggleStep}>
-                Já possui uma conta?
-              </IconButton>{" "}
+              <IconButton onClick={toggleStep}>Já possui uma conta?</IconButton>{" "}
             </div>
           </>
         ) : (

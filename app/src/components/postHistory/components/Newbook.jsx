@@ -9,7 +9,7 @@ import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
 import DatePicker from "react-date-picker";
 import EventIcon from "@material-ui/icons/Event";
 import ClearIcon from "@material-ui/icons/Clear";
-import {development} from '../../../config/url'
+import { development } from "../../../config/url";
 import "./Newbook.css";
 const Newbook = () => {
   const [step, setStep] = useState(0);
@@ -106,7 +106,7 @@ const Newbook = () => {
       lancamento: date,
       genero: genre,
       link: link,
-      distribuidora: "fulpibooks"     
+      distribuidora: "fulpibooks",
     };
     Axios.defaults.headers.common[
       "Authorization"
@@ -122,13 +122,24 @@ const Newbook = () => {
         setLoading(false);
       });
   }
-  var genres = ["action", "romance", "fiction", "biography",
-    "horror", "poetry", "anthem", "sonnet", "satire",
-    "technician", "fable", "literature", "drama"]
+  var genres = [
+    "action",
+    "romance",
+    "fiction",
+    "biography",
+    "horror",
+    "poetry",
+    "anthem",
+    "sonnet",
+    "satire",
+    "technician",
+    "fable",
+    "literature",
+    "drama",
+  ];
 
   return (
     <div className="newbook">
-
       <div className="timeline">
         <div
           className="line"
@@ -279,7 +290,7 @@ const Newbook = () => {
                 >
                   <option value="">--Escolha o gênero--</option>
                   {genres.map((e, i) => {
-                   return <option value={e}>{e}</option>
+                    return <option value={e}>{e}</option>;
                   })}
                 </select>
               </div>
