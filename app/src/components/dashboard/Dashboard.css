@@ -4,6 +4,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   color: #fff;
+
 }
 .dashboard h3 {
   margin-left: 20px;
@@ -21,7 +22,6 @@
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
 
   
 }
@@ -61,6 +61,7 @@
 }
 
 .spotlight > .btn > .title {
+
   height: 100%;
 }
 .spotlight > .btn > .title p {
@@ -77,11 +78,39 @@
   color: #e50914;
   opacity: 0.7;
 }
+.spotlight>.btnNextSpotlight{
+  height: 100%;
+  width: 70px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: transparent;
+  z-index: 99;
+  border: none;
+  color: #1414146e;
+}
+.spotlight>.btnBackSpotlight{
+  height: 100%;
+  width: 70px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  z-index: 99;
+  border: none;
+  color: #1414146e;
+}
+.spotlight>.btnNextSpotlight:hover,.spotlight>.btnBackSpotlight:hover{
+background-color: transparent;
+color:#141414;
+font-weight: bold;
+}
 .rowsGenre {
   position: relative;
   height: 100%;
   width: 100vw;
 }
+
 @media (max-width: 600px) {
 
   .spotlight {    

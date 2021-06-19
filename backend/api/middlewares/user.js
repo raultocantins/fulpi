@@ -5,7 +5,7 @@ const setImageUser = async(req, res) => {
         .update({ image: req.file.location })
         .where({ id: req.user.id})
         .then((_) => {
-            res.status(204).json({ url: req.file.location });
+            res.json({ url: req.file.location });
         })
         .catch((err) => {
             console.log(err)

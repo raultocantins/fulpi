@@ -1,4 +1,4 @@
-import { React,  useState } from "react";
+import { React, useState } from "react";
 import "./Profile.css";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -13,7 +13,7 @@ import ReactLoading from "react-loading";
 import { development } from "../../config/url";
 import { useDispatch, useSelector } from "react-redux";
 function setImage(image) {
-  return { type: "SET_IMAGE", image: image };
+  return { type: "SET_IMAGE", image };
 }
 const Profile = () => {
   const dispatch = useDispatch();
@@ -26,9 +26,10 @@ const Profile = () => {
     const data = new FormData();
     data.append("file", img.target.files[0]);
     Axios.post(`${development}/user/image`, data)
-      .then((res) => {    
+      .then((res) => {
         dispatch(setImage(res.data.url));
         setLoading(false);
+
       })
       .catch((err) => {
         console.log(err);
@@ -57,7 +58,7 @@ const Profile = () => {
               disabled={loading ? true : false}
             >
               {loading ? (
-                <ReactLoading  type="spinningBubbles" />
+                <ReactLoading type="spinningBubbles" />
               ) : (
                 <PhotoCamera />
               )}

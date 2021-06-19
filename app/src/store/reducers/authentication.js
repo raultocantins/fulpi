@@ -12,7 +12,7 @@ export const authentication = (state = initialState, action) => {
     case "SET_IMAGE":
       return {
         ...state,
-        user: { image: action.image },
+        user: { ...state.user, image: action.image },
       };
 
     default:

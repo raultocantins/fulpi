@@ -140,7 +140,7 @@ function orderBygenre(data) {
         fable: fable,
         literature: literature,
         drama: drama,
-        spotlight: spot.slice(0, 1)
+        spotlight: spot.slice(0, 3)
     }
 
     return historys;
