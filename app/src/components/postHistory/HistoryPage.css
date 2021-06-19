@@ -1,5 +1,5 @@
 .historyPage{
-    color: #fff;
+
     height: 100vh;
 }
 .historyPage>.container {
@@ -14,14 +14,14 @@
 .historyPage> .appbar {
   height: 50px;
   width: 100%;
-  color: #fff;
+ 
   display: flex;
   justify-content: space-around;
   align-items: center;
   display: flex !important;
 }
 .historyPage> .appbar > .menu a {
-  color: #fff;
+ 
   text-decoration: none;
   margin-right: 50px;
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -33,12 +33,12 @@
   color: #e50914;
 }
 .historyPage> .appbar > .search > .searchInput input {
-  color: #fff;
+ 
   margin: 0px 10px 0px 10px;
 }
 
 .historyPage> .appbar > .search > .searchInput svg {
-  color: #fff;
+ 
   margin-right: 10px;
 }
 .historyPage> .appbar > .imgProfile a {

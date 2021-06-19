@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+color: #FFF;
 }
 .newbook > .timeline {
   display: flex;
@@ -16,7 +17,7 @@
 .newbook > .timeline > .line {
   width: 10%;
   height: 5px;
-  background-color: rgba(255, 255, 255, 0.315);
+  background-color: #14141456;
   padding: 5px;
   border-radius: 10px;
   transition: all ease 0.5s;
@@ -71,7 +72,7 @@
   display: none;
 }
 .step1 svg {
-  color: #fff;
+  color: #Fff;
   position: absolute;
   z-index: 8;
   font-size: 90px;

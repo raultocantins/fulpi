@@ -1,7 +1,6 @@
 .book{    
     width: 900px;
     position: relative;
-    color: #fff;  
     border-radius: 10px;
   height: auto;
   margin-top: 300px;
@@ -34,6 +33,7 @@
     z-index: 6;
 bottom: 0;
 background-color: #14141442;
+color: #fff;
 }
 .book>.capa>.describe button {
     border: none;

@@ -6,19 +6,19 @@
 
 .rpv-default-layout-toolbar{
     background-color: transparent!important;
-    color: #fff!important;
+    color: inherit!important;
 }
 .rpv-default-layout-toolbar svg{
    
-    color: #fff!important;
+    color: inherit!important;
 }
 .rpv-default-layout-sidebar-headers{
     background-color: transparent!important;
-    color: #fff!important;
+    color: inherit!important;
 
 }
 .rpv-default-layout-sidebar-headers svg{   
-    color: #fff!important;
+    color: inherit!important;
 }
 .rpv-default-layout-container{
     border: none;

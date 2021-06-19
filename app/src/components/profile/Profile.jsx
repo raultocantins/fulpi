@@ -43,7 +43,7 @@ const Profile = () => {
       <h1>Informações Pessoais</h1>
       <div className="perfil">
         <div className="upload">
-          <div className="hoverblack"></div>
+       
           <input
             type="file"
             onChange={onChange}

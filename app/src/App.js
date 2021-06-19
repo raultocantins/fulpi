@@ -2,8 +2,6 @@ import "./App.css";
 import { React, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Axios from "axios";
-import Input from "@material-ui/core/Input";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
 //import Components
@@ -25,6 +23,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { development } from "./config/url";
 import Semfoto from "./assets/semfoto.jpg";
 import Writer from "./assets/writer.jpg";
+import IconButton from '@material-ui/core/IconButton';
+
 function historys(historys) {
   return { type: "HISTORYS", historys };
 }
@@ -161,16 +161,9 @@ function App() {
                 <Link to="/app/favoritos">Favoritos</Link>*/}
               </div>
               <div className="search">
-                <Input
-                  id="input-with-icon-adornment"
-                  className="searchInput"
-                  color="secondary"
-                  endAdornment={
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  }
-                />
+              <IconButton color="primary" aria-label="upload picture" component="span">
+          <SearchIcon />
+        </IconButton>
               </div>
               <div className="imgProfile">
                 <Link to="/app/profile">
