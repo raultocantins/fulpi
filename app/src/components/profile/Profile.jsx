@@ -12,11 +12,13 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ReactLoading from "react-loading";
 import { development } from "../../config/url";
 import { useDispatch, useSelector } from "react-redux";
-import ProfileIllustration from '../../assets/n.png'
+import ProfileIllustration from "../../assets/n.png";
+import { useAlert } from "react-alert";
 function setImage(image) {
   return { type: "SET_IMAGE", image };
 }
 const Profile = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.authentication.user);
@@ -30,12 +32,12 @@ const Profile = () => {
       .then((res) => {
         dispatch(setImage(res.data.url));
         setLoading(false);
-
+        alert.success("Image updated with success!");
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
-        alert("Error ao enviar Imagem");
+        alert.error("Error ao enviar Imagem");
       });
   }
 
@@ -44,7 +46,6 @@ const Profile = () => {
       <h1>Informações Pessoais</h1>
       <div className="perfil">
         <div className="upload">
-       
           <input
             type="file"
             onChange={onChange}
@@ -65,7 +66,10 @@ const Profile = () => {
               )}
             </IconButton>
           </label>
-          <img src={user.image?user.image:ProfileIllustration} alt="profile" />
+          <img
+            src={user.image ? user.image : ProfileIllustration}
+            alt="profile"
+          />
         </div>
 
         <div className="describe">

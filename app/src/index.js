@@ -8,6 +8,10 @@ import reportWebVitals from "./reportWebVitals";
 import Writer from "./components/postHistory/HistoryPage";
 import { Provider } from "react-redux";
 import store from "./store/store";
+
+import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +20,16 @@ import {
 } from "react-router-dom";
 
 import { isAuthenticate, isWriter } from "./config/auth";
+
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.TOP_RIGHT,
+  timeout: 3500,
+  offset: "30px",
+  // you can also just use 'scale'
+  transition: transitions.FADE,
+  containerStyle:{fontSize:"15px"}
+};
 
 const PrivateRouter = ({ component: Component, ...rest }) => (
   <Route
@@ -58,25 +72,23 @@ const RouterError = ({ component: Component, ...rest }) => (
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Provider store={store}>
-          <RouterError path="/" exact />
-
-
-          <PrivateRouter path="/app" component={App} />{" "}
-          <Route path="/signin">
-            <Login />
-          </Route>
-          <PrivateRouterWriter path="/writer" component={Writer} />{" "}
-          <Route path="/writer/register">
-            <WriterRegister />
-          </Route>
-        </Provider>
-
-
-      </Switch>
-    </Router>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <Router>
+        <Switch>
+          <Provider store={store}>
+            <RouterError path="/" exact />
+            <PrivateRouter path="/app" component={App} />{" "}
+            <Route path="/signin">
+              <Login />
+            </Route>
+            <PrivateRouterWriter path="/writer" component={Writer} />{" "}
+            <Route path="/writer/register">
+              <WriterRegister />
+            </Route>
+          </Provider>
+        </Switch>
+      </Router>
+    </AlertProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

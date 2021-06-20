@@ -10,6 +10,7 @@ import Loading from "../../shared/loading/Loading";
 
 const PdfViewer = () => {
   let { id } = useParams();
+
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +21,7 @@ const PdfViewer = () => {
     <div className="pdfviewer">
       {loading ? Loading() : ""}
       <Viewer
-      onZoom={()=>alert()}
+        onZoom={() => alert()}
         onDocumentLoad={handleLoading}
         fileUrl={`https://fulpihistory.s3.sa-east-1.amazonaws.com/${id}`}
         plugins={[defaultLayoutPluginInstance]}

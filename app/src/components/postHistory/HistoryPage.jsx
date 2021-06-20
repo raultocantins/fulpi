@@ -59,12 +59,12 @@ export default class HistoryPage extends React.Component {
               <Link to="/writer/newbook" onClick={this.toggleMenuMobile}>
                 Send Book
               </Link>
-              <Button onClick={this.logout}>
-                <ExitToAppIcon />
-              </Button>
 
               <Button onClick={this.toApp} style={{ bottom: "100px" }}>
                 <LoopIcon />
+              </Button>
+              <Button onClick={this.logout}>
+                <ExitToAppIcon />
               </Button>
             </div>
           ) : (
@@ -75,11 +75,11 @@ export default class HistoryPage extends React.Component {
             <Link to="/writer/books">My Books</Link>
             <Link to="/writer/profit">My Profit</Link>
             <Link to="/writer/newbook"> Send Book</Link>
-            <Button onClick={this.logout}>
-              <ExitToAppIcon />
-            </Button>
             <Button onClick={this.toApp}>
               <LoopIcon />
+            </Button>
+            <Button onClick={this.logout}>
+              <ExitToAppIcon />
             </Button>
           </div>
         </div>

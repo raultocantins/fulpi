@@ -9,12 +9,13 @@ import AuthRegister from "../../config/register";
 import { isAuthenticate } from "../../config/auth";
 import { useDispatch } from "react-redux";
 import { development } from "../../config/url";
-
+import { useAlert } from 'react-alert'
 function signIn(user) {
   window.location.href = "/app";
   return { type: "SIGNIN_USER", user };
 }
 const Login = () => {
+  const alert = useAlert()
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -38,10 +39,13 @@ const Login = () => {
   function submit() {
     setLoading(true);
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password === "") {
-      alert("email inválido!");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ) {     
+       alert.show("email inválido!")
       setLoading(false);
-    } else {
+    } else if(password.length<8){
+      alert.show("Insira um password válido!")
+      setLoading(false);
+    }else{
       Axios.post(`${development}/auth/signin`, { email, password })
         .then((res) => {
           var dataUser = JSON.stringify(res.data);
@@ -51,20 +55,20 @@ const Login = () => {
         })
         .catch((err) => {
           setLoading(false);
-          alert(err);
+          alert.error("Erro ao fazer login!");
           console.log(err);
         });
     }
   }
   function registerUser() {
     if (name.length < 6) {
-      alert("name não inserido");
+      alert.show("name não inserido");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email === "") {
-      alert("email não inserido/inválido");
+      alert.show("email não inserido/inválido");
     } else if (password.length < 8) {
-      alert("password não inserido");
+      alert.show("password não inserido");
     } else if (confirmPassword.length < 8) {
-      alert("confirm password não inserido");
+      alert.show("confirm password não inserido");
     } else if (password === confirmPassword) {
       setLoading(true);
       var user = {
@@ -76,17 +80,18 @@ const Login = () => {
       AuthRegister(user)
         .then((res) => {
           setLoading(false);
+          alert.success("Register success!!!")
           toggleStep();
         })
         .catch((err) => {
           setLoading(false);
-          alert("error");
+          alert.error("error");
           console.log(err);
           setLoading(false);
         });
     } else {
       setLoading(false);
-      alert("Senhas não são iguais!!");
+      alert.show("Senhas não são iguais!!");
     }
   }
 

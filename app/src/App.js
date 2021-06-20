@@ -26,6 +26,7 @@ import Writer from "./assets/writer.jpg";
 import IconButton from "@material-ui/core/IconButton";
 import LoopIcon from "@material-ui/icons/Loop";
 import ProfileIllustration from "./assets/n.png";
+import { useAlert } from 'react-alert'
 function historys(historys) {
   return { type: "HISTORYS", historys };
 }
@@ -34,6 +35,7 @@ function userSet(user) {
 }
 
 function App() {
+  const alert = useAlert()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authentication.user);
   const [toggleMenu, ToggleMenu] = useState(false);
@@ -66,11 +68,12 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        alert("error ao carregar historias");
+        alert.error("Error network!");
+        setTimeout(()=>window.location.reload(),2000)
         setLoading(false);
       });
-  }, [dispatch]);
- 
+  }, [dispatch,alert]);
+
   function selectApp() {
     setSelect(false);
     setApp(true);
@@ -161,7 +164,6 @@ function App() {
                   <Button onClick={logout}>
                     <ExitToAppIcon />
                   </Button>
-
                 </div>
               ) : (
                 ""
@@ -189,10 +191,6 @@ function App() {
                   />
                   <p>{user.name.slice(0, 12)}</p>
                 </Link>
-
-                <Button onClick={logout}>
-                  <ExitToAppIcon />
-                </Button>
                 {user.writer ? (
                   <Button onClick={toWriter}>
                     <LoopIcon />
@@ -200,6 +198,10 @@ function App() {
                 ) : (
                   ""
                 )}
+
+                <Button onClick={logout}>
+                  <ExitToAppIcon />
+                </Button>
               </div>
             </div>
             <div className="container">
