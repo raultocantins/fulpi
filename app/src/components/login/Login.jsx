@@ -101,7 +101,7 @@ const Login = () => {
             <h1>Sign Up</h1>{" "}
             <input
               name="name"
-              placeholder="Nome completo"
+              placeholder="Full name"
               onChange={(value) => setName(value.target.value)}
               value={name}
             />
@@ -132,7 +132,7 @@ const Login = () => {
               <IconButton>
                 Sign up with google <FunctionsIcon />
               </IconButton>{" "}
-              <IconButton onClick={toggleStep}>Já possui uma conta?</IconButton>{" "}
+              <IconButton onClick={toggleStep}>Already have an account?</IconButton>{" "}
             </div>
           </>
         ) : (
@@ -163,7 +163,7 @@ const Login = () => {
                 Sign in with google <FunctionsIcon />
               </IconButton>{" "}
               <IconButton onClick={toggleStep}>
-                Não possui uma conta?
+              Don't have an account?
               </IconButton>{" "}
             </div>
           </>

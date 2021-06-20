@@ -101,7 +101,7 @@ export default class Writer extends React.Component {
               <h1>Sign Up</h1>{" "}
               <input
                 name="name"
-                placeholder="Nome completo"
+                placeholder="Full name"
                 onChange={this.handleChange("name")}
                 value={this.state.name}
               />
@@ -137,7 +137,7 @@ export default class Writer extends React.Component {
                   Sign up with google <FunctionsIcon />
                 </IconButton>{" "}
                 <IconButton onClick={this.toggleStep}>
-                  Já possui uma conta fulpibooks?
+                already have a fulpibooks account?
                 </IconButton>{" "}
               </div>
             </React.Fragment>
@@ -173,7 +173,7 @@ export default class Writer extends React.Component {
                   Sign in with google <FunctionsIcon />
                 </IconButton>{" "}
                 <IconButton onClick={this.toggleStep}>
-                  Não possui uma conta?
+                Don't have an account?
                 </IconButton>{" "}
               </div>
             </React.Fragment>

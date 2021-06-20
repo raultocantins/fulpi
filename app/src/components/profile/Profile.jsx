@@ -12,6 +12,7 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ReactLoading from "react-loading";
 import { development } from "../../config/url";
 import { useDispatch, useSelector } from "react-redux";
+import ProfileIllustration from '../../assets/n.png'
 function setImage(image) {
   return { type: "SET_IMAGE", image };
 }
@@ -64,7 +65,7 @@ const Profile = () => {
               )}
             </IconButton>
           </label>
-          <img src={user.image} alt="profile" />
+          <img src={user.image?user.image:ProfileIllustration} alt="profile" />
         </div>
 
         <div className="describe">

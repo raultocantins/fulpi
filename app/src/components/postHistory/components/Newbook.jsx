@@ -20,6 +20,7 @@ const Newbook = () => {
   const [prefacio, setPrefacio] = useState("");
   const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
+  const [progress, setProgress] = useState("");
   function nextStep() {
     if (step < 5) {
       switch (step) {
@@ -81,15 +82,24 @@ const Newbook = () => {
   }
   function onChangePdf(file) {
     setLoading(true);
+    setLink("");
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post(`${development}/history/uploads`, data)
+    Axios.post(`${development}/history/uploads`, data, {
+      onUploadProgress: (progressEvent) => {
+        setProgress(
+          `${Math.round((progressEvent.loaded / progressEvent.total) * 100)}`
+        );
+      },
+    })
       .then((res) => {
+        setProgress("");
         setLink(res.data.url);
         setLoading(false);
         console.log(res.data.url);
       })
       .catch((err) => {
+        setProgress("");
         console.log(err);
         alert("Error ao enviar Imagem");
         setLoading(false);
@@ -140,32 +150,6 @@ const Newbook = () => {
 
   return (
     <div className="newbook">
-      <div className="timeline">
-        <div
-          className="line"
-          style={step === 0 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 1 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 2 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 3 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 4 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 5 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-      </div>
       <div className="box">
         {loading ? <ReactLoading className="loading" type="bubbles" /> : ""}
         {step === 0 ? (
@@ -218,7 +202,14 @@ const Newbook = () => {
             ) : (
               <div className="describe">
                 <p>
-                  <strong>Selecione o arquivo pdf, </strong>
+                  <strong>
+                    {progress === "" ? (
+                      "Selecione o arquivo pdf"
+                    ) : (
+                      <strong>{progress}% concluído</strong>
+                    )}
+                    ,{" "}
+                  </strong>
                   aqui é o passo mais importante, é a sua obra que ficará
                   disponível para todos os leitores.
                 </p>{" "}
@@ -365,6 +356,33 @@ const Newbook = () => {
         ) : (
           ""
         )}
+      </div>
+
+      <div className="timeline">
+        <div
+          className="line"
+          style={step === 0 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 1 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 2 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 3 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 4 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 5 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
       </div>
     </div>
   );
