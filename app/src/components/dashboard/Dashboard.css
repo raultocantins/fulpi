@@ -61,11 +61,11 @@
 }
 
 .spotlight > .btn > .title {
-
   height: 100%;
 }
 .spotlight > .btn > .title p {
   margin: 0;
+
 }
 .spotlight > .btn > .title h1 {
   margin: 5px 0px 10px 0px;
@@ -112,7 +112,9 @@ font-weight: bold;
 }
 
 @media (max-width: 600px) {
-
+  .spotlight > .btn > .title {
+display: none;
+  }
   .spotlight {    
     width: 90vw;
     height: 230px;
