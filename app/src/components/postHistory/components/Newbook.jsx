@@ -10,8 +10,11 @@ import DatePicker from "react-date-picker";
 import EventIcon from "@material-ui/icons/Event";
 import ClearIcon from "@material-ui/icons/Clear";
 import { development } from "../../../config/url";
+import { useAlert } from "react-alert";
+
 import "./Newbook.css";
 const Newbook = () => {
+  const alert = useAlert();
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [userimg, setUserImage] = useState("");
@@ -20,6 +23,7 @@ const Newbook = () => {
   const [prefacio, setPrefacio] = useState("");
   const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
+  const [progress, setProgress] = useState("");
   function nextStep() {
     if (step < 5) {
       switch (step) {
@@ -27,28 +31,28 @@ const Newbook = () => {
           if (userimg) {
             setStep(step + 1);
           } else {
-            alert("Envie uma imagem para continuar");
+            alert.show("Envie uma imagem para continuar");
           }
           break;
         case 1:
           if (link) {
             setStep(step + 1);
           } else {
-            alert("Envie o seu pdf para continuar");
+            alert.show("Envie o seu pdf para continuar");
           }
           break;
         case 2:
           if (prefacio && date && genre) {
             setStep(step + 1);
           } else {
-            alert("Preencha os campos para continuar");
+            alert.show("Preencha os campos para continuar");
           }
           break;
         case 3:
           if (title) {
             setStep(step + 1);
           } else {
-            alert("Preencha o títula para finalizar");
+            alert.show("Preencha o títula para finalizar");
           }
           break;
         default:
@@ -68,30 +72,38 @@ const Newbook = () => {
     data.append("file", file.target.files[0]);
     Axios.post(`${development}/history/uploads`, data)
       .then((res) => {
-        console.log(res.data.url);
         setUserImage(res.data.url);
         setLoading(false);
-        //  alert("deu certo");
+        alert.success("Upload da imagem completo!");
       })
       .catch((err) => {
         console.log(err);
-        // alert("Error ao enviar Imagem");
+        alert.error("Error ao enviar Imagem");
         setLoading(false);
       });
   }
   function onChangePdf(file) {
     setLoading(true);
+    setLink("");
     var data = new FormData();
     data.append("file", file.target.files[0]);
-    Axios.post(`${development}/history/uploads`, data)
+    Axios.post(`${development}/history/uploads`, data, {
+      onUploadProgress: (progressEvent) => {
+        setProgress(
+          `${Math.round((progressEvent.loaded / progressEvent.total) * 100)}`
+        );
+      },
+    })
       .then((res) => {
         setLink(res.data.url);
         setLoading(false);
-        console.log(res.data.url);
+        alert.success("Upload da imagem completo!");
+        setProgress("");
       })
       .catch((err) => {
+        setProgress("");
         console.log(err);
-        alert("Error ao enviar Imagem");
+        alert.error("Error ao enviar o arquivo pdf");
         setLoading(false);
       });
   }
@@ -115,10 +127,11 @@ const Newbook = () => {
       .then((res) => {
         setLoading(false);
         setStep(step + 1);
+        alert.success("Envio completo!");
       })
       .catch((err) => {
         console.log(err);
-        alert("error");
+        alert.error("error");
         setLoading(false);
       });
   }
@@ -140,32 +153,6 @@ const Newbook = () => {
 
   return (
     <div className="newbook">
-      <div className="timeline">
-        <div
-          className="line"
-          style={step === 0 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 1 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 2 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 3 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 4 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-        <div
-          className="line"
-          style={step === 5 ? { backgroundColor: "#e50914" } : {}}
-        ></div>
-      </div>
       <div className="box">
         {loading ? <ReactLoading className="loading" type="bubbles" /> : ""}
         {step === 0 ? (
@@ -218,7 +205,14 @@ const Newbook = () => {
             ) : (
               <div className="describe">
                 <p>
-                  <strong>Selecione o arquivo pdf, </strong>
+                  <strong>
+                    {progress === "" ? (
+                      "Selecione o arquivo pdf"
+                    ) : (
+                      <strong>{progress}% concluído</strong>
+                    )}
+                    ,{" "}
+                  </strong>
                   aqui é o passo mais importante, é a sua obra que ficará
                   disponível para todos os leitores.
                 </p>{" "}
@@ -365,6 +359,33 @@ const Newbook = () => {
         ) : (
           ""
         )}
+      </div>
+
+      <div className="timeline">
+        <div
+          className="line"
+          style={step === 0 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 1 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 2 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 3 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 4 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
+        <div
+          className="line"
+          style={step === 5 ? { backgroundColor: "#e50914" } : {}}
+        ></div>
       </div>
     </div>
   );

@@ -84,6 +84,7 @@ color: #141414!important;
   display: none;
 }
 .selectUser {
+ 
   animation-name: render;
   animation-duration: 1s;
   animation-fill-mode: forwards;
@@ -92,6 +93,8 @@ color: #141414!important;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  font-size: 20px;
 }
 .hoverBlack {
   width: 100%;
@@ -143,34 +146,40 @@ color: #141414!important;
   .appbar > .menuMobile {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: stretch;
     background-color: #141414b7;
     position: absolute;
     z-index: 99;
-    top: 80px;
-    width: 100%;
-    height: auto;
+    top: 0px;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    
     text-align: center;
   }
   .appbar > .menuMobile button {
     color: #fff;
-    width: 50%;
-    background-color: red;
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    bottom: 30px;
   }
   .appbar > .menuMobile a {
-    padding: 5px;
-    margin: 5px;
+    padding: 15px;
+    margin: 15px 0px;
     color: #fff;
     text-decoration: none;
   }
   .selectUser {
     flex-direction: column;
+    text-align: center;
   }
   .selectUser button {
     width: 200px;
     height: 150px;
-   
+ 
   }
 }
 

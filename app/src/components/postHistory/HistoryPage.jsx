@@ -1,12 +1,12 @@
 import React from "react";
-import {  Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CreateIcon from "@material-ui/icons/Create";
 import MovieRow from "../movieRow/MovieRow";
 import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
-
+import LoopIcon from "@material-ui/icons/Loop";
 import "./HistoryPage.css";
 
 //Components
@@ -15,43 +15,21 @@ import Newbook from "./components/Newbook";
 export default class HistoryPage extends React.Component {
   state = {
     toggleMenu: false,
-    items: [
-      {
-        status: true,
-        name: "Breaking bad",
-        id: 0,
-        image:
-          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
-      },
-      {
-        status: false,
-        name: "Morgan prime",
-        id: 1,
-        image:
-          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
-      },
-      {
-        name: "Breaking bad",
-        status: false,
-        id: 2,
-        image:
-          "https://uploads.metropoles.com/wp-content/uploads/2020/07/01150506/breaking-bad1.jpg",
-      },
-      {
-        status: true,
-        name: "Breaking bad",
-        id: 0,
-        image: "https://i.ytimg.com/vi/j1Y5FNKwzNo/maxresdefault.jpg",
-      },
-    ],
   };
- 
+  constructor(props) {
+    super(props);
+    this.toggleMenuMobile = this.toggleMenuMobile.bind(this);
+  }
+
   toggleMenuMobile() {
-    //   ToggleMenu(!toggleMenu);
+    this.setState({ toggleMenu: !this.state.toggleMenu });
   }
   logout() {
     window.localStorage.removeItem("token");
     document.location.href = "/signin";
+  }
+  toApp() {
+    window.location.href = "/app";
   }
   render() {
     return (
@@ -60,6 +38,7 @@ export default class HistoryPage extends React.Component {
           <h1>
             FulpiBooks <CreateIcon />
           </h1>
+
           {this.state.toggleMenu ? (
             <CloseIcon className="iconMobile" onClick={this.toggleMenuMobile} />
           ) : (
@@ -68,34 +47,41 @@ export default class HistoryPage extends React.Component {
 
           {this.state.toggleMenu ? (
             <div className="menuMobile">
-              <Link to="/app/" onClick={this.toggleMenuMobile}>
-                Ínicio
+              <Link to="/writer/" onClick={this.toggleMenuMobile}>
+                Home
               </Link>
-              <Link to="/app/books" onClick={this.toggleMenuMobile}>
-                Books séries
+              <Link to="/writer/books" onClick={this.toggleMenuMobile}>
+                My Books
               </Link>
-              <Link to="/app/top10" onClick={this.toggleMenuMobile}>
-                Top10
+              <Link to="/writer/profit" onClick={this.toggleMenuMobile}>
+                My Profit
               </Link>
-              <Link to="/app/favoritos" onClick={this.toggleMenuMobile}>
-                Favoritos
+              <Link to="/writer/newbook" onClick={this.toggleMenuMobile}>
+                Send Book
               </Link>
-              <Link to="/app/profile" onClick={this.toggleMenuMobile}>
-                Perfil
-              </Link>
+
+              <Button onClick={this.toApp} style={{ bottom: "100px" }}>
+                <LoopIcon />
+              </Button>
+              <Button onClick={this.logout}>
+                <ExitToAppIcon />
+              </Button>
             </div>
           ) : (
             ""
           )}
           <div className="menu">
-            <Link to="/writer/">Ínicio</Link>
-            <Link to="/writer/books">Meus livros</Link>
-            <Link to="/writer/profit">Meus ganhos</Link>
-            <Link to="/writer/newbook">Adicionar livro</Link>
+            <Link to="/writer/">Home</Link>
+            <Link to="/writer/books">My Books</Link>
+            <Link to="/writer/profit">My Profit</Link>
+            <Link to="/writer/newbook"> Send Book</Link>
+            <Button onClick={this.toApp}>
+              <LoopIcon />
+            </Button>
+            <Button onClick={this.logout}>
+              <ExitToAppIcon />
+            </Button>
           </div>
-          <Button onClick={this.logout}>
-            <ExitToAppIcon />
-          </Button>
         </div>
         <div className="container">
           <Switch>

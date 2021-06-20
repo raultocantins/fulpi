@@ -23,8 +23,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { development } from "./config/url";
 import Semfoto from "./assets/semfoto.jpg";
 import Writer from "./assets/writer.jpg";
-import IconButton from '@material-ui/core/IconButton';
-
+import IconButton from "@material-ui/core/IconButton";
+import LoopIcon from "@material-ui/icons/Loop";
+import ProfileIllustration from "./assets/n.png";
+import { useAlert } from 'react-alert'
 function historys(historys) {
   return { type: "HISTORYS", historys };
 }
@@ -33,6 +35,7 @@ function userSet(user) {
 }
 
 function App() {
+  const alert = useAlert()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authentication.user);
   const [toggleMenu, ToggleMenu] = useState(false);
@@ -65,10 +68,11 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        alert("error ao carregar historias");
+        alert.error("Error network!");
+        setTimeout(()=>window.location.reload(),2000)
         setLoading(false);
       });
-  }, [dispatch]);
+  }, [dispatch,alert]);
 
   function selectApp() {
     setSelect(false);
@@ -86,36 +90,39 @@ function App() {
             type="spinningBubbles"
             color="#e50914"
             className="loading"
-            height={400}
-            width={400}
+            height={300}
+            width={300}
           />
         ) : (
           ""
         )}
         {user.writer && !loading && select ? (
           <div className="selectUser">
-            <button onClick={selectApp}>
-              <div className="hoverBlack"></div>
-              <LazyLoadImage
-                style={{ borderRadius: "10px" }}
-                effect="blur"
-                height="100%"
-                width="100%"
-                src={user.image ? user.image : Semfoto}
-                alt="user"
-              />
-            </button>
-            <button onClick={toWriter}>
-              <div className="hoverBlack"></div>
-              <LazyLoadImage
-                style={{ borderRadius: "10px" }}
-                effect="blur"
-                height="100%"
-                width="100%"
-                src={Writer}
-                alt="user"
-              />
-            </button>
+            <h1>Select user profile</h1>
+            <div className="groupButtons">
+              <button onClick={selectApp}>
+                <div className="hoverBlack"></div>
+                <LazyLoadImage
+                  style={{ borderRadius: "10px" }}
+                  effect="blur"
+                  height="100%"
+                  width="100%"
+                  src={user.image ? user.image : Semfoto}
+                  alt="user"
+                />
+              </button>
+              <button onClick={toWriter}>
+                <div className="hoverBlack"></div>
+                <LazyLoadImage
+                  style={{ borderRadius: "10px" }}
+                  effect="blur"
+                  height="100%"
+                  width="100%"
+                  src={Writer}
+                  alt="user"
+                />
+              </button>
+            </div>
           </div>
         ) : (
           ""
@@ -133,20 +140,27 @@ function App() {
               {toggleMenu ? (
                 <div className="menuMobile">
                   <Link to="/app/" onClick={toggleMenuMobile}>
-                    Ínicio
+                    Home
                   </Link>
                   <Link to="/app/books" onClick={toggleMenuMobile}>
-                    Books séries
+                    book Series
                   </Link>
                   <Link to="/app/top10" onClick={toggleMenuMobile}>
                     Top10
                   </Link>
                   <Link to="/app/favoritos" onClick={toggleMenuMobile}>
-                    Favoritos
+                    Favorite
                   </Link>
                   <Link to="/app/profile" onClick={toggleMenuMobile}>
-                    Perfil
+                    Profile
                   </Link>
+                  {user.writer ? (
+                    <Button onClick={toWriter} style={{ bottom: "100px" }}>
+                      <LoopIcon />
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                   <Button onClick={logout}>
                     <ExitToAppIcon />
                   </Button>
@@ -155,21 +169,35 @@ function App() {
                 ""
               )}
               <div className="menu">
-                <Link to="/app/">Ínicio</Link>
-                {/* <Link to="/app/books">Books séries</Link>
-                  <Link to="/app/top10">Top10</Link>
-                <Link to="/app/favoritos">Favoritos</Link>*/}
+                <Link to="/app/">Home</Link>
+                <Link to="/app/books">book Series</Link>
+                <Link to="/app/top10">Top10</Link>
+                <Link to="/app/favoritos">Favorite</Link>
               </div>
               <div className="search">
-              <IconButton color="primary" aria-label="upload picture" component="span">
-          <SearchIcon />
-        </IconButton>
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                >
+                  <SearchIcon />
+                </IconButton>
               </div>
               <div className="imgProfile">
                 <Link to="/app/profile">
-                  <img src={user.image} alt="profile" />
-            <p>{user.name.slice(0,12)}</p>
+                  <img
+                    src={user.image ? user.image : ProfileIllustration}
+                    alt="profile"
+                  />
+                  <p>{user.name.slice(0, 12)}</p>
                 </Link>
+                {user.writer ? (
+                  <Button onClick={toWriter}>
+                    <LoopIcon />
+                  </Button>
+                ) : (
+                  ""
+                )}
 
                 <Button onClick={logout}>
                   <ExitToAppIcon />

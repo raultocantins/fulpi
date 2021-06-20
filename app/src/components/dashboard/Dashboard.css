@@ -4,7 +4,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   color: inherit;
-
 }
 .dashboard h3 {
   margin-left: 20px;
@@ -22,8 +21,6 @@
   position: relative;
   display: flex;
   justify-content: center;
-
-  
 }
 .spotlight img {
   height: 100%;
@@ -34,7 +31,6 @@
 }
 
 .spotlight > .btn {
-  
   position: absolute;
   z-index: 6;
   bottom: 0px;
@@ -61,6 +57,10 @@
 }
 
 .spotlight > .btn > .title {
+<<<<<<< HEAD
+=======
+  color: #fff;
+>>>>>>> fcfd077bc15210f1625f73a5b41f8653bdd18149
   height: 100%;
 }
 .spotlight > .btn > .title p {
@@ -78,7 +78,7 @@
   color: #e50914;
   opacity: 0.7;
 }
-.spotlight>.btnNextSpotlight{
+.spotlight > .btnNextSpotlight {
   height: 100%;
   width: 70px;
   position: absolute;
@@ -89,7 +89,7 @@
   border: none;
   color: #1414146e;
 }
-.spotlight>.btnBackSpotlight{
+.spotlight > .btnBackSpotlight {
   height: 100%;
   width: 70px;
   position: absolute;
@@ -100,10 +100,11 @@
   border: none;
   color: #1414146e;
 }
-.spotlight>.btnNextSpotlight:hover,.spotlight>.btnBackSpotlight:hover{
-background-color: transparent;
-color:#141414;
-font-weight: bold;
+.spotlight > .btnNextSpotlight:hover,
+.spotlight > .btnBackSpotlight:hover {
+  background-color: transparent;
+  color: #141414;
+  font-weight: bold;
 }
 .rowsGenre {
   position: relative;
@@ -112,19 +113,40 @@ font-weight: bold;
 }
 
 @media (max-width: 600px) {
+<<<<<<< HEAD
   .spotlight > .btn > .title {
 display: none;
   }
   .spotlight {    
+=======
+  .spotlight {
+>>>>>>> fcfd077bc15210f1625f73a5b41f8653bdd18149
     width: 90vw;
     height: 230px;
   }
-  .spotlight>.btn {    
-    
-   padding-bottom: 18px;
+
+  .spotlight > .btn {
+    position: absolute;
+    z-index: 6;
+    bottom: 0px;
+    height: auto;
+    width: 100%;
+    background-color: #14141472;
+    display: flex;
+    flex-direction: column;
   }
-  .spotlight img {    
+  .spotlight > .btn button {
+    border: none;
+    background-color: #e50914;
+    color: #fff;
+    width: 300px;
+    height: 30px;
+    margin: 5px 0px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  .spotlight img {
     border-radius: 0px;
   }
 }
-
