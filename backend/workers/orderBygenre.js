@@ -1,4 +1,8 @@
-function orderBygenre(data) {
+
+
+
+ function orderBygenre(data,favorites) {
+    
     var mock = []
     var types = ["action", "romance", "fiction", "biography",
         "horror", "poetry", "anthem", "sonnet", "satire",
@@ -120,7 +124,10 @@ function orderBygenre(data) {
         literature,
         drama,
     ]
+   
+
     var spot = []
+
     var spotlight = historysAll.map(e => {
         e.map(e => e.score >= 0 ? spot.push(e) : null)
     })
@@ -140,7 +147,9 @@ function orderBygenre(data) {
         fable: fable,
         literature: literature,
         drama: drama,
-        spotlight: spot.slice(0, 3)
+        spotlight: spot.slice(0, 3),
+        favorites:favorites[0].favoritos
+        
     }
 
     return historys;

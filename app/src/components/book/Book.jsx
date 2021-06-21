@@ -63,7 +63,7 @@ const Book = function () {
         />
         <div className="describe">
           <h1>{history.name}</h1>
-          <Link to={`/app/pdfviewer/${getUrl()}`}>
+          <Link to={`/app/pdfviewer/${getUrl()}/${history?.id}`}>
             <button>Ler book</button>
           </Link>
         </div>

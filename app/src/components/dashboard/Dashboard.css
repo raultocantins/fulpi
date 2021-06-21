@@ -21,6 +21,7 @@
   position: relative;
   display: flex;
   justify-content: center;
+  color: #fff;
 }
 .spotlight img {
   height: 100%;
@@ -57,10 +58,6 @@
 }
 
 .spotlight > .btn > .title {
-<<<<<<< HEAD
-=======
-  color: #fff;
->>>>>>> fcfd077bc15210f1625f73a5b41f8653bdd18149
   height: 100%;
 }
 .spotlight > .btn > .title p {
@@ -113,14 +110,10 @@
 }
 
 @media (max-width: 600px) {
-<<<<<<< HEAD
   .spotlight > .btn > .title {
 display: none;
   }
   .spotlight {    
-=======
-  .spotlight {
->>>>>>> fcfd077bc15210f1625f73a5b41f8653bdd18149
     width: 90vw;
     height: 230px;
   }

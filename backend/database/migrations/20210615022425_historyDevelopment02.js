@@ -4,7 +4,7 @@ exports.up = function (knex) {
         table.increments('id').primary()
         table.string('name').notNull()
         table.string('image').notNull()
-        table.string('prefacio').notNull()
+        table.text('prefacio').notNull()
         table.integer('score')
         table.string('escritor').notNull()
         table.timestamp('lancamento').notNull()

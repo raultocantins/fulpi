@@ -11,7 +11,7 @@ const params = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 const strategy = new Strategy(params, (payload, done) => {
-  db("user")
+  db("user02")
     .where({ id: payload.id })
     .first()
     .then((user) => done(null, user ? { ...payload } : false))

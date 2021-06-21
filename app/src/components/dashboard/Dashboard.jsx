@@ -47,7 +47,7 @@ const Dashboard = () => {
             effect="blur"
             height="100%"
             width="100%"
-            src={historys.spotlight[spotlight].image} // use normal <img> attributes as props
+            src={historys.spotlight[spotlight]?.image} // use normal <img> attributes as props
           />
 
 
@@ -55,10 +55,10 @@ const Dashboard = () => {
 
             <div className="title">
 
-              <h1>{historys.spotlight[spotlight].name}</h1>
-              <p>Por: {historys.spotlight[spotlight].escritor}</p>
+              <h1>{historys.spotlight[spotlight]?.name}</h1>
+              <p>Por: {historys.spotlight[spotlight]?.escritor}</p>
             </div>
-            <Link to={`/app/book/${historys.spotlight[spotlight].id}`}>  <button >Read book</button></Link>
+            <Link to={`/app/book/${historys?.spotlight[spotlight]?.id}`}>  <button >Read book</button></Link>
           </div>
         </div>
       </div>

@@ -21,7 +21,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useDispatch, useSelector } from "react-redux";
 import { development } from "./config/url";
-import Semfoto from "./assets/semfoto.jpg";
 import Writer from "./assets/writer.jpg";
 import IconButton from "@material-ui/core/IconButton";
 import LoopIcon from "@material-ui/icons/Loop";
@@ -69,10 +68,10 @@ function App() {
       .catch((err) => {
         console.log(err);
         alert.error("Error network!");
-        setTimeout(()=>window.location.reload(),2000)
+        setTimeout(() => window.location.reload(), 10000)
         setLoading(false);
       });
-  }, [dispatch,alert]);
+  }, [dispatch, alert]);
 
   function selectApp() {
     setSelect(false);
@@ -107,7 +106,7 @@ function App() {
                   effect="blur"
                   height="100%"
                   width="100%"
-                  src={user.image ? user.image : Semfoto}
+                  src={user.image ? user.image : ProfileIllustration}
                   alt="user"
                 />
               </button>
@@ -224,7 +223,7 @@ function App() {
                 <Route path="/app/book/:id">
                   <Book />
                 </Route>
-                <Route path="/app/pdfviewer/:id">
+                <Route path="/app/pdfviewer/:id/:historyId">
                   <PdfViewer />
                 </Route>
               </Switch>

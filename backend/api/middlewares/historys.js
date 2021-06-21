@@ -2,11 +2,12 @@ const db = require('../../database/db')
 const orderBygenre=require('../../workers/orderBygenre')
 
 const getHistorys = async (req, res) => {
+    const favorites=await db("user02").select("favoritos").where({ id: req.user.id }) 
     const data = await db('historyDevelopment02').select('id', 'name', 'image', 'escritor','prefacio','score','lancamento','genero','link','distribuidora','status').then(historys => {
         return historys
     })
 
-   var historys= orderBygenre(data)
+   var historys= orderBygenre(data,favorites)
     res.json(historys)
     
 

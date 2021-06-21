@@ -4,7 +4,7 @@ const router = express.Router();
 const { save_user, signin, validateToken, signinTest ,signinWriter} = require("./middlewares/auth");
 const { setGenre, getGenres } = require("./middlewares/genres");
 const { getHistorys, setHistory,getHistoryById } = require('./middlewares/historys')
-const { setImageUser } = require('./middlewares/user')
+const { setImageUser ,favoriteHistory} = require('./middlewares/user')
 const authenticate = require("./middlewares/passport");
 const multerImageProfile = require("./multer");
 const multerFileHistory = require("./multerFileHistory")
@@ -12,9 +12,6 @@ const multer = require('multer')
 //import middlewares
 router.use(express.json());
 router.use(cors())
-//get genres
-router.get("/genres", authenticate(), getGenres);
-router.post("/genres", authenticate(), setGenre);
 
 //get historys
 router.get("/historys", authenticate(), getHistorys);
@@ -46,6 +43,9 @@ router.post("/validateToken", validateToken);
 //Upload user image
 router.post("/user/image",[authenticate(), multer(multerImageProfile).single("file")], setImageUser);
 
+
+//Add history favorite
+router.post('/favorite/book/:id',authenticate(),favoriteHistory)
 
 //Upload file history test
 router.post("/history/uploads", multer(multerFileHistory).single("file"), (req,res)=>{

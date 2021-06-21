@@ -27,7 +27,7 @@ const signin = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send("Informe o usuário e senha!");
   }
-  const user = await db("user").where({ email: req.body.email }).first();
+  const user = await db("user02").where({ email: req.body.email }).first();
 
   if (!user) return res.status(400).send("Usuário não encontrado!");
   const isMath = bcrypt.compareSync(req.body.password, user.password);
@@ -52,16 +52,16 @@ const signinWriter = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send("Informe o usuário e senha!");
   }
-  const user = await db("user").where({ email: req.body.email }).first();
+  const user = await db("user02").where({ email: req.body.email }).first();
 
   if (!user) return res.status(400).send("Usuário não encontrado!");
   const isMath = bcrypt.compareSync(req.body.password, user.password);
   if (!isMath) return res.status(401).send("E-mail/senha inválidos!");
   const now = Math.floor(Date.now() / 1000);
   if (!user.writer) {
-    const updated = await db("user").where({ email: req.body.email }).first().update({ writer: true })
+    const updated = await db("user02").where({ email: req.body.email }).first().update({ writer: true })
     if (updated) {
-      const userUpdated = await db("user").where({ email: req.body.email }).first();
+      const userUpdated = await db("user02").where({ email: req.body.email }).first();
       const payload = {
         id: userUpdated.id,
         name: userUpdated.name,
@@ -123,7 +123,7 @@ const save_user = async (req, res) => {
   if (req.params.id) user.id = req.params.id;
   // if (user) user.createAt = new Date().toLocaleString();
   try {
-    const userFromDB = await db("user").first().where({ email: user.email });
+    const userFromDB = await db("user02").first().where({ email: user.email });
 
     if (!user.id) {
       notExistsOrError(userFromDB, "Usuário já cadastrado");
@@ -134,7 +134,7 @@ const save_user = async (req, res) => {
 
   if (user.id) {
     // delete user.createAt;
-    db("user")
+    db("user02")
       .update(user)
       .where({ id: user.id })
       .then((_) => {
@@ -146,7 +146,7 @@ const save_user = async (req, res) => {
   } else if (user) {
     user.password = encryptPassword(user.password);
 
-    db("user")
+    db("user02")
       .insert(user)
       .then((_) => res.status(204).send("Inserção concluida!"))
       .catch((err) => {
