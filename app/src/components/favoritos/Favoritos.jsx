@@ -1,80 +1,62 @@
-import React,{useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import "./Favoritos.css";
 import MovieRow from "../movieRow/MovieRow";
 import { useSelector } from "react-redux";
 const Favoritos = () => {
+  const [historyFavorite, setHistorysFavorite] = useState();
+  const historys = useSelector((state) => state.historys.historys);
+  const favoriteIds = useSelector((state) => state.historys.historys.favorites);
+  useEffect(() => {
+    const genres = [
+      "action",
+      "anthem",
+      "biography",
+      "drama",
+      "fable",
+      "fiction",
+      "horror",
+      "literature",
+      "poetry",
+      "romance",
+      "satire",
+      "sonnet",
+      "technician",
+    ];
+    let arrays = [];
+    let newArray = [];
+    var favoriteHistorys = [];
+    //  var likedHistorys = [];
+    //  var completHistorys = [];
+    for (var i = 0; i <= genres.length; i++) {
+      arrays.push(historys[genres[i]]);
+    }
+    arrays.map((e) => (e?.length > 0 ? newArray.push(e) : e));
+    newArray.map((e) => {
+      return e.map(
+        (e) => (favoriteIds?.includes(e.id) ? favoriteHistorys.push(e) : "")
+        //  likedHistorys?.includes(e.id) ? favoriteHistorys.push(e) : "",
+        //completHistorys?.includes(e.id) ? favoriteHistorys.push(e) : ""
+      );
+    });
+    setHistorysFavorite(favoriteHistorys);
+  }, [historys, favoriteIds]);
 
-
-const historys = useSelector((state) => state.historys.historys);
-useEffect(()=>{
-  const favoriteHistorys=historys.action.map(e=>e.id===historys.favorites[1]?e:null)
-  console.log(favoriteHistorys)
-})
   return (
     <div className="favoritos">
-      <h1>Favoritos</h1>
+      <h1>My list</h1>
       <div className="rowsGenre">
-      {historys.action?.length > 0 ? (
-          <MovieRow title="Action" items={historys.action} />
-        ) : (
-          ""
-        )}
-        {historys.romance?.length > 0 ? (
-          <MovieRow title="romance" items={historys.romance} />
-        ) : (
-          ""
-        )}
-        {historys.fiction?.length > 0 ? (
-          <MovieRow title="fiction" items={historys.fiction} />
-        ) : (
-          ""
-        )}
-        {historys.biography?.length > 0 ? (
-          <MovieRow title="biography" items={historys.biography} />
-        ) : (
-          ""
-        )}
-        {historys.poetry?.length > 0 ? (
-          <MovieRow title="poetry" items={historys.poetry} />
-        ) : (
-          ""
-        )}
-        {historys.anthem?.length > 0 ? (
-          <MovieRow title="anthem" items={historys.anthem} />
-        ) : (
-          ""
-        )}
-        {historys.sonnet?.length > 0 ? (
-          <MovieRow title="sonnet" items={historys.sonnet} />
-        ) : (
-          ""
-        )}
-        {historys.satire?.length > 0 ? (
-          <MovieRow title="satire" items={historys.satire} />
-        ) : (
-          ""
-        )}
-        {historys.technician?.length > 0 ? (
-          <MovieRow title="technician" items={historys.technician} />
-        ) : (
-          ""
-        )}
-        {historys.fable?.length > 0 ? (
-          <MovieRow title="fable" items={historys.fable} />
-        ) : (
-          ""
-        )}
-        {historys.literature?.length > 0 ? (
-          <MovieRow title="literature" items={historys.literature} />
-        ) : (
-          ""
-        )}
-        {historys.drama?.length > 0 ? (
-          <MovieRow title="drama" items={historys.drama} />
-        ) : (
-          ""
-        )}
-     
+        <MovieRow
+          title="Favorites"
+          items={historyFavorite ? historyFavorite : []}
+        />
+        <MovieRow
+          title="Likes"
+          items={historyFavorite ? historyFavorite : []}
+        />
+        <MovieRow
+          title="Read books"
+          items={historyFavorite ? historyFavorite : []}
+        />
       </div>
     </div>
   );

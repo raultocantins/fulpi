@@ -7,10 +7,13 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import { useParams } from "react-router-dom";
 import "./PdfViewer.css";
 import Loading from "../../shared/loading/Loading";
-
+import { useDispatch } from "react-redux";
+function favorite(id) {
+  return { type: "FAVORITE_BOOK", id };
+}
 const PdfViewer = () => {
   let { id,historyId } = useParams();
-
+  const dispatch = useDispatch();
 
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const [loading, setLoading] = useState(true);
@@ -23,15 +26,15 @@ const PdfViewer = () => {
     Axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${userToken.token}`;
-    Axios.post(`http://localhost:4000/favorite/book/${historyId}`)
+    Axios.post(`http://fulpibackend.ngrok.io/favorite/book/${historyId}`)
       .then(res => {
+        dispatch(favorite(id));    
         alert('historia marcada como favorita')
       })
       .catch(err => {
         alert('error')
         console.log(err)
-      })
-  
+      }) 
 
     }
   return (

@@ -1,2 +1,2 @@
-const development="http://localhost:4000"
+const development="http://fulpibackend.ngrok.io"
 module.exports={development}

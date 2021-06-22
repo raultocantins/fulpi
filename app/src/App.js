@@ -148,7 +148,7 @@ function App() {
                     Top10
                   </Link>
                   <Link to="/app/favoritos" onClick={toggleMenuMobile}>
-                    Favorite
+                  My list
                   </Link>
                   <Link to="/app/profile" onClick={toggleMenuMobile}>
                     Profile
@@ -171,7 +171,7 @@ function App() {
                 <Link to="/app/">Home</Link>
                 <Link to="/app/books">book Series</Link>
                 <Link to="/app/top10">Top10</Link>
-                <Link to="/app/favoritos">Favorite</Link>
+                <Link to="/app/favoritos">My list</Link>
               </div>
               <div className="search">
                 <IconButton

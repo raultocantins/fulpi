@@ -9,6 +9,11 @@ const initialState = {
           ...state,
           historys: action.historys
         };
+        case 'FAVORITE_BOOK':
+          return {
+            ...state.historys,
+            favorites:[...state.historys.favorite,action.id]
+          };
       default:
         return state;
     }
