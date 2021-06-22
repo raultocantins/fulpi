@@ -4,7 +4,7 @@ const router = express.Router();
 const { save_user, signin, validateToken, signinTest ,signinWriter} = require("./middlewares/auth");
 const { setGenre, getGenres } = require("./middlewares/genres");
 const { getHistorys, setHistory,getHistoryById } = require('./middlewares/historys')
-const { setImageUser ,favoriteHistory} = require('./middlewares/user')
+const { setImageUser ,favoriteHistory,likeBook} = require('./middlewares/user')
 const authenticate = require("./middlewares/passport");
 const multerImageProfile = require("./multer");
 const multerFileHistory = require("./multerFileHistory")
@@ -28,24 +28,24 @@ router.post("/auth/register/user", save_user);
 //login user
 router.post("/auth/signin", signin);
 
-
 //login writer
 router.post("/auth/signin/writer", signinWriter);
-
-
-//login user test
-router.post("/auth/signinteste", signinTest);
 
 //VALIDATE TOKEN
 router.post("/validateToken", validateToken);
 
-
 //Upload user image
 router.post("/user/image",[authenticate(), multer(multerImageProfile).single("file")], setImageUser);
 
-
-//Add history favorite
+//Add book favorite
 router.post('/favorite/book/:id',authenticate(),favoriteHistory)
+
+//Like book
+router.post('/like/book/:id',authenticate(),likeBook)
+
+//finished book
+router.post('/finished/book/:id',authenticate(),likeBook)
+
 
 //Upload file history test
 router.post("/history/uploads", multer(multerFileHistory).single("file"), (req,res)=>{

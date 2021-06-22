@@ -29,5 +29,41 @@ const favoriteHistory = async (req, res) => {
         });
 
 }
+const likeBook = async (req, res) => {
+    var history = parseInt(req.params.id)
+    var likes = await db("user02").select("like").where({ id: req.user.id })
+   // var historys = likes[0].likes
 
-module.exports = { setImageUser, favoriteHistory }
+    await db("user02")
+        .update({ like: [...likes[0].likes, history] })
+        .where({ id: req.user.id })
+        .then((_) => {
+            res.status(204)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(500).send(err);
+        });
+
+}
+
+const finishedBook = async (req, res) => {
+    var history = parseInt(req.params.id)
+    var finishedBooks = await db("user02").select("finished").where({ id: req.user.id })
+   // var historys = likes[0].likes
+
+    await db("user02")
+        .update({ finished: [...finishedBooks[0].finished, history] })
+        .where({ id: req.user.id })
+        .then((_) => {
+            res.status(204)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(500).send(err);
+        });
+
+}
+
+
+module.exports = { setImageUser, favoriteHistory,likeBook,finishedBook }
