@@ -1,7 +1,7 @@
 const db = require('../../database/db')
 
 const setImageUser = async (req, res) => {
-    await db("user")
+    await db("user02")
         .update({ image: req.file.location })
         .where({ id: req.user.id })
         .then((_) => {
