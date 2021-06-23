@@ -3,6 +3,7 @@ import "./MovieRow.css";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { Link } from "react-router-dom";
+
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ReactLoading from "react-loading";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -27,7 +28,10 @@ const MovieRow = ({ title, items }) => {
 
   return (
     <div className="movieRow">
-      <h2>{title}</h2>
+ <Link to={`/app/genre/${title}`} >
+ <h2 >{title}</h2>
+                  </Link>
+      
       <div className="movieRow-left" onClick={handleLeftArrow}>
         <NavigateBeforeIcon style={{ fontSize: 50 }} />
       </div>

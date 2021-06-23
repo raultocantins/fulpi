@@ -1,0 +1,52 @@
+.genre{   
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+width: 90%;
+position: relative;
+overflow: hidden;
+flex-direction: column;
+}
+.genre .row{     
+   
+ height: 100%;
+ width: 100%;
+ width: inherit;
+ flex-wrap: wrap;
+ justify-content: center;
+ display: flex;
+    overflow-y: auto;  
+    }
+    
+
+
+.genre .row .row--item{
+   height: 180px;
+   width: 250px; 
+   margin: 15px;
+    }
+  
+    .genre .row .row--item img{
+        transform: scale(0.9);
+       height: 100%;
+       width: 100%;
+         }
+         .genre .row .row--item img:hover{
+            transition: all ease 0.2s;
+            transform: scale(1);
+           height: 100%;
+           width: 100%;
+             }
+.loadingBooks{
+    position: absolute;
+    bottom: 0;
+   right:0;
+   width: 100%;
+   height: 40px;
+   background-color: #1414146c;
+   border: none;
+   outline: none;
+   color: #fff;
+   border-radius: 10px 10px 0px 0px;
+}

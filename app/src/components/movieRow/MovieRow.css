@@ -42,8 +42,13 @@
 }
 
 .movieRow h2 {
-  margin: 0px 0px 30px 30px;
+  margin: 0px 0px 30px 30px; 
 }
+.movieRow a {
+ text-decoration: none;
+ color: inherit;  
+}
+
 
 .movieRow--listarea {
   overflow-x: hidden;

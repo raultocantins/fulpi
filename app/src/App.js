@@ -12,6 +12,7 @@ import Top10 from "./components/top10/Top10";
 import Favoritos from "./components/favoritos/Favoritos";
 import BookSeries from "./components/bookSeries/BookSeries";
 import Profile from "./components/profile/Profile";
+import Genre from './components/genre/Genre'
 import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
 import PdfViewer from "./components/pdfviewer/PdfViewer";
@@ -225,6 +226,9 @@ function App() {
                 </Route>
                 <Route path="/app/pdfviewer/:id/:historyId">
                   <PdfViewer />
+                </Route>
+                 <Route path="/app/genre/:id">
+                <Genre/>
                 </Route>
               </Switch>
             </div>
