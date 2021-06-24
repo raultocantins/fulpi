@@ -83,45 +83,47 @@ color: #141414!important;
 .appbar > .iconMobile {
   display: none;
 }
-.selectUser {
- 
+.selectUser { 
   animation-name: render;
-  animation-duration: 1s;
+  animation-duration: 0.3s;
   animation-fill-mode: forwards;
   height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 20px;
+  align-items: center;  
 }
-.hoverBlack {
-  width: 100%;
+
+.selectUser >.groupButtons{ 
   height: 100%;
-  background-color: transparent;
-  position: absolute;
-  z-index: 5;
-  border-radius: inherit;
+  width: 100%;
+  background-color:#141414;
 }
-.selectUser button {
-  position: relative;
-  width: 300px;
-  height: 250px;
+
+.selectUser>.groupButtons button {  
+  width: 50vw;
+  height: 100%;
   border: none;
   padding: 0;
-  border-radius: 10px;
-  margin: 50px;
+  opacity:0.3;
 }
-.hoverBlack:hover {
-  background-color: #14141446;
-  transition: all ease 0.3s;
+.selectUser>.groupButtons button:hover {
+  animation-name: selected;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
-.selectUser button img {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
+.selectUser >.groupButtons >.select--app {
+ background-image:url("https://i.pinimg.com/originals/86/74/95/867495bf752bd8fa73a6ea326587eb97.jpg");
+ background-repeat:no-repeat;
+ background-size:cover;
+ 
+ }
+.selectUser >.groupButtons >.select--writer {
+ background-image:url("https://i.pinimg.com/736x/16/a3/e7/16a3e7a03820c92d22ae27d2b9891982.jpg");
+  background-repeat:no-repeat;
+ background-size:cover;
 }
+
 
 @media (max-width: 1150px) {
   .container {
@@ -166,26 +168,41 @@ color: #141414!important;
     position: absolute;
     bottom: 30px;
   }
+  
   .appbar > .menuMobile a {
     padding: 15px;
     margin: 15px 0px;
     color: #fff;
     text-decoration: none;
   }
-  .selectUser {
-    flex-direction: column;
-    text-align: center;
+  .selectUser>.groupButtons {
+    display:flex;
+    flex-direction: column;   
+    
   }
-  .selectUser button {
-    width: 200px;
-    height: 150px;
+  .selectUser>.groupButtons button {  
+  width: 100vw;
+  height: 50vh;
+}
+.selectUser >.groupButtons >.select--app {
+opacity:1;
  
-  }
+ }
+
 }
 
 @keyframes render {
   from {
     opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes selected {
+  from {
+
   }
   to {
     opacity: 1;

@@ -17,12 +17,9 @@ import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
 import PdfViewer from "./components/pdfviewer/PdfViewer";
 import { Worker } from "@react-pdf-viewer/core";
-import ReactLoading from "react-loading";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useDispatch, useSelector } from "react-redux";
 import { development } from "./config/url";
-import Writer from "./assets/writer.jpg";
 import IconButton from "@material-ui/core/IconButton";
 import LoopIcon from "@material-ui/icons/Loop";
 import ProfileIllustration from "./assets/n.png";
@@ -84,44 +81,15 @@ function App() {
 
   return (
     <Router>
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-        {loading ? (
-          <ReactLoading
-            type="spinningBubbles"
-            color="#e50914"
-            className="loading"
-            height={300}
-            width={300}
-          />
-        ) : (
-          ""
-        )}
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">      
         {user.writer && !loading && select ? (
           <div className="selectUser">
-            <h1>Select user profile</h1>
+           
             <div className="groupButtons">
-              <button onClick={selectApp}>
-                <div className="hoverBlack"></div>
-                <LazyLoadImage
-                  style={{ borderRadius: "10px" }}
-                  effect="blur"
-                  height="100%"
-                  width="100%"
-                  src={user.image ? user.image : ProfileIllustration}
-                  alt="user"
-                />
-              </button>
-              <button onClick={toWriter}>
-                <div className="hoverBlack"></div>
-                <LazyLoadImage
-                  style={{ borderRadius: "10px" }}
-                  effect="blur"
-                  height="100%"
-                  width="100%"
-                  src={Writer}
-                  alt="user"
-                />
-              </button>
+              <button onClick={selectApp} className="select--app"/>              
+                 
+              <button onClick={toWriter} className="select--writer"/>
+                        
             </div>
           </div>
         ) : (

@@ -77,7 +77,7 @@ const Writer = () => {
         })
         .catch((err) => {
           setLoading(false);
-          alert("error");
+          alert.error("error");
           console.log(err);
         });
     } else {

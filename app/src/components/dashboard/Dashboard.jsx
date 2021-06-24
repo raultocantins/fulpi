@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import "./Dashboard.css";
 import MovieRow from "../movieRow/MovieRow";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -9,30 +9,19 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 const Dashboard = () => {
   const [spotlight, setSpotlight] = useState(0)
-
-  useEffect(() => {
-
-
-  })
-  function carouselNext() {
-
+   function carouselNext() {
     if (spotlight < historys.spotlight.length - 1) {
       setSpotlight(spotlight + 1)
     } else {
       setSpotlight(0)
     }
-
-
   }
   function carouselBack() {
-
     if (spotlight > 0) {
       setSpotlight(spotlight - 1)
     }else{
       setSpotlight(historys.spotlight.length- 1)
     }
-
-
   }
 
   const historys = useSelector((state) => state.historys.historys);
