@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "text": "node ./workers/toText.js",
-    "image": "node ./workers/toImage.js",
+  "scripts": {   
     "start": "nodemon ./api/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

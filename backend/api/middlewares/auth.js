@@ -38,7 +38,7 @@ const signin = async (req, res) => {
     name: user.name,
     email: user.email,
     writer: user.writer,
-    image:user.image,
+    image: user.image,
     iat: now,
     exp: now + 60 * 60 * 24,
   };
@@ -59,15 +59,20 @@ const signinWriter = async (req, res) => {
   if (!isMath) return res.status(401).send("E-mail/senha inválidos!");
   const now = Math.floor(Date.now() / 1000);
   if (!user.writer) {
-    const updated = await db("user02").where({ email: req.body.email }).first().update({ writer: true })
+    const updated = await db("user02")
+      .where({ email: req.body.email })
+      .first()
+      .update({ writer: true });
     if (updated) {
-      const userUpdated = await db("user02").where({ email: req.body.email }).first();
+      const userUpdated = await db("user02")
+        .where({ email: req.body.email })
+        .first();
       const payload = {
         id: userUpdated.id,
         name: userUpdated.name,
         email: userUpdated.email,
         writer: userUpdated.writer,
-        image:userUpdated.image,
+        image: userUpdated.image,
         iat: now,
         exp: now + 60 * 60 * 24,
       };
@@ -76,14 +81,13 @@ const signinWriter = async (req, res) => {
         token: jwtSimple.encode(payload, authSecret),
       });
     }
-
   } else {
     const payload = {
       id: user.id,
       name: user.name,
       email: user.email,
       writer: user.writer,
-      image:user.image,
+      image: user.image,
       iat: now,
       exp: now + 60 * 60 * 24,
     };
@@ -92,8 +96,6 @@ const signinWriter = async (req, res) => {
       token: jwtSimple.encode(payload, authSecret),
     });
   }
-
-
 };
 
 const validateToken = async (req, res, next) => {

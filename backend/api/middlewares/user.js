@@ -15,7 +15,6 @@ const setImageUser = async (req, res) => {
 const favoriteHistory = async (req, res) => {
     var history = parseInt(req.params.id)
     var favoritos = await db("user02").select("favoritos").where({ id: req.user.id })
-    var historys = favoritos[0].favoritos
 
     await db("user02")
         .update({ favoritos: [...favoritos[0].favoritos, history] })
@@ -31,7 +30,7 @@ const favoriteHistory = async (req, res) => {
 }
 const likeBook = async (req, res) => {
     var history = parseInt(req.params.id)
-    var likes = await db("user02").select("like").where({ id: req.user.id })
+    var likes = await db("user02").select("likes").where({ id: req.user.id })
    // var historys = likes[0].likes
 
     await db("user02")
