@@ -75,4 +75,19 @@ const setHistory = async (req, res) => {
     });
 };
 
-module.exports = { getHistorys, setHistory, getHistoryById };
+const getBooksByGenre = async (req, res) => {
+  let genre = req.query.genre;
+  const page = req.query.page;
+  return db("historyfull")
+    .where({ genre: genre })
+    .paginate({
+      perPage: 5,
+      currentPage: page,
+    })
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((err) => res.status(500).send(err));
+};
+
+module.exports = { getHistorys, setHistory, getHistoryById, getBooksByGenre };
