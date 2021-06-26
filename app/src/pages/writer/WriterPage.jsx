@@ -7,12 +7,12 @@ import MovieRow from "../movieRow/MovieRow";
 import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
 import LoopIcon from "@material-ui/icons/Loop";
-import "./HistoryPage.css";
+import "./WriterPage.css";
 
 //Components
 import Newbook from "./components/Newbook";
 
-export default class HistoryPage extends React.Component {
+export default class WriterPage extends React.Component {
   state = {
     toggleMenu: false,
   };

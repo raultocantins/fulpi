@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import Axios from 'axios'
+import Axios from '../../shared/axios/Axios'
 import { Viewer } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
@@ -21,11 +21,7 @@ const PdfViewer = () => {
   function handleLoading() {
     setLoading(false);
   }
-  function favoriteHistory() {
-    let userToken = JSON.parse(window.localStorage.getItem("token"));
-    Axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${userToken.token}`;
+  function favoriteHistory() {   
     Axios.post(`http://fulpibackend.ngrok.io/favorite/book/${historyId}`)
       .then(res => {
         dispatch(favorite(id));    

@@ -1,21 +1,21 @@
 import "./App.css";
 import { React, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Axios from "axios";
+
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
 //import Components
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import Book from "./components/book/Book";
-import Dashboard from "./components/dashboard/Dashboard";
-import Top10 from "./components/top10/Top10";
-import Favoritos from "./components/favoritos/Favoritos";
-import BookSeries from "./components/bookSeries/BookSeries";
-import Profile from "./components/profile/Profile";
-import Genre from './components/genre/Genre'
+import Book from "./pages/book/Book";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Top10 from "./pages/top10/Top10";
+import Favoritos from "./pages/favoritos/Favoritos";
+import BookSeries from "./pages/bookSeries/BookSeries";
+import Profile from "./pages/profile/Profile";
+import Genre from "./pages/genre/Genre";
 import AppsIcon from "@material-ui/icons/Apps";
 import CloseIcon from "@material-ui/icons/Close";
-import PdfViewer from "./components/pdfviewer/PdfViewer";
+import PdfViewer from "./pages/pdfviewer/PdfViewer";
 import { Worker } from "@react-pdf-viewer/core";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,10 @@ import { development } from "./config/url";
 import IconButton from "@material-ui/core/IconButton";
 import LoopIcon from "@material-ui/icons/Loop";
 import ProfileIllustration from "./assets/n.png";
-import { useAlert } from 'react-alert'
+import { useAlert } from "react-alert";
+import Loading from "./shared/loading/Loading";
+
+import Axios from "./shared/axios/Axios";
 function historys(historys) {
   return { type: "HISTORYS", historys };
 }
@@ -32,13 +35,11 @@ function userSet(user) {
 }
 
 function App() {
-  const alert = useAlert()
+  const alert = useAlert();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authentication.user);
   const [toggleMenu, ToggleMenu] = useState(false);
-  const [app, setApp] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [select, setSelect] = useState(false);
+  const [loading, setLoading] = useState(true);
   function toggleMenuMobile() {
     ToggleMenu(!toggleMenu);
   }
@@ -47,55 +48,27 @@ function App() {
     document.location.href = "/signin";
   }
   useEffect(() => {
-    setLoading(true);
     let userToken = JSON.parse(window.localStorage.getItem("token"));
-    Axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${userToken.token}`;
     Axios.get(`${development}/historys`)
       .then((res) => {
         dispatch(historys(res.data));
         dispatch(userSet(userToken));
         setLoading(false);
-        if (!userToken.writer) {
-          setApp(true);
-        } else {
-          setSelect(true);
-        }
       })
       .catch((err) => {
         console.log(err);
         alert.error("Error network!");
-        setTimeout(() => window.location.reload(), 10000)
-        setLoading(false);
       });
   }, [dispatch, alert]);
 
-  function selectApp() {
-    setSelect(false);
-    setApp(true);
-  }
   function toWriter() {
     window.location.href = "/writer";
   }
 
   return (
     <Router>
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">      
-        {user.writer && !loading && select ? (
-          <div className="selectUser">
-           
-            <div className="groupButtons">
-              <button onClick={selectApp} className="select--app"/>              
-                 
-              <button onClick={toWriter} className="select--writer"/>
-                        
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
-        {!loading && app && !select ? (
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
+        {!loading ? (
           <div className="App">
             <div className="appbar">
               <h1>FulpiBooks</h1>
@@ -117,7 +90,7 @@ function App() {
                     Top10
                   </Link>
                   <Link to="/app/favoritos" onClick={toggleMenuMobile}>
-                  My list
+                    My list
                   </Link>
                   <Link to="/app/profile" onClick={toggleMenuMobile}>
                     Profile
@@ -195,14 +168,14 @@ function App() {
                 <Route path="/app/pdfviewer/:id/:historyId">
                   <PdfViewer />
                 </Route>
-                 <Route path="/app/genre/:id">
-                <Genre/>
+                <Route path="/app/genre/:id">
+                  <Genre />
                 </Route>
               </Switch>
             </div>
           </div>
         ) : (
-          ""
+          <Loading />
         )}
       </Worker>
     </Router>

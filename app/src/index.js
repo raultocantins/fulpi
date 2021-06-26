@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Login from "./components/login/Login";
-import WriterRegister from "./components/writerRegister/Writer";
+import Login from "./pages/login/Login";
+import WriterRegister from "./pages/writerRegister/Writer";
 import reportWebVitals from "./reportWebVitals";
-import Writer from "./components/postHistory/HistoryPage";
+import WriterPage from "./pages/writer/WriterPage";
 import { Provider } from "react-redux";
 import store from "./store/store";
 
@@ -81,7 +81,7 @@ ReactDOM.render(
             <Route path="/signin">
               <Login />
             </Route>
-            <PrivateRouterWriter path="/writer" component={Writer} />{" "}
+            <PrivateRouterWriter path="/writer" component={WriterPage} />{" "}
             <Route path="/writer/register">
               <WriterRegister />
             </Route>

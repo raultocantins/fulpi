@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import PhoneIcon from "@material-ui/icons/Phone";
-import Axios from "axios";
+import Axios from "../../shared/axios/Axios";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ReactLoading from "react-loading";
@@ -22,9 +22,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.authentication.user);
-  function onChange(img) {
-    let user = JSON.parse(window.localStorage.getItem("token"));
-    Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+  function onChange(img) {   
     setLoading(true);
     const data = new FormData();
     data.append("file", img.target.files[0]);

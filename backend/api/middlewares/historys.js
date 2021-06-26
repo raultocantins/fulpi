@@ -56,15 +56,15 @@ const setHistory = async (req, res) => {
   const newHistory = {
     name: history.name,
     image: history.image,
-    prefacio: history.prefacio,
-    score: history.score ? history.score : 0,
-    escritor: history.escritor,
-    lancamento: history.lancamento,
-    genero: history.genero,
-    link: history.link,
-    distribuidora: history.distribuidora,
+    describe: history.describe,   
+    publisher: history.publisher,
+    writer: history.writer,   
+    writtenin: history.writtenin,
+    genre: history.genre,
+    link: history.link, 
     userId: req.user.id,
     status: false,
+    createdAt:new Date().toLocaleDateString() 
   };
   await db("historyfull")
     .insert(newHistory)

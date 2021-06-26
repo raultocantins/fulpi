@@ -35,9 +35,9 @@ const Book = function () {
       if (e) {
         e.map((e) => {
           if (e.id === parseInt(id)) {
-            setHistory(e)
+            setHistory(e);
           }
-          return e
+          return e;
         });
       }
     });
@@ -47,9 +47,11 @@ const Book = function () {
   });
   function getUrl() {
     if (history.link) {
-      return history?.link.replace("https://fulpihistory.s3.sa-east-1.amazonaws.com/", "")
+      return history?.link.replace(
+        "https://fulpihistory.s3.sa-east-1.amazonaws.com/",
+        ""
+      );
     }
-
   }
   return (
     <div className="book">

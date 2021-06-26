@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import Axios from "axios";
+import Axios from "../../../shared/axios/Axios";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ReactLoading from "react-loading";
@@ -11,7 +11,7 @@ import EventIcon from "@material-ui/icons/Event";
 import ClearIcon from "@material-ui/icons/Clear";
 import { development } from "../../../config/url";
 import { useAlert } from "react-alert";
-
+import {  useSelector } from "react-redux";
 import "./Newbook.css";
 const Newbook = () => {
   const alert = useAlert();
@@ -19,11 +19,12 @@ const Newbook = () => {
   const [loading, setLoading] = useState(false);
   const [userimg, setUserImage] = useState("");
   const [link, setLink] = useState("");
-  const [date, setDate] = useState();
-  const [prefacio, setPrefacio] = useState("");
+  const [writtenin, setWrittenin] = useState();
+  const [describe, setDescribe] = useState("");
   const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
   const [progress, setProgress] = useState("");
+  const user = useSelector((state) => state.authentication.user);
   function nextStep() {
     if (step < 5) {
       switch (step) {
@@ -42,7 +43,7 @@ const Newbook = () => {
           }
           break;
         case 2:
-          if (prefacio && date && genre) {
+          if (describe && genre) {
             setStep(step + 1);
           } else {
             alert.show("Preencha os campos para continuar");
@@ -108,21 +109,17 @@ const Newbook = () => {
       });
   }
   function submitHistory() {
-    setLoading(true);
-    var userToken = JSON.parse(window.localStorage.getItem("token"));
+    setLoading(true); 
     var history = {
       name: title,
       image: userimg,
-      prefacio: prefacio,
-      escritor: userToken.name,
-      lancamento: date,
-      genero: genre,
+      describe: describe,
+      writtenin: writtenin,
+      genre: genre,
       link: link,
-      distribuidora: "fulpibooks",
-    };
-    Axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${userToken.token}`;
+      publisher: "FulpiBooks",
+      writer:user.name
+    };   
     Axios.post(`${development}/history`, { history })
       .then((res) => {
         setLoading(false);
@@ -256,10 +253,10 @@ const Newbook = () => {
                 <label htmlFor="formGroupExampleInput">Prefácio</label>
                 <textarea
                   onChange={(text) => {
-                    setPrefacio(text.target.value);
+                    setDescribe(text.target.value);
                   }}
                   id="formGroupExampleInput"
-                  value={prefacio}
+                  value={describe}
                 />
               </div>
               <div className="lancamento">
@@ -268,9 +265,9 @@ const Newbook = () => {
                   calendarIcon={<EventIcon />}
                   clearIcon={<ClearIcon />}
                   onChange={(newDate) => {
-                    setDate(newDate);
+                    setWrittenin(newDate);
                   }}
-                  value={date}
+                  value={writtenin}
                   id="formGroupExampleInput"
                 />
               </div>
@@ -319,9 +316,9 @@ const Newbook = () => {
               <h1>{title}</h1>
               <p>
                 <strong>Préfacio: </strong>
-                {prefacio}
+                {describe}
               </p>
-              <p>Data de Lançamento: {new Date(date).toLocaleString()}</p>
+              <p>Data de Lançamento: {new Date(writtenin).toLocaleString()}</p>
               <p>Gênero: {genre}</p>
             </div>
           </div>

@@ -5,22 +5,22 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 const Dashboard = () => {
-  const [spotlight, setSpotlight] = useState(0)
-   function carouselNext() {
+  const [spotlight, setSpotlight] = useState(0);
+  function carouselNext() {
     if (spotlight < historys.spotlight.length - 1) {
-      setSpotlight(spotlight + 1)
+      setSpotlight(spotlight + 1);
     } else {
-      setSpotlight(0)
+      setSpotlight(0);
     }
   }
   function carouselBack() {
     if (spotlight > 0) {
-      setSpotlight(spotlight - 1)
-    }else{
-      setSpotlight(historys.spotlight.length- 1)
+      setSpotlight(spotlight - 1);
+    } else {
+      setSpotlight(historys.spotlight.length - 1);
     }
   }
 
@@ -29,8 +29,12 @@ const Dashboard = () => {
     <div className="dashboard">
       <div className="cartaz">
         <div className="spotlight">
-          <button onClick={carouselNext} className="btnNextSpotlight"><ArrowForwardIosIcon/></button>
-          <button onClick={carouselBack} className="btnBackSpotlight"><ArrowBackIosIcon/></button>
+          <button onClick={carouselNext} className="btnNextSpotlight">
+            <ArrowForwardIosIcon />
+          </button>
+          <button onClick={carouselBack} className="btnBackSpotlight">
+            <ArrowBackIosIcon />
+          </button>
           <LazyLoadImage
             alt="spotlight"
             effect="blur"
@@ -38,16 +42,15 @@ const Dashboard = () => {
             width="100%"
             src={historys.spotlight[spotlight]?.image} // use normal <img> attributes as props
           />
-
-
           <div className="btn">
-
             <div className="title">
-
               <h1>{historys.spotlight[spotlight]?.name}</h1>
               <p>Por: {historys.spotlight[spotlight]?.escritor}</p>
             </div>
-            <Link to={`/app/book/${historys?.spotlight[spotlight]?.id}`}>  <button >Read book</button></Link>
+            <Link to={`/app/book/${historys?.spotlight[spotlight]?.id}`}>
+              {" "}
+              <button>Read book</button>
+            </Link>
           </div>
         </div>
       </div>
