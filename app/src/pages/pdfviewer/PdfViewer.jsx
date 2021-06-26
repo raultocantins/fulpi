@@ -8,9 +8,7 @@ import { useParams } from "react-router-dom";
 import "./PdfViewer.css";
 import Loading from "../../shared/loading/Loading";
 import { useDispatch } from "react-redux";
-function favorite(id) {
-  return { type: "FAVORITE_BOOK", id };
-}
+import favorite from '../../store/actions/actions'
 const PdfViewer = () => {
   let { id,historyId } = useParams();
   const dispatch = useDispatch();

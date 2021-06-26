@@ -10,10 +10,7 @@ import { isAuthenticate } from "../../config/auth";
 import { useDispatch } from "react-redux";
 import { development } from "../../config/url";
 import { useAlert } from 'react-alert'
-function signIn(user) {
-  window.location.href = "/app";
-  return { type: "SIGNIN_USER", user };
-}
+import {signIn} from '../../store/actions/actions'
 const Login = () => {
   const alert = useAlert()
   const dispatch = useDispatch();

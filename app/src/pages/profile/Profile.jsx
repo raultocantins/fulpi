@@ -14,15 +14,14 @@ import { development } from "../../config/url";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileIllustration from "../../assets/n.png";
 import { useAlert } from "react-alert";
-function setImage(image) {
-  return { type: "SET_IMAGE", image };
-}
+import setImage from "../../store/actions/actions";
+
 const Profile = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.authentication.user);
-  function onChange(img) {   
+  function onChange(img) {
     setLoading(true);
     const data = new FormData();
     data.append("file", img.target.files[0]);
