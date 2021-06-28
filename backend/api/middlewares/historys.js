@@ -18,11 +18,13 @@ const getHistorys = async (req, res) => {
       "status",
       "createdAt"
     )
-    .then((historys) => {
+    .then((historys) => {   
       return historys;
     });
   var historys = orderBygenre(data);
+ 
   res.json(historys);
+
 };
 const getHistoryById = async (req, res) => {
   const id = req.params.id;
@@ -58,7 +60,7 @@ const setHistory = async (req, res) => {
     image: history.image,
     describe: history.describe,   
     publisher: history.publisher,
-    writer: history.writer,   
+    writer: req.user.name,   
     writtenin: history.writtenin,
     genre: history.genre,
     link: history.link, 

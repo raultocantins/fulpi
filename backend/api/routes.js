@@ -11,6 +11,7 @@ const {
   getHistorys,
   setHistory,
   getHistoryById,
+  getBooksByGenre
 } = require("./middlewares/historys");
 const {
   setImageUser,
@@ -27,6 +28,8 @@ router.use(cors());
 //////////////////////////////////////////////////////////
 //get historys
 router.get("/historys", authenticate(), getHistorys);
+//get books by genre
+router.get("/books", authenticate(), getBooksByGenre);
 //get history BY ID
 router.get("/history/:id", getHistoryById);
 //set history

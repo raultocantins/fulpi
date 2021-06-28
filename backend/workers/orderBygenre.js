@@ -15,8 +15,9 @@ function orderBygenre(data) {
     "literature",
     "drama",
   ];
+
   var historyByGenre = data.map((e, i) => {
-    switch (e.genero) {
+    switch (e.genre) {
       case "action":
         mock.push({ action: e });
         break;
@@ -77,6 +78,7 @@ function orderBygenre(data) {
   var drama = [];
 
   var h = [];
+
   var newObj = mock.map((e) => {
     for (var i = 0; i <= types.length; i++) {
       if (e[types[i]]) {
@@ -139,9 +141,10 @@ function orderBygenre(data) {
     literature,
     drama,
   ];
+  
   var spot = [];
   var spotlight = historysAll.map((e) => {
-    e.map((e) => (e.score >= 0 ? spot.push(e) : null));
+    e.map((e) => (e.likes >= 0 ? spot.push(e) : null));
   });
   var historys = {
     action: action,
@@ -161,5 +164,6 @@ function orderBygenre(data) {
   };
 
   return historys;
+  
 }
 module.exports = orderBygenre;

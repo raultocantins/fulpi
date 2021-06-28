@@ -11,7 +11,6 @@ import EventIcon from "@material-ui/icons/Event";
 import ClearIcon from "@material-ui/icons/Clear";
 import { development } from "../../../config/url";
 import { useAlert } from "react-alert";
-import {  useSelector } from "react-redux";
 import "./Newbook.css";
 const Newbook = () => {
   const alert = useAlert();
@@ -24,7 +23,7 @@ const Newbook = () => {
   const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
   const [progress, setProgress] = useState("");
-  const user = useSelector((state) => state.authentication.user);
+  var userToken = JSON.parse(window.localStorage.getItem("token"));
   function nextStep() {
     if (step < 5) {
       switch (step) {
@@ -118,7 +117,7 @@ const Newbook = () => {
       genre: genre,
       link: link,
       publisher: "FulpiBooks",
-      writer:user.name
+      writer:userToken.name
     };   
     Axios.post(`${development}/history`, { history })
       .then((res) => {

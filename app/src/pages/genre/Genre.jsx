@@ -8,13 +8,15 @@ import development from "../../config/url";
 import ReactLoading from "react-loading";
 const Genre = () => {
   var { genre } = useParams();
+ 
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   useEffect(() => {
-    Axios.get(`${development}/books/?genre=${genre}&page=${page}`)
+    Axios.get(`http://localhost:4000/books/?genre=fiction&page=${page}`)
       .then((res) => {
-        setBooks(res.data);
+      setBooks(res.data.data);
+  console.log(res.data.data)
         setLoading(false);
       })
       .catch((err) => {
@@ -22,13 +24,18 @@ const Genre = () => {
         setLoading(false);
         alert("error");
       });
-  }, [page, books, genre]);
+  }, [ ]);
 
   function addNewBooks() {
     setPage(page + 1);
-    Axios.get(`${development}/books/?genre=${genre}&page=${page}`)
+    Axios.get(`http://localhost:4000/books/?genre=fiction&page=${page}`)
       .then((res) => {
-        setBooks([...books, res.data]);
+        if(res.data.data.length>0){
+          //setBooks([...books, res.data.data]);
+        }else{
+          alert('não possui mais books')
+        }
+       
       })
       .catch((err) => {
         console.log(err);
@@ -44,9 +51,9 @@ const Genre = () => {
         <div className="row">
           {books.map((e) => {
             return (
-              <Link to={`/app/book/${e.id}`}>
-                <div key={e.id} className="row--item">
-                  <img src={e.img} alt="capa" />
+              <Link key={e.id} to={`/app/book/${e.id}`}>
+                <div  className="row--item">
+                  <img src={e.image} alt="capa" />
                 </div>
               </Link>
             );
