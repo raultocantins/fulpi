@@ -73,7 +73,7 @@ const Book = function () {
       <div className="content">
         <div className="preface">
           <h1>Prefácio</h1>
-          <p>{history.prefacio}</p>
+          <p>{history.describe}</p>
         </div>
         <div className="score">
           <h1>Score</h1>
@@ -86,17 +86,17 @@ const Book = function () {
         <div className="owner">
           <h1>Escritores/Produtores</h1>
           <p>
-            <strong>Nome: </strong> {history.escritor}
+            <strong>Nome: </strong> {history.writer}
           </p>
           <p>
-            <strong>Lançamento: </strong> {history.lancamento}
+            <strong>Lançamento: </strong> {history.writtenin}
           </p>
           <p>
-            <strong>Distribuidora: </strong> {history.distribuidora}
+            <strong>Distribuidora: </strong> {history.publisher}
           </p>
           <p>
             <strong>Gênero: </strong>
-            {history.genero}
+            {history.genre}
           </p>
         </div>
       </div>

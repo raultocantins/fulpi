@@ -28,7 +28,7 @@ const Genre = () => {
 
   function addNewBooks() {
     setPage(page + 1);
-    Axios.get(`http://localhost:4000/books/?genre=fiction&page=${page}`)
+    Axios.get(`http://fulpibackend.ngrok.io/books/?genre=fiction&page=${page}`)
       .then((res) => {
         if(res.data.data.length>0){
           //setBooks([...books, res.data.data]);

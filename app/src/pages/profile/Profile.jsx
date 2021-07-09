@@ -14,7 +14,7 @@ import { development } from "../../config/url";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileIllustration from "../../assets/n.png";
 import { useAlert } from "react-alert";
-import setImage from "../../store/actions/actions";
+import {setImage} from "../../store/actions/actions";
 
 const Profile = () => {
   const alert = useAlert();
